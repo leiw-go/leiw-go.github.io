@@ -9,7 +9,7 @@
     
     <title>
         
-            博客自动部署配置 |
+            Hexo+Shell脚本+Crontab实现自动部署个人博客 |
         
         leiw&#39;s little blog
     </title>
@@ -161,7 +161,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">博客自动部署配置</span>
+            <span class="title-hover-animation">Hexo+Shell脚本+Crontab实现自动部署个人博客</span>
         </div>
 
         
@@ -173,26 +173,48 @@
                     <div class="author">
                         <span class="name">leiw</span>
                         
-                            <span class="author-label">Lv1</span>
+                            <span class="author-label">Lv2</span>
                         
                     </div>
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-11-21 13:04:24
+        <i class="fas fa-edit"></i>&nbsp;2021-11-21 13:50:50
     </span>
     
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/Hexo/">Hexo</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+        <span class="article-tags article-meta-item">
+            <i class="fas fa-tags"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/tags/Hexo/">Hexo</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
     
 
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>153 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>695 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>3 分钟</span>
         </span>
     
     
@@ -208,27 +230,114 @@
         
 
         <div class="article-content markdown-body">
-            <h1 id="Hexo-Sh脚本-Crontab实现自动部署个人博客"><a href="#Hexo-Sh脚本-Crontab实现自动部署个人博客" class="headerlink" title="Hexo+Sh脚本+Crontab实现自动部署个人博客"></a>Hexo+Sh脚本+Crontab实现自动部署个人博客</h1><h2 id="一、安装配置Hexo"><a href="#一、安装配置Hexo" class="headerlink" title="一、安装配置Hexo"></a>一、安装配置Hexo</h2><ul>
-<li>这个太简单了随便配置一下就行</li>
+            <h1 id="Hexo-Shell脚本-Crontab实现自动部署个人博客"><a href="#Hexo-Shell脚本-Crontab实现自动部署个人博客" class="headerlink" title="Hexo+Shell脚本+Crontab实现自动部署个人博客"></a>Hexo+Shell脚本+Crontab实现自动部署个人博客</h1><h2 id="一、安装配置Hexo"><a href="#一、安装配置Hexo" class="headerlink" title="一、安装配置Hexo"></a>一、安装配置Hexo</h2><ul>
+<li>参照HelloHexo</li>
+<li>配置成功后hexo server开启服务器后就可以访问了，<code>ip:4000</code>就ok</li>
 </ul>
 <h2 id="二、远程Ubunt生成ssh密钥配置连接github远程仓库"><a href="#二、远程Ubunt生成ssh密钥配置连接github远程仓库" class="headerlink" title="二、远程Ubunt生成ssh密钥配置连接github远程仓库"></a>二、远程Ubunt生成ssh密钥配置连接github远程仓库</h2><ol>
 <li><p>生成密钥</p>
-<ol>
-<li><pre><code class="bash">ssh-keygen -t rsa -C &quot;你的GitHub注册邮箱&quot;
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的GitHub注册邮箱&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将文件夹~/.ssh文件夹下的公钥–<code>id_rsa.pub</code>的全部内容粘贴配置到<a class="link"   target="_blank" rel="noopener" href="https://github.com/settings/keys[https://github.com/settings/keys]" >https://github.com/settings/keys[https://github.com/settings/keys]<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+</ol>
+<h2 id="三、git-pull实现与github远程仓库的同步"><a href="#三、git-pull实现与github远程仓库的同步" class="headerlink" title="三、git pull实现与github远程仓库的同步"></a>三、git pull实现与github远程仓库的同步</h2><ol>
+<li><p>在myblog/source/_posts文件夹下建立git裸仓</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></li>
+<li><p>指定远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@github.com:leiw-go/learnAndtry.git <span class="comment">#记住时通过ssh连接GitHub的不要粘错了链接</span></span><br><span class="line">git remote -v <span class="comment">#看下操作成功没用</span></span><br></pre></td></tr></table></figure></li>
+<li><p>同步仓库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull orgin master</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="四、部署gitpage"><a href="#四、部署gitpage" class="headerlink" title="四、部署gitpage"></a>四、部署gitpage</h2><ol>
+<li><p>配置根目录下_config.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:leiw-go/leiw-go.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
+<li><p>一键部署</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#hexo执行命令均需在hexo根目录下</span></span><br><span class="line">hexo generate <span class="comment">#生成静态网站目录public(hexo g)</span></span><br><span class="line">hexo depoly <span class="comment">#部署，意思差不多就是git push(hexo d)</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="五、Shell脚本实现一键操作"><a href="#五、Shell脚本实现一键操作" class="headerlink" title="五、Shell脚本实现一键操作"></a>五、Shell脚本实现一键操作</h2><ul>
+<li><p>autopull.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/ubuntu/myblog/<span class="built_in">source</span>/_posts</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure></li>
+<li><p>autodeploy.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/ubuntu/myblog</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="六、配置crontab工具实现每天博客网站的自动部署"><a href="#六、配置crontab工具实现每天博客网站的自动部署" class="headerlink" title="六、配置crontab工具实现每天博客网站的自动部署"></a>六、配置crontab工具实现每天博客网站的自动部署</h2><ul>
+<li><p><code>crontab -e</code>进入编辑定时执行配置信息的界面，加入以下两条信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 */2 * * * sh /home/ubuntu/myblog/<span class="built_in">source</span>/_posts/autopull.sh <span class="comment">#每隔两个小时自动同步远程仓库</span></span><br><span class="line">30 */2 * * * sh /home/ubuntu/myblog/autodeploy.sh <span class="comment">#每两个小时的半点自动部署发布网站</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="七、现在只需要往github上面填东西即可"><a href="#七、现在只需要往github上面填东西即可" class="headerlink" title="七、现在只需要往github上面填东西即可"></a>七、现在只需要往github上面填东西即可</h2><ul>
+<li>在你自己的本地电脑上<code>git push -u origin master</code>把你写的文章推到GitHub上文章即可自动发布</li>
+</ul>
+<h2 id="八、问题记录"><a href="#八、问题记录" class="headerlink" title="八、问题记录"></a>八、问题记录</h2><ul>
+<li><p>进行<code>git push</code>操作时报错：<code>fatal: The current branch master has no upstream branch.</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img-blog.csdnimg.cn/20190623184825880.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<p><strong>原因：</strong>没有将本地的分支与远程仓库的分支进行关联<br>通过<code>git branch</code>查看本地分支只有<code>master</code></p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img-blog.csdnimg.cn/20190623184837154.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<p>通过<code>git branch -a</code>查看远程分支，有<code>master</code>和<code>remotes/origin/master</code>两个</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img-blog.csdnimg.cn/20190623184856359.png"
+                      alt="在这里插入图片描述"
+                ></p>
+<p>这时由于远程仓库太多，且分支较多。在默认情况下，<code>git push</code>时一般会上传到<code>origin</code>下的<code>master</code>分支上，然而当<code>repository</code>和<code>branch</code>过多，而又没有设置关联时，git就会产生疑问，因为它无法判断你的push目标</p>
+<p><strong>解决方式一</strong></p>
+<p>使用<code>git push --set-upstream origin master</code>命令</p>
+<p><strong>解决方式二</strong></p>
+<p>使用<code>git push -u origin master</code>命令</p>
+</li>
+<li><p>git pull 时报错</p>
+<ul>
+<li><pre><code class="bash">There is no tracking information for the current branch.
+Please specify which branch you want to merge with.
+See git-pull(1) for details.
+
+    git pull &lt;remote&gt; &lt;branch&gt;
+
+If you wish to set tracking information for this branch you can do so with:
+
+    git branch --set-upstream-to=origin/&lt;branch&gt; master    
 </code></pre>
 </li>
-<li><p>将文件夹~/.ssh文件夹下的公钥–<code>id_rsa.pub</code>的全部内容粘贴配置到<a class="link"   target="_blank" rel="noopener" href="https://github.com/settings/keys[https://github.com/settings/keys]%E4%B8%AD" >https://github.com/settings/keys[https://github.com/settings/keys]中<i class="fas fa-external-link-alt"></i></a></p>
+<li><p>解决方法见提示</p>
+<ul>
+<li><code>git pull origin master</code>或者<code>git branch --set-upstream-to=origin/master</code></li>
+</ul>
 </li>
-</ol>
+</ul>
 </li>
-</ol>
-<h2 id="三、编写sh脚本给pull和hexo-clean-amp-amp-hexo-g-amp-amp-hexo-d"><a href="#三、编写sh脚本给pull和hexo-clean-amp-amp-hexo-g-amp-amp-hexo-d" class="headerlink" title="三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d"></a>三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d</h2><h2 id="四、配置crontab工具每天中午十二点自动执行"><a href="#四、配置crontab工具每天中午十二点自动执行" class="headerlink" title="四、配置crontab工具每天中午十二点自动执行"></a>四、配置crontab工具每天中午十二点自动执行</h2><h2 id="五、现在只需要往github上面填东西即可"><a href="#五、现在只需要往github上面填东西即可" class="headerlink" title="五、现在只需要往github上面填东西即可"></a>五、现在只需要往github上面填东西即可</h2><h2 id="六、"><a href="#六、" class="headerlink" title="六、"></a>六、</h2>
+</ul>
+
         </div>
 
         
 
         
             <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2021/11/21/Nginx%E9%83%A8%E7%BD%B2Hexo+SSL%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Nginx部署Hexo+SSL证书安装配置</span>
+                                <span class="post-nav-item">上一篇</span>
+                            </span>
+                        </a>
+                    </div>
                 
                 
                     <div class="article-next">
@@ -363,7 +472,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo-Sh%E8%84%9A%E6%9C%AC-Crontab%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2"><span class="nav-text">Hexo+Sh脚本+Crontab实现自动部署个人博客</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEHexo"><span class="nav-text">一、安装配置Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%BF%9C%E7%A8%8BUbunt%E7%94%9F%E6%88%90ssh%E5%AF%86%E9%92%A5%E9%85%8D%E7%BD%AE%E8%BF%9E%E6%8E%A5github%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-text">二、远程Ubunt生成ssh密钥配置连接github远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BC%96%E5%86%99sh%E8%84%9A%E6%9C%AC%E7%BB%99pull%E5%92%8Chexo-clean-amp-amp-hexo-g-amp-amp-hexo-d"><span class="nav-text">三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AEcrontab%E5%B7%A5%E5%85%B7%E6%AF%8F%E5%A4%A9%E4%B8%AD%E5%8D%88%E5%8D%81%E4%BA%8C%E7%82%B9%E8%87%AA%E5%8A%A8%E6%89%A7%E8%A1%8C"><span class="nav-text">四、配置crontab工具每天中午十二点自动执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%8E%B0%E5%9C%A8%E5%8F%AA%E9%9C%80%E8%A6%81%E5%BE%80github%E4%B8%8A%E9%9D%A2%E5%A1%AB%E4%B8%9C%E8%A5%BF%E5%8D%B3%E5%8F%AF"><span class="nav-text">五、现在只需要往github上面填东西即可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81"><span class="nav-text">六、</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo-Shell%E8%84%9A%E6%9C%AC-Crontab%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2"><span class="nav-text">Hexo+Shell脚本+Crontab实现自动部署个人博客</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEHexo"><span class="nav-text">一、安装配置Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%BF%9C%E7%A8%8BUbunt%E7%94%9F%E6%88%90ssh%E5%AF%86%E9%92%A5%E9%85%8D%E7%BD%AE%E8%BF%9E%E6%8E%A5github%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-text">二、远程Ubunt生成ssh密钥配置连接github远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81git-pull%E5%AE%9E%E7%8E%B0%E4%B8%8Egithub%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E5%90%8C%E6%AD%A5"><span class="nav-text">三、git pull实现与github远程仓库的同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%83%A8%E7%BD%B2gitpage"><span class="nav-text">四、部署gitpage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81Shell%E8%84%9A%E6%9C%AC%E5%AE%9E%E7%8E%B0%E4%B8%80%E9%94%AE%E6%93%8D%E4%BD%9C"><span class="nav-text">五、Shell脚本实现一键操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E9%85%8D%E7%BD%AEcrontab%E5%B7%A5%E5%85%B7%E5%AE%9E%E7%8E%B0%E6%AF%8F%E5%A4%A9%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%9A%84%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2"><span class="nav-text">六、配置crontab工具实现每天博客网站的自动部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E7%8E%B0%E5%9C%A8%E5%8F%AA%E9%9C%80%E8%A6%81%E5%BE%80github%E4%B8%8A%E9%9D%A2%E5%A1%AB%E4%B8%9C%E8%A5%BF%E5%8D%B3%E5%8F%AF"><span class="nav-text">七、现在只需要往github上面填东西即可</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AB%E3%80%81%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95"><span class="nav-text">八、问题记录</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
