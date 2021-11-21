@@ -65,93 +65,7 @@
 <td>Set the language to override auto-detection</td>
 <td>Inherited from _config.yml</td>
 </tr>
-<tr>
-<td>=======</td>
-<td></td>
-<td></td>
-</tr>
 </tbody></table>
-<hr>
-<p>title: HelloHexo<br>date: 2021-11-20 13:50:50<br>tags: Hexo<br>excerpt: 稍微学学hexo写作的属性是什么样的,也记一下Front-matter</p>
-<hr>
-<h2 id="就只是简单的MarkDown吗-1"><a href="#就只是简单的MarkDown吗-1" class="headerlink" title="就只是简单的MarkDown吗"></a>就只是简单的MarkDown吗</h2><h3 id="创建一个page页-1"><a href="#创建一个page页-1" class="headerlink" title="创建一个page页"></a>创建一个page页</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="然后丢进去就差不多了-1"><a href="#然后丢进去就差不多了-1" class="headerlink" title="然后丢进去就差不多了"></a>然后丢进去就差不多了</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h4 id="以下是Font-matter预先定义的参数，在模板中使用这些参数值并加以利用。-1"><a href="#以下是Font-matter预先定义的参数，在模板中使用这些参数值并加以利用。-1" class="headerlink" title="以下是Font-matter预先定义的参数，在模板中使用这些参数值并加以利用。"></a>以下是Font-matter预先定义的参数，在模板中使用这些参数值并加以利用。</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>layout</td>
-<td>布局</td>
-<td>config.default_layout</td>
-</tr>
-<tr>
-<td>title</td>
-<td>标题</td>
-<td>文章的文件名</td>
-</tr>
-<tr>
-<td>date</td>
-<td>建立日期</td>
-<td>文件建立日期</td>
-</tr>
-<tr>
-<td>updated</td>
-<td>更新日期</td>
-<td>文件更新日期</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>开启文章的评论功能</td>
-<td>true</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>标签（不适用于分页）</td>
-<td></td>
-</tr>
-<tr>
-<td>categories</td>
-<td>分类（不适用于分页）</td>
-<td></td>
-</tr>
-<tr>
-<td>permalink</td>
-<td>覆盖文章网址</td>
-<td></td>
-</tr>
-<tr>
-<td>excerpt</td>
-<td>Page excerpt in plain text. Use this plugin to format the text</td>
-<td></td>
-</tr>
-<tr>
-<td>lang</td>
-<td>Set the language to override auto-detection</td>
-<td>Inherited from _config.yml</td>
-</tr>
-</tbody></table>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>1a739a7d0804431b3d2867d6772779ad5135ff5e</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 ]]></content>
       <categories>
         <category>Hexo</category>
@@ -169,35 +83,7 @@
 </ul>
 </li>
 <li>StringBuffer<ul>
-<li><h1 id="线程安全，可变的字符序列。-字符串缓冲区就像一个String，但可以修改，StringBuffer的append和insert是主要使用的方法"><a href="#线程安全，可变的字符序列。-字符串缓冲区就像一个String，但可以修改，StringBuffer的append和insert是主要使用的方法" class="headerlink" title="线程安全，可变的字符序列。 字符串缓冲区就像一个String，但可以修改，StringBuffer的append和insert是主要使用的方法"></a>线程安全，可变的字符序列。 字符串缓冲区就像一个<code>String</code>，但可以修改，<code>StringBuffer</code>的<code>append</code>和<code>insert</code>是主要使用的方法</h1></li>
-</ul>
-</li>
-</ul>
-<hr>
-<p>title: Java小知识点–更新ing<br>date: 2021-11-20 18:51:20<br>tags: Spring<br>excerpt: 小东西容易忘，能咋办翻饭笔记查查jdk文档呗</p>
-<hr>
-<h1 id="Java小知识点-1"><a href="#Java小知识点-1" class="headerlink" title="Java小知识点"></a>Java小知识点</h1><ul>
-<li>StringBuilder<ul>
-<li>一个可变的字符序列。 此类提供与<code>StringBuffer</code>的API，但不保证同步。  此类设计用作简易替换为<code>StringBuffer</code>在正在使用由单个线程字符串缓冲区的地方（如通常是这种情况）。  在可能的情况下，建议使用这个类别优先于<code>StringBuffer</code> ，因为它在大多数实现中将更快。</li>
-</ul>
-</li>
-<li>StringBuffer<ul>
-<li>线程安全，可变的字符序列。 字符串缓冲区就像一个<code>String</code>，但可以修改，<code>StringBuffer</code>的<code>append</code>和<code>insert</code>是主要使用的方法<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>1a739a7d0804431b3d2867d6772779ad5135ff5e</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</li>
+<li>线程安全，可变的字符序列。 字符串缓冲区就像一个<code>String</code>，但可以修改，<code>StringBuffer</code>的<code>append</code>和<code>insert</code>是主要使用的方法</li>
 </ul>
 </li>
 </ul>
@@ -392,26 +278,12 @@
 </li>
 <li><p>线程插队(线程vip阻塞)</p>
 <ul>
-<li>```java<br>t2.start();<br>t2.join();<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">- ### 线程同步</span><br><span class="line"></span><br><span class="line">  - </span><br><span class="line"></span><br><span class="line">## 四、排序查找算法</span><br><span class="line"></span><br><span class="line">- 查找</span><br><span class="line"></span><br><span class="line">  - 顺序查找</span><br><span class="line"></span><br><span class="line">    - | 平均查找长度 | 时间复杂度 |</span><br><span class="line">      | :----------: | :--------: |</span><br><span class="line">      |   (n+1)/2    |    O(n)    |</span><br><span class="line"></span><br><span class="line">  - 二分查找（折半查找）</span><br><span class="line"></span><br><span class="line">    - | 平均查找长度 | 时间复杂度 |</span><br><span class="line">      | :----------: | :--------: |</span><br><span class="line">      |  log2(n+1)   |  O(log2n)  |</span><br><span class="line"></span><br><span class="line">  - 插值查找</span><br><span class="line"></span><br><span class="line">    - **时间复杂度分析：** O(log2(log2n))</span><br><span class="line"></span><br><span class="line">  - 斐波那契查找</span><br><span class="line"></span><br><span class="line">    - </span><br><span class="line"></span><br><span class="line">  - 树表查找</span><br><span class="line">=======</span><br><span class="line">---</span><br><span class="line">title: Java超基础不能忘</span><br><span class="line">date: 2021-11-20 18:50:50</span><br><span class="line">tags: Spring</span><br><span class="line">excerpt: Java八股文打死不能忘~</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># Java知识基础</span><br><span class="line"></span><br><span class="line">## 一、面向对象编程的特点</span><br><span class="line"></span><br><span class="line">- ### 封装</span><br><span class="line"></span><br><span class="line">  - 某事物的属性和行为包装到对象中，这个对象只对外公布需要公开的属性和行为</span><br><span class="line">  - **public** 表明该数据成员、成员函数是对所有用户开放的，所有用户都可以直接进行调用</span><br><span class="line">  - **private** 表示私有，私有的意思就是除了**class自己**之外，**任何人都不可以**直接使用。</span><br><span class="line">  - **protected ** 对于子女、朋友来说，就是public的，可以自由使用，没有任何限制，而对于其他的外部class，protected就变成private。</span><br><span class="line"></span><br><span class="line">- ### 继承</span><br><span class="line"></span><br><span class="line">  - 子对象可以继承父对象的属性和行为</span><br><span class="line"></span><br><span class="line">- ### 多态性</span><br><span class="line"></span><br><span class="line">  - 方法的重载</span><br><span class="line">    - 方法重载：在类中定义方法名相同，参数不同的不同的多个方法（返回值类型可随意，不能以返回类型作为重载函数的区分标准）。</span><br><span class="line">    - 方法重写：如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写 </span><br><span class="line"></span><br><span class="line">- ### 八大原则</span><br><span class="line"></span><br><span class="line">  1. **单一职责原则** 每一个类应该专注于做一件事情。</span><br><span class="line">  2. **里氏替换原则** 超类存在的地方，子类是可以替换的。**UserInterface methods=new UserInterfaceImpl();**</span><br><span class="line">  3. **依赖倒置原则** 实现尽量依赖抽象，不依赖具体实现</span><br><span class="line">  4. **接口隔离原则** 应当为客户端提供尽可能小的单独的接口，而不是提供大的总的接口。</span><br><span class="line">  5. **迪米特法则** 又叫最少知识原则，一个软件实体应当尽可能少的与其他实体发生相互作用</span><br><span class="line">  6. **开闭原则** 面向扩展开放，面向修改关闭。</span><br><span class="line">  7. **组合/聚合复用原则** 尽量使用合成/聚合达到复用，尽量少用继承。原则： 一个类中有另一个类的对象。</span><br><span class="line">  8. **高内聚、低耦合** 高内聚指的就是单一职责原则，一个类做的职责越单一，内聚度就越高，低耦合，指的就是依赖倒置原则，尽量使用抽象耦合去代替具体耦合</span><br><span class="line"></span><br><span class="line">- **具备iterator接口的对象**</span><br><span class="line"></span><br><span class="line">  - 数组</span><br><span class="line">  - 字符串</span><br><span class="line">  - 函数的 arguments 对象</span><br><span class="line">  - Set/Map 数据结构</span><br><span class="line">  - TypedArray</span><br><span class="line">  - NodeList 对象</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 二、Java数据结构</span><br><span class="line"></span><br><span class="line">1. ### List(可重复)</span><br><span class="line"></span><br><span class="line">   - ArrayList 基于数组实现，增删慢，查询快，线程不安全</span><br><span class="line">   - Vector 基于数组实现，增删慢，查询快，线程安全</span><br><span class="line">   - LinkedList 基于双向链表实现，增删快，查询慢，线程不安全</span><br><span class="line"></span><br><span class="line">2. ### Queue</span><br><span class="line"></span><br><span class="line">   - ArrayBlockingQueue 基于数组实现的有界阻塞队列</span><br><span class="line">   - LinkedBlockingQueue 基于链表实现的有界阻塞队列</span><br><span class="line">   - PriorityBlockingQueue 支持优先级排序的无界阻塞队列</span><br><span class="line">   - DelayQueue 支持延迟操作的无界阻塞队列</span><br><span class="line">   - SynchronousQueue 用于线程同步的阻塞队列</span><br><span class="line">   - LinkedTransferQueue 基于链表实现的无界阻塞队列</span><br><span class="line">   - LinkedBlockingDeque 基于链表实现的双向阻塞队列</span><br><span class="line"></span><br><span class="line">3. ### Set（不可重复）</span><br><span class="line"></span><br><span class="line">   1. HashSet 哈希表实现，存的是散列值</span><br><span class="line">   2. TreeSet 二叉树实现，将新添加的对象进行排序</span><br><span class="line">   3. `对象的相等性本质上是对象的HashCode值相等，HashCode值是Java根据对象的内存地址通过HashCode()方法计算出的HashCode值`</span><br><span class="line">   4. LinkHashSet 哈希表实现数据存储，双向链表记录顺序，底层使用LinkedHashMap记录数据，继承了HashSet</span><br><span class="line"></span><br><span class="line">4. ### Map</span><br><span class="line"></span><br><span class="line">   - HashMap</span><br><span class="line">     - 数组+链表存储数据，线程不安全</span><br><span class="line">     - jdk8改为数组+链表或者红黑树</span><br><span class="line">     - 链表存在主要是为了解决经过hash计算后会有重复值这一问题</span><br><span class="line">   - ConCurrentHashMap</span><br><span class="line">     - 分段锁的思想实现并发操作，线程安全</span><br><span class="line">   - HashTable</span><br><span class="line">     - 和HashTable类似，线程安全</span><br><span class="line">   - TreeMap</span><br><span class="line">     - 二叉树存取数据，key必须实现Camparable接口</span><br><span class="line"></span><br><span class="line">   - LinkedHashMap</span><br><span class="line">     - 链表保存数据的插入顺序</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-Map.Entry的作用<br>Map.Entry是为了更方便的输出map键值对。一般情况下，要输出Map中的key 和 value  是先得到key的集合keySet()，然后再迭代（循环）由每个key得到每个value。values()方法是获取集合中的所有值，不包含键，没有对应关系。而Entry可以一次性获得这两个值。<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">## 三、多线程的并发编程</span><br><span class="line"></span><br><span class="line">- ### 创建线程的方式</span><br><span class="line"></span><br><span class="line">  1. 继承Thread类</span><br><span class="line"></span><br><span class="line">     1. ```java</span><br><span class="line">        Thread t1= new ThreadEx();</span><br><span class="line">        t1.start();//继承Thread   11111</span><br></pre></td></tr></table></figure></li>
-</ul>
+<li><pre><code class="java">t2.start();
+t2.join();
+</code></pre>
 </li>
 </ul>
-<ol start="2">
-<li><p>实现Runnable接口</p>
-<ol>
-<li>```java<br>ThreadRun t2=new ThreadRun();<br>new Thread(t2,”实现Runnable创建线程1”).start();<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">  3. 通过ExecutorService和实现Callable接口实现有返回值的线程</span><br><span class="line">     1. 实现Callable接口创建线程，可以用构造函数给线程取名字</span><br><span class="line">     2. `ExecutorService pool= Executors.newFixedThreadPool(2);`//创建线程池</span><br><span class="line">     3. `Callable c=new MyCallable(&quot;name&quot;);`//创建一个有返回值的线程</span><br><span class="line">     4. `pool.submit(c);`//提交线程</span><br><span class="line">     5. `pool.shutdown();`//关闭线程</span><br><span class="line"></span><br><span class="line">  4. 基于线程池</span><br><span class="line">     1. `ExecutorService pool= Executors.newFixedThreadPool(2);`//创建线程池</span><br><span class="line">     2. `pool.excute(()-&gt;System.out.println(”线程执行中“));`//提交线程并执行</span><br><span class="line"></span><br><span class="line">- ### 线程池的工作原理</span><br><span class="line"></span><br><span class="line">  - 线程池的主要作用：**线程复用**，**线程资源管理**，**控制操作系统最大并发数**以保证系统安全且高效</span><br><span class="line">    - 线程复用时JVM不断调用Runnable对象的run方法，循环中把Runnable对象放进Queue中，这样既可以有效控制正在执行的线程个数，也能保证系统中等待执行的其他线程有序执行</span><br><span class="line">  - 线程池的核心组件</span><br><span class="line">    - **线程池管理器**</span><br><span class="line">    - **工作线程**：线程池中执行具体任务的线程</span><br><span class="line">    - **任务接口**：定义**工作线程**的调度和执行策略 只有线程实现该接口，才能实现任务调度</span><br><span class="line">    - **任务队列**：用于存放处理的任务，新任务会不断加入，执行完成的任务会被从队列中除去</span><br><span class="line">  - 线程池通过Executor框架实现，核心类：Executors,ExecutorService,ThreadPoolExecutor,Callable,Future,FutureTask</span><br><span class="line"></span><br><span class="line">- ### 线程的五大状态</span><br><span class="line"></span><br><span class="line">  - 创建状态（新生状态）</span><br><span class="line">  - 就绪状态</span><br><span class="line">  - 阻塞状态</span><br><span class="line">  - 运行状态</span><br><span class="line">  - 死亡状态</span><br><span class="line">  - 通过`Thread.State state=thread.getState();`获取线程状态</span><br><span class="line">    - NEW</span><br><span class="line">      尚未启动的线程处于此状态。 </span><br><span class="line">    - RUNNABLE</span><br><span class="line">      在Java虚拟机中执行的线程处于此状态。 </span><br><span class="line">    - BLOCKED</span><br><span class="line">      被阻塞等待监视器锁定的线程处于此状态。 </span><br><span class="line">    - WAITING</span><br><span class="line">      正在等待另一个线程执行特定动作的线程处于此状态。 </span><br><span class="line">    - TIMED_WAITING</span><br><span class="line">      正在等待另一个线程执行动作达到指定等待时间的线程处于此状态。 </span><br><span class="line">    - TERMINATED</span><br><span class="line"></span><br><span class="line">- ### 线程的优先级</span><br><span class="line"></span><br><span class="line">  - 线程的Priority优先级低的收到CPU的调度的概率低</span><br><span class="line"></span><br><span class="line">  - ```java</span><br><span class="line">    t2.setPriority();//设置优先级，默认优先级是5</span><br><span class="line">    t2.start;//Thread.MAX_PRIORITY是10</span><br></pre></td></tr></table></figure></li>
-</ol>
 </li>
-</ol>
-</li>
-<li><h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><ul>
-<li><p>线程分<strong>用户线程</strong>和<strong>守护线程</strong></p>
-</li>
-<li><p>JVM必须确保用户线程执行完毕，而不需要等待守护线程执行完毕</p>
-</li>
-<li><p>```<br>god god = new god();//run方法里面可以写无线循环函数<br>Thread t2= new Thread(god,”守护线程”);<br>t2.setDaemon(true);//设置线程为守护线程<br>t2.start();</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 线程方法</span><br><span class="line"></span><br><span class="line">  - 线程停止</span><br><span class="line"></span><br><span class="line">    - 建议正常停止--&gt;利用次数，不建议死循环</span><br><span class="line">    - 建议使用标志位--&gt;设置一个标志位</span><br><span class="line">    - 不要使用stop或者destroy等过时或者JDK不建议使用的方法（设置标志位让线程停止）</span><br><span class="line"></span><br><span class="line">  - 线程休眠</span><br><span class="line"></span><br><span class="line">    - 模拟网络延时：放大问题的发生性</span><br><span class="line">    - `Thread.sleep(1000);`</span><br><span class="line"></span><br><span class="line">  - 线程礼让</span><br><span class="line"></span><br><span class="line">    - `Thread.yeild();`</span><br><span class="line"></span><br><span class="line">  - 线程插队(线程vip阻塞)</span><br><span class="line"></span><br><span class="line">    - ```java</span><br><span class="line">      t2.start();</span><br><span class="line">      t2.join();</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -465,21 +337,6 @@ Map.Entry的作用<br>Map.Entry是为了更方便的输出map键值对。一般�
 <p>- </p>
 </li>
 <li><p>树表查找</p>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>1a739a7d0804431b3d2867d6772779ad5135ff5e</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
 </li>
 </ul>
 </li>
@@ -490,6 +347,58 @@ Map.Entry的作用<br>Map.Entry是为了更方便的输出map键值对。一般�
       </categories>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo常用命令</title>
+    <url>/2021/11/20/README_Hexo/</url>
+    <content><![CDATA[<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/hexojs/logo/master/hexo-logo-avatar.png"
+                      alt="Hexo logo" width="100" height="100" align="right" 
+                >
+
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><blockquote>
+<p>A fast, simple &amp; powerful blog framework, powered by <a class="link"   href="https://nodejs.org/" >Node.js<i class="fas fa-external-link-alt"></i></a>.</p>
+</blockquote>
+<p><a class="link"   href="https://hexo.io/" >Website<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/" >Documentation<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/#Installation" >Installation Guide<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/contributing" >Contribution Guide<i class="fas fa-external-link-alt"></i></a> |<br><a href="CODE_OF_CONDUCT.md">Code of Conduct</a> |<br><a class="link"   href="https://hexo.io/api/" >API<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://twitter.com/hexojs" >Twitter<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>Blazing fast generating</li>
+<li>Support for GitHub Flavored Markdown and most Octopress plugins</li>
+<li>One-command deploy to GitHub Pages, Heroku, etc.</li>
+<li>Powerful API for limitless extensibility</li>
+<li>Hundreds of <a class="link"   href="https://hexo.io/themes/" >themes<i class="fas fa-external-link-alt"></i></a> &amp; <a class="link"   href="https://hexo.io/plugins/" >plugins<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p><strong>Install Hexo</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p><strong>Setup your blog</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+
+<p><strong>Start the server</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p><strong>Create a new post</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Generate static files</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<h2 id="More-Information"><a href="#More-Information" class="headerlink" title="More Information"></a>More Information</h2><ul>
+<li>Read the <a class="link"   href="https://hexo.io/" >documentation<i class="fas fa-external-link-alt"></i></a></li>
+<li>Visit the <a class="link"   href="https://github.com/hexojs/awesome-hexo" >Awesome Hexo<i class="fas fa-external-link-alt"></i></a> list</li>
+<li>Find solutions in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a></li>
+<li>Join discussion on <a class="link"   href="https://groups.google.com/group/hexo" >Google Group<i class="fas fa-external-link-alt"></i></a>, <a class="link"   href="https://discord.gg/teM2Anj" >Discord<i class="fas fa-external-link-alt"></i></a>, <a class="link"   href="https://gitter.im/hexojs/hexo" >Gitter<i class="fas fa-external-link-alt"></i></a> or <a class="link"   href="https://t.me/hexojs" >Telegram<i class="fas fa-external-link-alt"></i></a></li>
+<li>See the <a class="link"   href="https://hexo.io/plugins/" >plugin list<i class="fas fa-external-link-alt"></i></a> and the <a class="link"   href="https://hexo.io/themes/" >theme list<i class="fas fa-external-link-alt"></i></a> on wiki</li>
+<li>Follow <a class="link"   href="https://twitter.com/hexojs" >@hexojs<i class="fas fa-external-link-alt"></i></a> for latest news</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -734,6 +643,6 @@ Map.Entry的作用<br>Map.Entry是为了更方便的输出map键值对。一般�
 </ol>
 </li>
 </ol>
-<h2 id="三、编写sh脚本给pull和hexo-clean-amp-amp-hexo-g-amp-amp-hexo-d"><a href="#三、编写sh脚本给pull和hexo-clean-amp-amp-hexo-g-amp-amp-hexo-d" class="headerlink" title="三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d"></a>三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d</h2><h2 id="四、配置crontab工具每天中午十二点自动执行"><a href="#四、配置crontab工具每天中午十二点自动执行" class="headerlink" title="四、配置crontab工具每天中午十二点自动执行"></a>四、配置crontab工具每天中午十二点自动执行</h2><h2 id="五、现在只需要往github上面填东西即可"><a href="#五、现在只需要往github上面填东西即可" class="headerlink" title="五、现在只需要往github上面填东西即可"></a>五、现在只需要往github上面填东西即可</h2>]]></content>
+<h2 id="三、编写sh脚本给pull和hexo-clean-amp-amp-hexo-g-amp-amp-hexo-d"><a href="#三、编写sh脚本给pull和hexo-clean-amp-amp-hexo-g-amp-amp-hexo-d" class="headerlink" title="三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d"></a>三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d</h2><h2 id="四、配置crontab工具每天中午十二点自动执行"><a href="#四、配置crontab工具每天中午十二点自动执行" class="headerlink" title="四、配置crontab工具每天中午十二点自动执行"></a>四、配置crontab工具每天中午十二点自动执行</h2><h2 id="五、现在只需要往github上面填东西即可"><a href="#五、现在只需要往github上面填东西即可" class="headerlink" title="五、现在只需要往github上面填东西即可"></a>五、现在只需要往github上面填东西即可</h2><h2 id="六、"><a href="#六、" class="headerlink" title="六、"></a>六、</h2>]]></content>
   </entry>
 </search>
