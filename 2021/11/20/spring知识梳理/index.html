@@ -217,12 +217,12 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>1.1k 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>2.2k 字</span>
         </span>
     
     
         <span class="article-min2read article-meta-item">
-            <i class="fas fa-clock"></i>&nbsp;<span>4 分钟</span>
+            <i class="fas fa-clock"></i>&nbsp;<span>8 分钟</span>
         </span>
     
     
@@ -360,19 +360,18 @@
 </li>
 <li><p>注解配置总结</p>
 <ol>
-<li><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-                           https://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
-    &lt;!-- 配置注解支持 --&gt;    
-    &lt;context:annotation-config/&gt; 
-&lt;/beans&gt;
+<li>```xml<?xml version="1.0" encoding="UTF-8"?>
+&lt;beans xmlns=”<a class="link"   target="_blank" rel="noopener" href="http://www.springframework.org/schema/beans&quot;" >http://www.springframework.org/schema/beans&quot;<i class="fas fa-external-link-alt"></i></a><pre><code>   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+   xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+   xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+                       https://www.springframework.org/schema/beans/spring-beans.xsd
+                       http://www.springframework.org/schema/context
+                       https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+&lt;!-- 配置注解支持 --&gt;    
+&lt;context:annotation-config/&gt; 
 </code></pre>
-</li>
+</beans>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">      </span><br><span class="line"></span><br><span class="line">4. 使用注解</span><br><span class="line"></span><br><span class="line">- ### Spring常用注解</span><br><span class="line"></span><br><span class="line">  - Bean声明</span><br><span class="line">    - @Component 定义基础层的通用组件</span><br><span class="line">    - @Service 定义业务逻辑层的服务组件</span><br><span class="line">    - @Repository 在数据访问层定义数据资源服务</span><br><span class="line">    - @Controller 在展示层使用，用于定义控制器</span><br><span class="line">  - Beans注入</span><br><span class="line">    - @Autowired</span><br><span class="line">    - @Resource</span><br><span class="line">  - 配置类注解</span><br><span class="line">    - @Configuration</span><br><span class="line">    - @Bean</span><br><span class="line">    - @ComponentScan</span><br><span class="line">  - AOP注解</span><br><span class="line">  - @Bean属性支持注解</span><br><span class="line">  - 异步操作注解</span><br><span class="line">  - 定时任务相关</span><br><span class="line">  - 开启功能支持</span><br><span class="line">  - 测试相关注解</span><br><span class="line">  - Spring MVC注解</span><br><span class="line">    - @Controller 声明该类为Spring MVC的控制器</span><br><span class="line">    - @RequestMapping 声明映射Web请求的地址和参数，包括访问路径和参数</span><br><span class="line">    - @ResponseBody 支持将返回值放在ResponseBody体中返回，**通常用于返回json数据到前端**</span><br><span class="line">    - @RequestBody 允许Request的参数在RequestBody 体中</span><br><span class="line">    - @PathVariable 用于接收基于路径的参数，**通常作为RESTful接口的实现**</span><br><span class="line">    - @RestController 组合注解，相当于@Controller和@ResponseBody的组合</span><br><span class="line">    - @ExceptionHandler 用于全局控制器的异常处理</span><br><span class="line">=======</span><br><span class="line">---</span><br><span class="line">title: spring知识整理</span><br><span class="line">date: 2021-11-20 16:19:59</span><br><span class="line">tags:</span><br><span class="line">- Spring</span><br><span class="line">- Java</span><br><span class="line">categories: </span><br><span class="line">- Java</span><br><span class="line">- Spring</span><br><span class="line">excerpt: 概念还是必须要清晰的，学Spring配置和概念繁多，笔记不能丢，嘻嘻随时准备CTRLCV</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"># Spring知识梳理    </span><br><span class="line">## 一、特性    </span><br><span class="line">- 轻量</span><br><span class="line">- 控制反转</span><br><span class="line">    - 不需要自己去new一个对象了</span><br><span class="line">    - spring会在容器初始化完成后主动把依赖的对象传递给他</span><br><span class="line">    - 实现系统对象之间的解耦合</span><br><span class="line">- 面向切面  </span><br><span class="line">  - spring提供了面  向切面的编程支持</span><br><span class="line">  - 分离系统逻辑和业务逻辑</span><br><span class="line">  - 业务层只是实现与业务相关的代码，不需要关心系统功能的实现</span><br><span class="line">  - 通过面向切面技术实现系统功能的自动织入</span><br><span class="line">- 面向容器      </span><br><span class="line">  - 对象的配置化生成和对象的生命周期管理</span><br><span class="line">  - 通过xml配置或者注解bean对象，控制其创建和销毁以及是否为单例模式</span><br><span class="line">- ***spring是一个轻量性的具有控制反转和面向切面和容器编程特点的开发框架***</span><br><span class="line"></span><br><span class="line">## 二、Spring的模块组成</span><br><span class="line">1. ### 核心容器层 CC</span><br><span class="line">    - Sping-Beans</span><br><span class="line">      - 此模块基于工厂模式实现对象创建</span><br><span class="line">      - 通过XML配置实现声明式的对象管理</span><br><span class="line">    - Sping-Core</span><br><span class="line">      - 核心功能实现，包括**控制反转**和**依赖注入**</span><br><span class="line">      - bean对象的创建**依赖**于容器</span><br><span class="line">      - bean对象的所有属性由容器来**注入**</span><br><span class="line">    - Sping-Context</span><br><span class="line">      - 基于以上两个模块构建，实现国际化，事务管理、透明创建上下文等功能</span><br><span class="line">    - SpEL</span><br><span class="line">2. ### 数据访问层 DA</span><br><span class="line">     - JDBC</span><br><span class="line">       - 此模块提供了JDBC抽象层</span><br><span class="line">       - Spring持久化层基于抽象层实现了不同数据库间的灵活切换</span><br><span class="line">     - ORM（包括JPA,JDO,Hibernate等）</span><br><span class="line">     - OXM</span><br><span class="line">     - JMS</span><br><span class="line">       - 实现对消息队列的支持</span><br><span class="line">     - 事务处理</span><br><span class="line">       - 基于接口实现声明式的事务管理</span><br><span class="line">       - 通过配置和注解就可以实现，具体事务管理工作由Spring自动处理</span><br><span class="line">3. ### Web应用层 WA（包含web交互和数据传输等功能）</span><br><span class="line">     - Web</span><br><span class="line">       - 提供面向Web应用的基本功能</span><br><span class="line">     - Web-MVC</span><br><span class="line">       - 为web应用**提供模型视图控制**和**REST api服务**的实现</span><br><span class="line">       - 数字模型负责数据的业务逻辑，视图负责数据的展示</span><br><span class="line">     - Web-Soket</span><br><span class="line">       - 提供WebSocket-Base的支持，实现服务端与客户端的双向通信</span><br><span class="line">     - Web-Portlet</span><br><span class="line">       - 提供基于Portlet环境的MVC支持</span><br><span class="line">4. ### 其他重要模块</span><br><span class="line">    - AOP</span><br><span class="line">      - 允许定义方法拦截器和切入点实现系统功能和业务功能解耦合</span><br><span class="line">    - Aspects   </span><br><span class="line">      - 提供Spring和AspectJ的集成，是一个面向切面编程的模块</span><br><span class="line">    - Instrumentation</span><br><span class="line">      - 提供对Instrumentation的支持和类加载器的实现</span><br><span class="line">    - Messaging</span><br><span class="line">      - 为STOMP提供支持，主要用于WebSocket子协议的实现</span><br><span class="line">    - Test</span><br><span class="line">      - 对Junit等测试框架提供支持</span><br><span class="line">## 三、Spring的注解</span><br><span class="line">- ### Spring注解的使用规则 </span><br><span class="line"></span><br><span class="line">1. 导入命名空间及规范约束</span><br><span class="line">   1. xmlns指定的命名空间是默认的命名空间</span><br><span class="line">   2. xmlns:xsi是指该XML文件遵守xml规范</span><br><span class="line"></span><br><span class="line">2. 配置扫描包/注解支持</span><br><span class="line"></span><br><span class="line">   1. 配置文件中配置需要扫描的包，配置过的包中的注解才能生效</span><br><span class="line"></span><br><span class="line">3. 注解配置总结</span><br><span class="line"></span><br><span class="line">   1. ```xml</span><br><span class="line">      &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">      &lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">             xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">             xmlns:context=&quot;http://www.springframework.org/schema/context&quot;</span><br><span class="line">             xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans</span><br><span class="line">                                 https://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">                                 http://www.springframework.org/schema/context</span><br><span class="line">                                 https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;</span><br><span class="line">      	&lt;!-- 配置注解支持 --&gt;    </span><br><span class="line">          &lt;context:annotation-config/&gt; </span><br><span class="line">      &lt;/beans&gt;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 <li><p>使用注解</p>
@@ -411,7 +410,22 @@
 <li>@RequestBody 允许Request的参数在RequestBody 体中</li>
 <li>@PathVariable 用于接收基于路径的参数，<strong>通常作为RESTful接口的实现</strong></li>
 <li>@RestController 组合注解，相当于@Controller和@ResponseBody的组合</li>
-<li>@ExceptionHandler 用于全局控制器的异常处理</li>
+<li>@ExceptionHandler 用于全局控制器的异常处理<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>1a739a7d0804431b3d2867d6772779ad5135ff5e</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</li>
 <li>@InitBinder WebDataBinder用来自动绑定前台请求的参数到模型（Model）中</li>
 </ul>
 </li>
@@ -429,13 +443,13 @@
                     <div class="article-prev">
                         <a class="prev"
                            rel="prev"
-                           href="/2021/11/20/README_Hexo/"
+                           href="/2021/11/20/Java%E7%9F%A5%E8%AF%86%E5%9F%BA%E7%A1%80/"
                         >
                             <span class="left arrow-icon flex-center">
                               <i class="fas fa-chevron-left"></i>
                             </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">hexo常用命令</span>
+                                <span class="post-nav-title-item">Java超基础不能忘</span>
                                 <span class="post-nav-item">上一篇</span>
                             </span>
                         </a>

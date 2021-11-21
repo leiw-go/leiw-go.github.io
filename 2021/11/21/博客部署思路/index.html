@@ -9,7 +9,7 @@
     
     <title>
         
-            Hello World |
+            博客自动部署配置 |
         
         leiw&#39;s little blog
     </title>
@@ -161,7 +161,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">Hello World</span>
+            <span class="title-hover-animation">博客自动部署配置</span>
         </div>
 
         
@@ -179,7 +179,7 @@
                     <div class="meta-info">
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
-        <i class="fas fa-edit"></i>&nbsp;2021-11-20 11:56:34
+        <i class="fas fa-edit"></i>&nbsp;2021-11-21 12:12:05
     </span>
     
     
@@ -187,7 +187,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>75 字</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>152 字</span>
         </span>
     
     
@@ -208,20 +208,21 @@
         
 
         <div class="article-content markdown-body">
-            <p>Welcome to <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
-
+            <h1 id="Hexo-Sh脚本-Crontab实现自动部署个人博客"><a href="#Hexo-Sh脚本-Crontab实现自动部署个人博客" class="headerlink" title="Hexo+Sh脚本+Crontab实现自动部署个人博客"></a>Hexo+Sh脚本+Crontab实现自动部署个人博客</h1><h2 id="一、安装配置Hexo"><a href="#一、安装配置Hexo" class="headerlink" title="一、安装配置Hexo"></a>一、安装配置Hexo</h2><ul>
+<li>这个太简单了随便配置一下就行</li>
+</ul>
+<h2 id="二、远程Ubunt生成ssh密钥配置连接github远程仓库"><a href="#二、远程Ubunt生成ssh密钥配置连接github远程仓库" class="headerlink" title="二、远程Ubunt生成ssh密钥配置连接github远程仓库"></a>二、远程Ubunt生成ssh密钥配置连接github远程仓库</h2><ol>
+<li><p>生成密钥</p>
+<ol>
+<li><pre><code class="bash">ssh-keygen -t rsa -C &quot;你的GitHub注册邮箱&quot;
+</code></pre>
+</li>
+<li><p>将文件夹~/.ssh文件夹下的公钥–<code>id_rsa.pub</code>的全部内容粘贴配置到<a class="link"   target="_blank" rel="noopener" href="https://github.com/settings/keys[https://github.com/settings/keys]%E4%B8%AD" >https://github.com/settings/keys[https://github.com/settings/keys]中<i class="fas fa-external-link-alt"></i></a></p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="三、编写sh脚本给pull和hexo-clean-amp-amp-hexo-g-amp-amp-hexo-d"><a href="#三、编写sh脚本给pull和hexo-clean-amp-amp-hexo-g-amp-amp-hexo-d" class="headerlink" title="三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d"></a>三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d</h2><h2 id="四、配置crontab工具每天中午十二点自动执行"><a href="#四、配置crontab工具每天中午十二点自动执行" class="headerlink" title="四、配置crontab工具每天中午十二点自动执行"></a>四、配置crontab工具每天中午十二点自动执行</h2><h2 id="五、现在只需要往github上面填东西即可"><a href="#五、现在只需要往github上面填东西即可" class="headerlink" title="五、现在只需要往github上面填东西即可"></a>五、现在只需要往github上面填东西即可</h2>
         </div>
 
         
@@ -229,21 +230,21 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2021/11/20/HelloHexo/"
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2021/11/21/hello-world/"
                         >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">HelloHexo</span>
-                                <span class="post-nav-item">上一篇</span>
+                                <span class="post-nav-title-item">Hello World</span>
+                                <span class="post-nav-item">下一篇</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
                             </span>
                         </a>
                     </div>
-                
                 
             </div>
         
@@ -362,7 +363,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo-Sh%E8%84%9A%E6%9C%AC-Crontab%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2"><span class="nav-text">Hexo+Sh脚本+Crontab实现自动部署个人博客</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEHexo"><span class="nav-text">一、安装配置Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%BF%9C%E7%A8%8BUbunt%E7%94%9F%E6%88%90ssh%E5%AF%86%E9%92%A5%E9%85%8D%E7%BD%AE%E8%BF%9E%E6%8E%A5github%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="nav-text">二、远程Ubunt生成ssh密钥配置连接github远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BC%96%E5%86%99sh%E8%84%9A%E6%9C%AC%E7%BB%99pull%E5%92%8Chexo-clean-amp-amp-hexo-g-amp-amp-hexo-d"><span class="nav-text">三、编写sh脚本给pull和hexo clean&amp;&amp;hexo g&amp;&amp;hexo d</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%85%8D%E7%BD%AEcrontab%E5%B7%A5%E5%85%B7%E6%AF%8F%E5%A4%A9%E4%B8%AD%E5%8D%88%E5%8D%81%E4%BA%8C%E7%82%B9%E8%87%AA%E5%8A%A8%E6%89%A7%E8%A1%8C"><span class="nav-text">四、配置crontab工具每天中午十二点自动执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%8E%B0%E5%9C%A8%E5%8F%AA%E9%9C%80%E8%A6%81%E5%BE%80github%E4%B8%8A%E9%9D%A2%E5%A1%AB%E4%B8%9C%E8%A5%BF%E5%8D%B3%E5%8F%AF"><span class="nav-text">五、现在只需要往github上面填东西即可</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>
