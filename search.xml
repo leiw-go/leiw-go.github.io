@@ -1,8 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>计算机网络知识回顾</title>
+    <url>/2020/11/23/2020-11-23-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/</url>
+    <content><![CDATA[<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="计算机网络概述"><a href="#计算机网络概述" class="headerlink" title="计算机网络概述"></a>计算机网络概述</h2><ul>
+<li><p> Internet组成细节（全球最大的互联网络，ISP(Internet Service Provider)）</p>
+</li>
+<li><p>数以百万计的计算设备</p>
+</li>
+<li><p>通信链路</p>
+</li>
+<li><p>交换网络实现分组交换</p>
+</li>
+<li><p>网络协议</p>
+<p>互联网协议标准：RFC(Request for Comments)文档</p>
+<ol>
+<li>语法<ul>
+<li>数据与控制信息的格式或者结构</li>
+<li>信号的电平</li>
+</ul>
+</li>
+<li>语义<ul>
+<li>发出何种控制信息</li>
+<li>完成什么动作或者做出什么响应</li>
+<li>差错控制</li>
+</ul>
+</li>
+<li>时序<ul>
+<li>事件顺序</li>
+<li>发送双发速度的匹配</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>计算机网络结构</p>
+<ul>
+<li><p>网络边缘</p>
+<ul>
+<li>主机，各种终端设备</li>
+<li>网络应用</li>
+</ul>
+</li>
+<li><p>接入网络，物理介质：有线或者无线通信链路</p>
+<ol>
+<li>ADSL 非对称的数字用户线路，FMD频分多路复用 <strong>独享</strong><ul>
+<li>50k-1Mhz 下行</li>
+<li>4k-50khz 上行</li>
+<li>0-4khz 电话</li>
+</ul>
+</li>
+<li>电缆网络<ul>
+<li>HFC(hybrid fiber coax) 混合光纤同轴电缆 <strong>共享</strong></li>
+</ul>
+</li>
+<li>机构企业接入网络（以太网）</li>
+<li>无线接入网<ul>
+<li>Lan</li>
+<li>广域无线接入</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>网络核心（核心网络）ISP：核心功能为路由和转发</p>
+<ul>
+<li><p>路由设备（或者其他的分组转发设备）</p>
+<ol>
+<li>路由：确定分组从源到目的的传输路径</li>
+<li>转发：将分组从路由的<strong>输入端口</strong>交换至正确的输出端口</li>
+</ol>
+</li>
+<li><p>数据交换</p>
+<ol>
+<li>电路交换（独占资源）：分三个阶段：<strong>（多路复用技术）</strong><ol>
+<li>建立阶段（呼叫/电路建立）</li>
+<li>通信</li>
+<li>释放连接</li>
+</ol>
+</li>
+<li>报文交换<ul>
+<li>把完整报文进行存储转发</li>
+</ul>
+</li>
+<li>分组交换（<strong>报文的拆分与重组</strong>）（统计多路复用技术：按需分配带宽）<ul>
+<li>定义：把报文拆分成一系列的相对较小的数据包进行存储转发</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>计算机网络性能</p>
+<ul>
+<li>延迟（正在传输中的分组），时延（排队的分组），丢包（缓存用完被丢弃）<ul>
+<li>四种分组延迟<ul>
+<li>结点处理延迟：差错控制，确定输出链路</li>
+<li>排队延迟：等待输出链路可用，取决于路由器的拥挤程度（流量强度：La/R）</li>
+<li>传输延迟（L/R）即数据包/带宽</li>
+<li>传播延迟（d/s）物理长度/信号传播速度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>时延带宽积（以比特为单位的链路长度）<ul>
+<li>定义：传播延迟*带宽</li>
+</ul>
+</li>
+<li>丢包率（丢包数/已发分组总数）</li>
+<li>吞吐量（取决于瓶颈链路）</li>
+</ul>
+</li>
+<li><p>OSI参考模型</p>
+<ul>
+<li>Please Do Not Throw(传输层) Sausage Pizza(表示层) Away</li>
+<li>端到端层 应用层 表示层 会话层 传输层</li>
+<li>路由层 <ul>
+<li>网络层：逻辑寻址（ip），路由，分组转发</li>
+<li>数据链路层：组帧，物理寻址（MAC），流量控制，差错控制，接入控制</li>
+<li>物理层: 接口特性，比特编码，时钟同步</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据封装</p>
+<ul>
+<li>构建协议数据单元，增加控制信息（地址、差错检测编码、协议控制/优先级，安全控制等）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>HelloHexo</title>
-    <url>/2021/11/20/HelloHexo/</url>
+    <url>/2020/11/20/HelloHexo/</url>
     <content><![CDATA[<h2 id="就只是简单的MarkDown吗"><a href="#就只是简单的MarkDown吗" class="headerlink" title="就只是简单的MarkDown吗"></a>就只是简单的MarkDown吗</h2><h3 id="创建一个page页"><a href="#创建一个page页" class="headerlink" title="创建一个page页"></a>创建一个page页</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="然后丢进去就差不多了"><a href="#然后丢进去就差不多了" class="headerlink" title="然后丢进去就差不多了"></a>然后丢进去就差不多了</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
@@ -90,6 +227,21 @@
 ]]></content>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java数据结构与算法之查找</title>
+    <url>/2021/11/11/Java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/</url>
+    <content><![CDATA[<h1 id="Java数据结构与算法之查找"><a href="#Java数据结构与算法之查找" class="headerlink" title="Java数据结构与算法之查找"></a>Java数据结构与算法之查找</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>, right=arr.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right)&#123; #这里&lt;和&lt;=效果是一样的，也就多计算一次循环的差别</span><br><span class="line">            mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]&gt;target) right=mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]&lt;target) left=mid+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]==target) <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>数据结构与算法</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>数据结构与算法</tag>
       </tags>
   </entry>
   <entry>
@@ -361,60 +513,13 @@ t2.join();
       </tags>
   </entry>
   <entry>
-    <title>hexo常用命令</title>
-    <url>/2021/11/20/README_Hexo/</url>
-    <content><![CDATA[<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://raw.githubusercontent.com/hexojs/logo/master/hexo-logo-avatar.png"
-                      alt="Hexo logo" width="100" height="100" align="right" 
-                >
-
-<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><blockquote>
-<p>A fast, simple &amp; powerful blog framework, powered by <a class="link"   href="https://nodejs.org/" >Node.js<i class="fas fa-external-link-alt"></i></a>.</p>
-</blockquote>
-<p><a class="link"   href="https://hexo.io/" >Website<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/" >Documentation<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/#Installation" >Installation Guide<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/contributing" >Contribution Guide<i class="fas fa-external-link-alt"></i></a> |<br><a href="CODE_OF_CONDUCT.md">Code of Conduct</a> |<br><a class="link"   href="https://hexo.io/api/" >API<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://twitter.com/hexojs" >Twitter<i class="fas fa-external-link-alt"></i></a></p>
-<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
-<li>Blazing fast generating</li>
-<li>Support for GitHub Flavored Markdown and most Octopress plugins</li>
-<li>One-command deploy to GitHub Pages, Heroku, etc.</li>
-<li>Powerful API for limitless extensibility</li>
-<li>Hundreds of <a class="link"   href="https://hexo.io/themes/" >themes<i class="fas fa-external-link-alt"></i></a> &amp; <a class="link"   href="https://hexo.io/plugins/" >plugins<i class="fas fa-external-link-alt"></i></a></li>
-</ul>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p><strong>Install Hexo</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p><strong>Setup your blog</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
-
-<p><strong>Start the server</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p><strong>Create a new post</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Generate static files</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<h2 id="More-Information"><a href="#More-Information" class="headerlink" title="More Information"></a>More Information</h2><ul>
-<li>Read the <a class="link"   href="https://hexo.io/" >documentation<i class="fas fa-external-link-alt"></i></a></li>
-<li>Visit the <a class="link"   href="https://github.com/hexojs/awesome-hexo" >Awesome Hexo<i class="fas fa-external-link-alt"></i></a> list</li>
-<li>Find solutions in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a></li>
-<li>Join discussion on <a class="link"   href="https://groups.google.com/group/hexo" >Google Group<i class="fas fa-external-link-alt"></i></a>, <a class="link"   href="https://discord.gg/teM2Anj" >Discord<i class="fas fa-external-link-alt"></i></a>, <a class="link"   href="https://gitter.im/hexojs/hexo" >Gitter<i class="fas fa-external-link-alt"></i></a> or <a class="link"   href="https://t.me/hexojs" >Telegram<i class="fas fa-external-link-alt"></i></a></li>
-<li>See the <a class="link"   href="https://hexo.io/plugins/" >plugin list<i class="fas fa-external-link-alt"></i></a> and the <a class="link"   href="https://hexo.io/themes/" >theme list<i class="fas fa-external-link-alt"></i></a> on wiki</li>
-<li>Follow <a class="link"   href="https://twitter.com/hexojs" >@hexojs<i class="fas fa-external-link-alt"></i></a> for latest news</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
+    <title>Just for Test</title>
+    <url>/2021/11/25/Test/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>Hello World</title>
-    <url>/2021/11/21/hello-world/</url>
+    <url>/2020/11/12/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
@@ -772,6 +877,101 @@ If you wish to set tracking information for this branch you can do so with:
       </categories>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库系统原理小记</title>
+    <url>/2020/12/20/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<h1 id="数据库系统原理"><a href="#数据库系统原理" class="headerlink" title="数据库系统原理"></a>数据库系统原理</h1><h2 id="第一章、绪论"><a href="#第一章、绪论" class="headerlink" title="第一章、绪论"></a>第一章、绪论</h2><ul>
+<li><p>数据库模型：对数据结构和语义的概括</p>
+<ul>
+<li><p>层次模型</p>
+<ul>
+<li>以树结构组织数据</li>
+</ul>
+</li>
+<li><p>关系模型</p>
+<ul>
+<li>以表组织数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据抽象的层次</p>
+<ul>
+<li>概念层：<ul>
+<li>数据模型：E-R模型（实例 联系模型）</li>
+<li>数据模式（脑图）</li>
+</ul>
+</li>
+<li>逻辑层<ul>
+<li>数据模型：关系型模型</li>
+<li>数据模式：模式</li>
+</ul>
+</li>
+<li>视图层<ul>
+<li>数据模型</li>
+<li>数据模式：外模式（应用层依据外模式建立）</li>
+</ul>
+</li>
+<li>物理层<ul>
+<li>数据模型：B+树数据模型</li>
+<li>数据模式：内模式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>三层模式以及两级映射</p>
+<ul>
+<li>物理独立性：如果数据库的内模式改变只要对模式/内模式映射做出响应修改，可以使模式保持不变</li>
+<li>逻辑独立性：如果数据库的模式改变只要对外模式/模式映射做出响应修改，可以使模式保持不变</li>
+</ul>
+</li>
+<li><p>查询处理模块</p>
+<ul>
+<li>数据定义语言</li>
+<li>数据操纵语言</li>
+<li>数据保护语言</li>
+<li>SQL语言包括以上三个部分</li>
+</ul>
+</li>
+<li><p>数据管理技术的发展趋势</p>
+<ul>
+<li>关系型数据库：1.以关系为数据模型    2.采用声明性语言    3.支持完全ACID特性的数据一致性</li>
+<li>数据库管理系统中**事务(transaction)**的四个特性<ul>
+<li><strong>原子性（Atomicity）</strong>：</li>
+<li><strong>一致性（Consistency）</strong></li>
+<li><strong>隔离性（Isolation）</strong></li>
+<li><strong>持久性（Durability）</strong></li>
+</ul>
+</li>
+<li>NoSQL系统<ul>
+<li>利用计算机集群来存储和处理大数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第二章、关系表的结构和约束"><a href="#第二章、关系表的结构和约束" class="headerlink" title="第二章、关系表的结构和约束"></a>第二章、关系表的结构和约束</h2><ul>
+<li>数据的完整性约束，常见约束有<ul>
+<li> 对属性取值范围的约束</li>
+<li>对属性值之间相互关系的限定（即键的概念）<ul>
+<li>超键：能唯一标识出各个属性的集合 </li>
+<li>候选键：能唯一标识出各个属性的集合，且不包含多余属性</li>
+<li>主键：一个表中可能有多个候选键，通常指定其中一个用作主键</li>
+<li>外键：关系表S1（引用关系）的一个属性子集必须匹配另一个关系表S2（被引用关系）中出现的数值，外键的值与被引用关系的值对应，或为空值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>数据库系统原理</category>
+      </categories>
+      <tags>
+        <tag>数据库系统原理</tag>
       </tags>
   </entry>
 </search>
