@@ -513,6 +513,58 @@ t2.join();
       </tags>
   </entry>
   <entry>
+    <title>README_Hexo</title>
+    <url>/2021/06/20/README_Hexo/</url>
+    <content><![CDATA[<img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://raw.githubusercontent.com/hexojs/logo/master/hexo-logo-avatar.png"
+                      alt="Hexo logo" width="100" height="100" align="right" 
+                >
+
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><blockquote>
+<p>A fast, simple &amp; powerful blog framework, powered by <a class="link"   href="https://nodejs.org/" >Node.js<i class="fas fa-external-link-alt"></i></a>.</p>
+</blockquote>
+<p><a class="link"   href="https://hexo.io/" >Website<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/" >Documentation<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/#Installation" >Installation Guide<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/contributing" >Contribution Guide<i class="fas fa-external-link-alt"></i></a> |<br><a href="CODE_OF_CONDUCT.md">Code of Conduct</a> |<br><a class="link"   href="https://hexo.io/api/" >API<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://twitter.com/hexojs" >Twitter<i class="fas fa-external-link-alt"></i></a></p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>Blazing fast generating</li>
+<li>Support for GitHub Flavored Markdown and most Octopress plugins</li>
+<li>One-command deploy to GitHub Pages, Heroku, etc.</li>
+<li>Powerful API for limitless extensibility</li>
+<li>Hundreds of <a class="link"   href="https://hexo.io/themes/" >themes<i class="fas fa-external-link-alt"></i></a> &amp; <a class="link"   href="https://hexo.io/plugins/" >plugins<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p><strong>Install Hexo</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p><strong>Setup your blog</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+
+<p><strong>Start the server</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p><strong>Create a new post</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Generate static files</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<h2 id="More-Information"><a href="#More-Information" class="headerlink" title="More Information"></a>More Information</h2><ul>
+<li>Read the <a class="link"   href="https://hexo.io/" >documentation<i class="fas fa-external-link-alt"></i></a></li>
+<li>Visit the <a class="link"   href="https://github.com/hexojs/awesome-hexo" >Awesome Hexo<i class="fas fa-external-link-alt"></i></a> list</li>
+<li>Find solutions in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a></li>
+<li>Join discussion on <a class="link"   href="https://groups.google.com/group/hexo" >Google Group<i class="fas fa-external-link-alt"></i></a>, <a class="link"   href="https://discord.gg/teM2Anj" >Discord<i class="fas fa-external-link-alt"></i></a>, <a class="link"   href="https://gitter.im/hexojs/hexo" >Gitter<i class="fas fa-external-link-alt"></i></a> or <a class="link"   href="https://t.me/hexojs" >Telegram<i class="fas fa-external-link-alt"></i></a></li>
+<li>See the <a class="link"   href="https://hexo.io/plugins/" >plugin list<i class="fas fa-external-link-alt"></i></a> and the <a class="link"   href="https://hexo.io/themes/" >theme list<i class="fas fa-external-link-alt"></i></a> on wiki</li>
+<li>Follow <a class="link"   href="https://twitter.com/hexojs" >@hexojs<i class="fas fa-external-link-alt"></i></a> for latest news</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Just for Test</title>
     <url>/2021/11/25/Test/</url>
     <content><![CDATA[]]></content>
