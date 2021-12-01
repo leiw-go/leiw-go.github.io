@@ -23,7 +23,7 @@
     <script id="hexo-configurations">
     let KEEP = window.KEEP || {};
     KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"};
-    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/log.jpg","favicon":"/images/learning.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"事物的发展是螺旋的上升和波浪式的前进，道路是曲折的，前途是光明的。"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/log.jpg","favicon":"/images/learning.svg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":false,"scale":false},"first_screen":{"enable":true,"background_img":"/images/bg.svg","description":"如果你想拥有你从未拥有的东西，那么你就得去做你从未做过的事情"},"scroll":{"progress_bar":{"enable":true},"percent":{"enable":true}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":false,"style":"default"},"pjax":{"enable":true},"lazyload":{"enable":true},"version":"3.4.3"};
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 月前","year":"%s 年前"};
   </script>
 <meta name="generator" content="Hexo 5.4.0"></head>
@@ -332,10 +332,9 @@
 <h2 id="三、多线程的并发编程"><a href="#三、多线程的并发编程" class="headerlink" title="三、多线程的并发编程"></a>三、多线程的并发编程</h2><ul>
 <li><h3 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h3><ol>
 <li><p>继承Thread类</p>
-<ol>
-<li>```java<br>Thread t1= new ThreadEx();<br>t1.start();//继承Thread   11111<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. 实现Runnable接口</span><br><span class="line"></span><br><span class="line">   1. ```java</span><br><span class="line">      ThreadRun t2=new ThreadRun();</span><br><span class="line">      new Thread(t2,&quot;实现Runnable创建线程1&quot;).start();</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Thread t1= <span class="keyword">new</span> ThreadEx();</span><br><span class="line">t1.start();<span class="comment">//继承Thread   11111</span></span><br></pre></td></tr></table></figure></li>
+<li><p>实现Runnable接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ThreadRun t2=<span class="keyword">new</span> ThreadRun();</span><br><span class="line"><span class="keyword">new</span> Thread(t2,<span class="string">&quot;实现Runnable创建线程1&quot;</span>).start();</span><br></pre></td></tr></table></figure></li>
 <li><p>通过ExecutorService和实现Callable接口实现有返回值的线程</p>
 <ol>
 <li>实现Callable接口创建线程，可以用构造函数给线程取名字</li>
@@ -386,39 +385,16 @@
 </ul>
 </li>
 <li><h3 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h3><ul>
-<li><p>线程的Priority优先级低的收到CPU的调度的概率低</p>
-</li>
-<li><p>```java<br>t2.setPriority();//设置优先级，默认优先级是5<br>t2.start;//Thread.MAX_PRIORITY是10</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ### 守护线程</span><br><span class="line"></span><br><span class="line">  - 线程分**用户线程**和**守护线程**</span><br><span class="line"></span><br><span class="line">  - JVM必须确保用户线程执行完毕，而不需要等待守护线程执行完毕</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    god god = new god();//run方法里面可以写无线循环函数</span><br><span class="line">    Thread t2= new Thread(god,&quot;守护线程&quot;);</span><br><span class="line">    t2.setDaemon(true);//设置线程为守护线程</span><br><span class="line">    t2.start();</span><br></pre></td></tr></table></figure></li>
+<li>线程的Priority优先级低的收到CPU的调度的概率低</li>
 </ul>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">t2.setPriority();<span class="comment">//设置优先级，默认优先级是5</span></span><br><span class="line">t2.start;<span class="comment">//Thread.MAX_PRIORITY是10</span></span><br></pre></td></tr></table></figure></li>
+<li><h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><ul>
+<li><p>线程分<strong>用户线程</strong>和<strong>守护线程</strong></p>
 </li>
-<li><h3 id="线程方法"><a href="#线程方法" class="headerlink" title="线程方法"></a>线程方法</h3><ul>
-<li><p>线程停止</p>
-<ul>
-<li>建议正常停止–&gt;利用次数，不建议死循环</li>
-<li>建议使用标志位–&gt;设置一个标志位</li>
-<li>不要使用stop或者destroy等过时或者JDK不建议使用的方法（设置标志位让线程停止）</li>
-</ul>
+<li><p>JVM必须确保用户线程执行完毕，而不需要等待守护线程执行完毕</p>
 </li>
-<li><p>线程休眠</p>
-<ul>
-<li>模拟网络延时：放大问题的发生性</li>
-<li><code>Thread.sleep(1000);</code></li>
-</ul>
-</li>
-<li><p>线程礼让</p>
-<ul>
-<li><code>Thread.yeild();</code></li>
-</ul>
-</li>
-<li><p>线程插队(线程vip阻塞)</p>
-<ul>
-<li><pre><code class="java">t2.start();
-t2.join();
-</code></pre>
-</li>
-</ul>
-</li>
+<li><p>```<br>god god = new god();//run方法里面可以写无线循环函数<br>Thread t2= new Thread(god,”守护线程”);<br>t2.setDaemon(true);//设置线程为守护线程<br>t2.start();</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- ### 线程方法</span><br><span class="line"></span><br><span class="line">  - 线程停止</span><br><span class="line"></span><br><span class="line">    - 建议正常停止--&gt;利用次数，不建议死循环</span><br><span class="line">    - 建议使用标志位--&gt;设置一个标志位</span><br><span class="line">    - 不要使用stop或者destroy等过时或者JDK不建议使用的方法（设置标志位让线程停止）</span><br><span class="line"></span><br><span class="line">  - 线程休眠</span><br><span class="line"></span><br><span class="line">    - 模拟网络延时：放大问题的发生性</span><br><span class="line">    - `Thread.sleep(1000);`</span><br><span class="line"></span><br><span class="line">  - 线程礼让</span><br><span class="line"></span><br><span class="line">    - `Thread.yeild();`</span><br><span class="line"></span><br><span class="line">  - 线程插队(线程vip阻塞)</span><br><span class="line"></span><br><span class="line">    - ```java</span><br><span class="line">      t2.start();</span><br><span class="line">      t2.join();</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -632,7 +608,7 @@ t2.join();
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E7%9F%A5%E8%AF%86%E5%9F%BA%E7%A1%80"><span class="nav-text">Java知识基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">一、面向对象编程的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-text">封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-text">多态性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AB%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="nav-text">八大原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">二、Java数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List-%E5%8F%AF%E9%87%8D%E5%A4%8D"><span class="nav-text">List(可重复)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-text">Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set%EF%BC%88%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%EF%BC%89"><span class="nav-text">Set（不可重复）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-text">Map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-text">三、多线程的并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">创建线程的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">线程池的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BA%94%E5%A4%A7%E7%8A%B6%E6%80%81"><span class="nav-text">线程的五大状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-text">线程的优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%96%B9%E6%B3%95"><span class="nav-text">线程方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="nav-text">线程同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%8E%92%E5%BA%8F%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="nav-text">四、排序查找算法</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java%E7%9F%A5%E8%AF%86%E5%9F%BA%E7%A1%80"><span class="nav-text">Java知识基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B%E7%9A%84%E7%89%B9%E7%82%B9"><span class="nav-text">一、面向对象编程的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%81%E8%A3%85"><span class="nav-text">封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%A7%E6%89%BF"><span class="nav-text">继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E6%80%81%E6%80%A7"><span class="nav-text">多态性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AB%E5%A4%A7%E5%8E%9F%E5%88%99"><span class="nav-text">八大原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-text">二、Java数据结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#List-%E5%8F%AF%E9%87%8D%E5%A4%8D"><span class="nav-text">List(可重复)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-text">Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Set%EF%BC%88%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%EF%BC%89"><span class="nav-text">Set（不可重复）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map"><span class="nav-text">Map</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-text">三、多线程的并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">创建线程的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-text">线程池的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BA%94%E5%A4%A7%E7%8A%B6%E6%80%81"><span class="nav-text">线程的五大状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9A%84%E4%BC%98%E5%85%88%E7%BA%A7"><span class="nav-text">线程的优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%88%E6%8A%A4%E7%BA%BF%E7%A8%8B"><span class="nav-text">守护线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="nav-text">线程同步</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%8E%92%E5%BA%8F%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95"><span class="nav-text">四、排序查找算法</span></a></li></ol></li></ol>
     </div>
 </div>
         </aside>

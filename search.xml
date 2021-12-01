@@ -349,10 +349,9 @@
 <h2 id="三、多线程的并发编程"><a href="#三、多线程的并发编程" class="headerlink" title="三、多线程的并发编程"></a>三、多线程的并发编程</h2><ul>
 <li><h3 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h3><ol>
 <li><p>继承Thread类</p>
-<ol>
-<li>```java<br>Thread t1= new ThreadEx();<br>t1.start();//继承Thread   11111<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">2. 实现Runnable接口</span><br><span class="line"></span><br><span class="line">   1. ```java</span><br><span class="line">      ThreadRun t2=new ThreadRun();</span><br><span class="line">      new Thread(t2,&quot;实现Runnable创建线程1&quot;).start();</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Thread t1= <span class="keyword">new</span> ThreadEx();</span><br><span class="line">t1.start();<span class="comment">//继承Thread   11111</span></span><br></pre></td></tr></table></figure></li>
+<li><p>实现Runnable接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ThreadRun t2=<span class="keyword">new</span> ThreadRun();</span><br><span class="line"><span class="keyword">new</span> Thread(t2,<span class="string">&quot;实现Runnable创建线程1&quot;</span>).start();</span><br></pre></td></tr></table></figure></li>
 <li><p>通过ExecutorService和实现Callable接口实现有返回值的线程</p>
 <ol>
 <li>实现Callable接口创建线程，可以用构造函数给线程取名字</li>
@@ -403,39 +402,16 @@
 </ul>
 </li>
 <li><h3 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h3><ul>
-<li><p>线程的Priority优先级低的收到CPU的调度的概率低</p>
-</li>
-<li><p>```java<br>t2.setPriority();//设置优先级，默认优先级是5<br>t2.start;//Thread.MAX_PRIORITY是10</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 守护线程</span><br><span class="line"></span><br><span class="line">  - 线程分**用户线程**和**守护线程**</span><br><span class="line"></span><br><span class="line">  - JVM必须确保用户线程执行完毕，而不需要等待守护线程执行完毕</span><br><span class="line"></span><br><span class="line">  - ```</span><br><span class="line">    god god = new god();//run方法里面可以写无线循环函数</span><br><span class="line">    Thread t2= new Thread(god,&quot;守护线程&quot;);</span><br><span class="line">    t2.setDaemon(true);//设置线程为守护线程</span><br><span class="line">    t2.start();</span><br></pre></td></tr></table></figure></li>
+<li>线程的Priority优先级低的收到CPU的调度的概率低</li>
 </ul>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">t2.setPriority();<span class="comment">//设置优先级，默认优先级是5</span></span><br><span class="line">t2.start;<span class="comment">//Thread.MAX_PRIORITY是10</span></span><br></pre></td></tr></table></figure></li>
+<li><h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><ul>
+<li><p>线程分<strong>用户线程</strong>和<strong>守护线程</strong></p>
 </li>
-<li><h3 id="线程方法"><a href="#线程方法" class="headerlink" title="线程方法"></a>线程方法</h3><ul>
-<li><p>线程停止</p>
-<ul>
-<li>建议正常停止–&gt;利用次数，不建议死循环</li>
-<li>建议使用标志位–&gt;设置一个标志位</li>
-<li>不要使用stop或者destroy等过时或者JDK不建议使用的方法（设置标志位让线程停止）</li>
-</ul>
+<li><p>JVM必须确保用户线程执行完毕，而不需要等待守护线程执行完毕</p>
 </li>
-<li><p>线程休眠</p>
-<ul>
-<li>模拟网络延时：放大问题的发生性</li>
-<li><code>Thread.sleep(1000);</code></li>
-</ul>
-</li>
-<li><p>线程礼让</p>
-<ul>
-<li><code>Thread.yeild();</code></li>
-</ul>
-</li>
-<li><p>线程插队(线程vip阻塞)</p>
-<ul>
-<li><pre><code class="java">t2.start();
-t2.join();
-</code></pre>
-</li>
-</ul>
-</li>
+<li><p>```<br>god god = new god();//run方法里面可以写无线循环函数<br>Thread t2= new Thread(god,”守护线程”);<br>t2.setDaemon(true);//设置线程为守护线程<br>t2.start();</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 线程方法</span><br><span class="line"></span><br><span class="line">  - 线程停止</span><br><span class="line"></span><br><span class="line">    - 建议正常停止--&gt;利用次数，不建议死循环</span><br><span class="line">    - 建议使用标志位--&gt;设置一个标志位</span><br><span class="line">    - 不要使用stop或者destroy等过时或者JDK不建议使用的方法（设置标志位让线程停止）</span><br><span class="line"></span><br><span class="line">  - 线程休眠</span><br><span class="line"></span><br><span class="line">    - 模拟网络延时：放大问题的发生性</span><br><span class="line">    - `Thread.sleep(1000);`</span><br><span class="line"></span><br><span class="line">  - 线程礼让</span><br><span class="line"></span><br><span class="line">    - `Thread.yeild();`</span><br><span class="line"></span><br><span class="line">  - 线程插队(线程vip阻塞)</span><br><span class="line"></span><br><span class="line">    - ```java</span><br><span class="line">      t2.start();</span><br><span class="line">      t2.join();</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
