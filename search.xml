@@ -1,8 +1,816 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>计算机网络知识回顾</title>
-    <url>/2020/11/23/2020-11-23-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E5%9B%9E%E9%A1%BE/</url>
+    <title>Java小知识点--更新ing</title>
+    <url>/2021/11/20/Java%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="Java小知识点"><a href="#Java小知识点" class="headerlink" title="Java小知识点"></a>Java小知识点</h1><ul>
+<li>StringBuilder<ul>
+<li>一个可变的字符序列。 此类提供与<code>StringBuffer</code>的API，但不保证同步。  此类设计用作简易替换为<code>StringBuffer</code>在正在使用由单个线程字符串缓冲区的地方（如通常是这种情况）。  在可能的情况下，建议使用这个类别优先于<code>StringBuffer</code> ，因为它在大多数实现中将更快。</li>
+</ul>
+</li>
+<li>StringBuffer<ul>
+<li>线程安全，可变的字符序列。 字符串缓冲区就像一个<code>String</code>，但可以修改，<code>StringBuffer</code>的<code>append</code>和<code>insert</code>是主要使用的方法</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java基础特性</title>
+    <url>/2021/11/20/Java%E7%9F%A5%E8%AF%86%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<h2 id="面向对象编程的特点"><a href="#面向对象编程的特点" class="headerlink" title="面向对象编程的特点"></a>面向对象编程的特点</h2><ol>
+<li><p>封装</p>
+<ul>
+<li>某事物的属性和行为包装到对象中，这个对象只对外公布需要公开的属性和行为</li>
+<li><strong>public</strong> 表明该数据成员、成员函数是对所有用户开放的，所有用户都可以直接进行调用</li>
+<li><strong>private</strong> 表示私有，私有的意思就是除了<strong>class自己</strong>之外，<strong>任何人都不可以</strong>直接使用。</li>
+<li>**protected ** 对于子女、朋友来说，就是public的，可以自由使用，没有任何限制，而对于其他的外部class，protected就变成private。</li>
+</ul>
+</li>
+<li><p>继承</p>
+<ul>
+<li>子对象可以继承父对象的属性和行为</li>
+</ul>
+</li>
+<li><p>多态性</p>
+<ul>
+<li>方法重载：在类中定义方法名相同，参数不同的不同的多个方法（返回值类型可随意，不能以返回类型作为重载函数的区分标准）。</li>
+<li>方法重写：如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写 </li>
+</ul>
+</li>
+</ol>
+<h3 id="八大原则"><a href="#八大原则" class="headerlink" title="八大原则"></a>八大原则</h3><ol>
+<li><strong>单一职责原则</strong> 每一个类应该专注于做一件事情。</li>
+<li><strong>里氏替换原则</strong> 超类存在的地方，子类是可以替换的。<strong>UserInterface methods=new UserInterfaceImpl();</strong></li>
+<li><strong>依赖倒置原则</strong> 实现尽量依赖抽象，不依赖具体实现</li>
+<li><strong>接口隔离原则</strong> 应当为客户端提供尽可能小的单独的接口，而不是提供大的总的接口。</li>
+<li><strong>迪米特法则</strong> 又叫最少知识原则，一个软件实体应当尽可能少的与其他实体发生相互作用</li>
+<li><strong>开闭原则</strong> 面向扩展开放，面向修改关闭。</li>
+<li><strong>组合/聚合复用原则</strong> 尽量使用合成/聚合达到复用，尽量少用继承。原则： 一个类中有另一个类的对象。</li>
+<li><strong>高内聚、低耦合</strong> 高内聚指的就是单一职责原则，一个类做的职责越单一，内聚度就越高，低耦合，指的就是依赖倒置原则，尽量使用抽象耦合去代替具体耦合</li>
+</ol>
+<ul>
+<li><p><strong>具备iterator接口的对象</strong></p>
+<ul>
+<li>数组</li>
+<li>字符串</li>
+<li>函数的 arguments 对象</li>
+<li>Set/Map 数据结构</li>
+<li>TypedArray</li>
+<li>NodeList 对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="Java数据结构"><a href="#Java数据结构" class="headerlink" title="Java数据结构"></a>Java数据结构</h2><ol>
+<li><p>List(可重复)</p>
+<ul>
+<li>ArrayList 基于数组实现，增删慢，查询快，线程不安全</li>
+<li>Vector 基于数组实现，增删慢，查询快，线程安全</li>
+<li>LinkedList 基于双向链表实现，增删快，查询慢，线程不安全</li>
+</ul>
+</li>
+<li><p>Queue</p>
+<ul>
+<li>ArrayBlockingQueue 基于数组实现的有界阻塞队列</li>
+<li>LinkedBlockingQueue 基于链表实现的有界阻塞队列</li>
+<li>PriorityBlockingQueue 支持优先级排序的无界阻塞队列</li>
+<li>DelayQueue 支持延迟操作的无界阻塞队列</li>
+<li>SynchronousQueue 用于线程同步的阻塞队列</li>
+<li>LinkedTransferQueue 基于链表实现的无界阻塞队列</li>
+<li>LinkedBlockingDeque 基于链表实现的双向阻塞队列</li>
+</ul>
+</li>
+<li><p>Set（不可重复）</p>
+<ol>
+<li>HashSet 哈希表实现，存的是散列值</li>
+<li>TreeSet 二叉树实现，将新添加的对象进行排序</li>
+<li><code>对象的相等性本质上是对象的HashCode值相等，HashCode值是Java根据对象的内存地址通过HashCode()方法计算出的HashCode值</code></li>
+<li>LinkHashSet 哈希表实现数据存储，双向链表记录顺序，底层使用LinkedHashMap记录数据，继承了HashSet</li>
+</ol>
+</li>
+<li><p>Map</p>
+<ul>
+<li><p>HashMap</p>
+<ul>
+<li>数组+链表存储数据，线程不安全</li>
+<li>jdk8改为数组+链表或者红黑树</li>
+<li>链表存在主要是为了解决经过hash计算后会有重复值这一问题</li>
+</ul>
+</li>
+<li><p>ConCurrentHashMap</p>
+<ul>
+<li>分段锁的思想实现并发操作，线程安全</li>
+</ul>
+</li>
+<li><p>HashTable</p>
+<ul>
+<li>和HashTable类似，线程安全</li>
+</ul>
+</li>
+<li><p>TreeMap</p>
+<ul>
+<li>二叉树存取数据，key必须实现Camparable接口</li>
+</ul>
+</li>
+<li><p>LinkedHashMap</p>
+<ul>
+<li>链表保存数据的插入顺序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map.Entry的作用</span><br><span class="line">	Map.Entry是为了更方便的输出map键值对。一般情况下，要输出Map中的key 和 value  是先得到key的集合keySet()，然后再迭代（循环）由每个key得到每个value。values()方法是获取集合中的所有值，不包含键，没有对应关系。而Entry可以一次性获得这两个值。</span><br></pre></td></tr></table></figure>
+
+<h2 id="多线程的并发编程"><a href="#多线程的并发编程" class="headerlink" title="多线程的并发编程"></a>多线程的并发编程</h2><h3 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h3><ol>
+<li><p>继承Thread类</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Thread t1= <span class="keyword">new</span> ThreadEx();</span><br><span class="line">t1.start();<span class="comment">//继承Thread   11111</span></span><br></pre></td></tr></table></figure></li>
+<li><p>实现Runnable接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ThreadRun t2=<span class="keyword">new</span> ThreadRun();</span><br><span class="line"><span class="keyword">new</span> Thread(t2,<span class="string">&quot;实现Runnable创建线程1&quot;</span>).start();</span><br></pre></td></tr></table></figure></li>
+<li><p>通过ExecutorService和实现Callable接口实现有返回值的线程</p>
+<ol>
+<li>实现Callable接口创建线程，可以用构造函数给线程取名字</li>
+<li><code>ExecutorService pool= Executors.newFixedThreadPool(2);</code>//创建线程池</li>
+<li><code>Callable c=new MyCallable(&quot;name&quot;);</code>//创建一个有返回值的线程</li>
+<li><code>pool.submit(c);</code>//提交线程</li>
+<li><code>pool.shutdown();</code>//关闭线程</li>
+</ol>
+</li>
+<li><p>基于线程池</p>
+<ol>
+<li><code>ExecutorService pool= Executors.newFixedThreadPool(2);</code>//创建线程池</li>
+<li><code>pool.excute(()-&gt;System.out.println(”线程执行中“));</code>//提交线程并执行</li>
+</ol>
+</li>
+</ol>
+<h3 id="线程池的工作原理"><a href="#线程池的工作原理" class="headerlink" title="线程池的工作原理"></a>线程池的工作原理</h3><ul>
+<li>线程池的主要作用：<strong>线程复用</strong>，<strong>线程资源管理</strong>，<strong>控制操作系统最大并发数</strong>以保证系统安全且高效<ul>
+<li>线程复用时JVM不断调用Runnable对象的run方法，循环中把Runnable对象放进Queue中，这样既可以有效控制正在执行的线程个数，也能保证系统中等待执行的其他线程有序执行</li>
+</ul>
+</li>
+<li>线程池的核心组件<ul>
+<li><strong>线程池管理器</strong></li>
+<li><strong>工作线程</strong>：线程池中执行具体任务的线程</li>
+<li><strong>任务接口</strong>：定义<strong>工作线程</strong>的调度和执行策略 只有线程实现该接口，才能实现任务调度</li>
+<li><strong>任务队列</strong>：用于存放处理的任务，新任务会不断加入，执行完成的任务会被从队列中除去</li>
+</ul>
+</li>
+<li>线程池通过Executor框架实现，核心类：Executors,ExecutorService,ThreadPoolExecutor,Callable,Future,FutureTask</li>
+</ul>
+<h3 id="线程的五大状态"><a href="#线程的五大状态" class="headerlink" title="线程的五大状态"></a>线程的五大状态</h3><ul>
+<li>创建状态（新生状态）</li>
+<li>就绪状态</li>
+<li>阻塞状态</li>
+<li>运行状态</li>
+<li>死亡状态</li>
+<li>通过<code>Thread.State state=thread.getState();</code>获取线程状态<ul>
+<li>NEW<br>尚未启动的线程处于此状态。 </li>
+<li>RUNNABLE<br>在Java虚拟机中执行的线程处于此状态。 </li>
+<li>BLOCKED<br>被阻塞等待监视器锁定的线程处于此状态。 </li>
+<li>WAITING<br>正在等待另一个线程执行特定动作的线程处于此状态。 </li>
+<li>TIMED_WAITING<br>正在等待另一个线程执行动作达到指定等待时间的线程处于此状态。 </li>
+<li>TERMINATED</li>
+</ul>
+</li>
+</ul>
+<h3 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h3><ul>
+<li>线程的Priority优先级低的收到CPU的调度的概率低</li>
+</ul>
+   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">t2.setPriority();<span class="comment">//设置优先级，默认优先级是5</span></span><br><span class="line">t2.start;<span class="comment">//Thread.MAX_PRIORITY是10</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><ul>
+<li><p>线程分<strong>用户线程</strong>和<strong>守护线程</strong></p>
+</li>
+<li><p>JVM必须确保用户线程执行完毕，而不需要等待守护线程执行完毕</p>
+</li>
+</ul>
+   <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">god god = <span class="keyword">new</span> god();<span class="comment">//run方法里面可以写无线循环函数</span></span><br><span class="line">Thread t2= <span class="keyword">new</span> Thread(god,<span class="string">&quot;守护线程&quot;</span>);</span><br><span class="line">t2.setDaemon(<span class="keyword">true</span>);<span class="comment">//设置线程为守护线程</span></span><br><span class="line">t2.start();</span><br></pre></td></tr></table></figure>
+
+<h3 id="线程方法"><a href="#线程方法" class="headerlink" title="线程方法"></a>线程方法</h3><ul>
+<li><p>线程停止</p>
+<ul>
+<li>建议正常停止–&gt;利用次数，不建议死循环</li>
+<li>建议使用标志位–&gt;设置一个标志位</li>
+<li>不要使用stop或者destroy等过时或者JDK不建议使用的方法（设置标志位让线程停止）</li>
+</ul>
+</li>
+<li><p>线程休眠</p>
+<ul>
+<li>模拟网络延时：放大问题的发生性</li>
+<li><code>Thread.sleep(1000);</code></li>
+</ul>
+</li>
+<li><p>线程礼让</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Thread.yeild();</span><br></pre></td></tr></table></figure></li>
+<li><p>线程插队(线程vip阻塞)</p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">t2.start();</span><br><span class="line">t2.join();</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h3><h2 id="排序查找算法"><a href="#排序查找算法" class="headerlink" title="排序查找算法"></a>排序查找算法</h2><ul>
+<li><p>查找</p>
+<ul>
+<li><p>顺序查找</p>
+<table>
+<thead>
+<tr>
+<th align="center">平均查找长度</th>
+<th align="center">时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">(n+1)/2</td>
+<td align="center">O(n)</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>二分查找（折半查找）</p>
+<table>
+<thead>
+<tr>
+<th align="center">平均查找长度</th>
+<th align="center">时间复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">log2(n+1)</td>
+<td align="center">O(log2n)</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>插值查找</p>
+<ul>
+<li><strong>时间复杂度分析：</strong> O(log2(log2n))</li>
+</ul>
+</li>
+<li><p>斐波那契查找</p>
+<p>- </p>
+</li>
+<li><p>树表查找</p>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx部署Hexo+SSL证书安装配置</title>
+    <url>/2021/11/21/Nginx%E9%83%A8%E7%BD%B2Hexo+SSL%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="Nginx部署Hexo-SSL证书安装配置"><a href="#Nginx部署Hexo-SSL证书安装配置" class="headerlink" title="Nginx部署Hexo+SSL证书安装配置"></a>Nginx部署Hexo+SSL证书安装配置</h1>]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>README_Hexo</title>
+    <url>/2021/06/20/README_Hexo/</url>
+    <content><![CDATA[<img src="https://raw.githubusercontent.com/hexojs/logo/master/hexo-logo-avatar.png" alt="Hexo logo" width="100" height="100" align="right" />
+
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><blockquote>
+<p>A fast, simple &amp; powerful blog framework, powered by <a href="https://nodejs.org/">Node.js</a>.</p>
+</blockquote>
+<p><a href="https://hexo.io/">Website</a> |<br><a href="https://hexo.io/docs/">Documentation</a> |<br><a href="https://hexo.io/docs/#Installation">Installation Guide</a> |<br><a href="https://hexo.io/docs/contributing">Contribution Guide</a> |<br><a href="CODE_OF_CONDUCT.md">Code of Conduct</a> |<br><a href="https://hexo.io/api/">API</a> |<br><a href="https://twitter.com/hexojs">Twitter</a></p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>Blazing fast generating</li>
+<li>Support for GitHub Flavored Markdown and most Octopress plugins</li>
+<li>One-command deploy to GitHub Pages, Heroku, etc.</li>
+<li>Powerful API for limitless extensibility</li>
+<li>Hundreds of <a href="https://hexo.io/themes/">themes</a> &amp; <a href="https://hexo.io/plugins/">plugins</a></li>
+</ul>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p><strong>Install Hexo</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p><strong>Setup your blog</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+
+<p><strong>Start the server</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p><strong>Create a new post</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Generate static files</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<h2 id="More-Information"><a href="#More-Information" class="headerlink" title="More Information"></a>More Information</h2><ul>
+<li>Read the <a href="https://hexo.io/">documentation</a></li>
+<li>Visit the <a href="https://github.com/hexojs/awesome-hexo">Awesome Hexo</a> list</li>
+<li>Find solutions in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a></li>
+<li>Join discussion on <a href="https://groups.google.com/group/hexo">Google Group</a>, <a href="https://discord.gg/teM2Anj">Discord</a>, <a href="https://gitter.im/hexojs/hexo">Gitter</a> or <a href="https://t.me/hexojs">Telegram</a></li>
+<li>See the <a href="https://hexo.io/plugins/">plugin list</a> and the <a href="https://hexo.io/themes/">theme list</a> on wiki</li>
+<li>Follow <a href="https://twitter.com/hexojs">@hexojs</a> for latest news</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/11/12/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>spring框架</title>
+    <url>/2021/11/20/spring%E6%A1%86%E6%9E%B6/</url>
+    <content><![CDATA[<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><ul>
+<li>轻量</li>
+<li>控制反转<ul>
+<li>不需要自己去new一个对象了</li>
+<li>spring会在容器初始化完成后主动把依赖的对象传递给他</li>
+<li>实现系统对象之间的解耦合</li>
+</ul>
+</li>
+<li>面向切面  <ul>
+<li>spring提供了面向切面的编程支持</li>
+<li>分离系统逻辑和业务逻辑</li>
+<li>业务层只是实现与业务相关的代码，不需要关心系统功能的实现</li>
+<li>通过面向切面技术实现系统功能的自动织入</li>
+</ul>
+</li>
+<li>面向容器      <ul>
+<li>对象的配置化生成和对象的生命周期管理</li>
+<li>通过xml配置或者注解bean对象，控制其创建和销毁以及是否为单例模式</li>
+</ul>
+</li>
+</ul>
+<p> <em><strong>spring是一个轻量性的具有控制反转和面向切面和容器编程特点的开发框架</strong></em></p>
+<h2 id="Spring的模块组成"><a href="#Spring的模块组成" class="headerlink" title="Spring的模块组成"></a>Spring的模块组成</h2><ul>
+<li><p>核心容器层 CC</p>
+<ul>
+<li>Sping-Beans<ul>
+<li>此模块基于工厂模式实现对象创建</li>
+<li>通过XML配置实现声明式的对象管理</li>
+</ul>
+</li>
+<li>Sping-Core<ul>
+<li>核心功能实现，包括<strong>控制反转</strong>和<strong>依赖注入</strong></li>
+<li>bean对象的创建<strong>依赖</strong>于容器</li>
+<li>bean对象的所有属性由容器来<strong>注入</strong></li>
+</ul>
+</li>
+<li>Sping-Context<ul>
+<li>基于以上两个模块构建，实现国际化，事务管理、透明创建上下文等功能</li>
+</ul>
+</li>
+<li>SpEL</li>
+</ul>
+</li>
+<li><p>数据访问层 DA</p>
+<ul>
+<li>JDBC</li>
+<li>此模块提供了JDBC抽象层</li>
+<li>Spring持久化层基于抽象层实现了不同数据库间的灵活切换</li>
+<li>ORM（包括JPA,JDO,Hibernate等）</li>
+<li>OXM</li>
+<li>JMS<ul>
+<li>实现对消息队列的支持</li>
+</ul>
+</li>
+<li>事务处理<ul>
+<li>基于接口实现声明式的事务管理</li>
+<li>通过配置和注解就可以实现，具体事务管理工作由Spring自动处理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Web应用层 WA（包含web交互和数据传输等功能）</p>
+<ul>
+<li>Web<ul>
+<li>提供面向Web应用的基本功能</li>
+</ul>
+</li>
+<li>Web-MVC<ul>
+<li>为web应用<strong>提供模型视图控制</strong>和<strong>REST api服务</strong>的实现</li>
+<li>数字模型负责数据的业务逻辑，视图负责数据的展示</li>
+</ul>
+</li>
+<li>Web-Soket<ul>
+<li>提供WebSocket-Base的支持，实现服务端与客户端的双向通信</li>
+</ul>
+</li>
+<li>Web-Portlet<ul>
+<li>提供基于Portlet环境的MVC支持</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>其他重要模块</p>
+<ul>
+<li>AOP<ul>
+<li>允许定义方法拦截器和切入点实现系统功能和业务功能解耦合</li>
+</ul>
+</li>
+<li>Aspects   <ul>
+<li>提供Spring和AspectJ的集成，是一个面向切面编程的模块</li>
+</ul>
+</li>
+<li>Instrumentation<ul>
+<li>提供对Instrumentation的支持和类加载器的实现</li>
+</ul>
+</li>
+<li>Messaging<ul>
+<li>为STOMP提供支持，主要用于WebSocket子协议的实现</li>
+</ul>
+</li>
+<li>Test<ul>
+<li>对Junit等测试框架提供支持<h2 id="Spring的注解"><a href="#Spring的注解" class="headerlink" title="Spring的注解"></a>Spring的注解</h2></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Spring注解的使用规则 </p>
+<ol>
+<li>导入命名空间及规范约束</li>
+</ol>
+<ul>
+<li>xmlns指定的命名空间是默认的命名空间</li>
+<li>xmlns:xsi是指该XML文件遵守xml规范</li>
+</ul>
+<ol start="2">
+<li>配置扫描包/注解支持</li>
+</ol>
+<ul>
+<li>配置文件中配置需要扫描的包，配置过的包中的注解才能生效</li>
+</ul>
+<ol start="3">
+<li>注解配置总结<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">                          https://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">                          http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">                          https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 配置注解支持 --&gt;</span>    </span><br><span class="line">   <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Spring常用注解"><a href="#Spring常用注解" class="headerlink" title="Spring常用注解"></a>Spring常用注解</h3></li>
+</ol>
+</li>
+<li><p>Bean声明</p>
+<ul>
+<li>@Component 定义基础层的通用组件</li>
+<li>@Service 定义业务逻辑层的服务组件</li>
+<li>@Repository 在数据访问层定义数据资源服务</li>
+<li>@Controller 在展示层使用，用于定义控制器</li>
+</ul>
+</li>
+<li><p>Beans注入</p>
+<ul>
+<li>@Autowired</li>
+<li>@Resource</li>
+</ul>
+</li>
+<li><p>配置类注解</p>
+<ul>
+<li>@Configuration</li>
+<li>@Bean</li>
+<li>@ComponentScan</li>
+</ul>
+</li>
+<li><p>AOP注解</p>
+</li>
+<li><p>@Bean属性支持注解</p>
+</li>
+<li><p>异步操作注解</p>
+</li>
+<li><p>定时任务相关</p>
+</li>
+<li><p>开启功能支持</p>
+</li>
+<li><p> 测试相关注解</p>
+</li>
+<li><p>Spring MVC注解</p>
+<ul>
+<li>@Controller 声明该类为Spring MVC的控制器</li>
+<li>@RequestMapping 声明映射Web请求的地址和参数，包括访问路径和参数</li>
+<li>@ResponseBody 支持将返回值放在ResponseBody体中返回，<strong>通常用于返回json数据到前端</strong></li>
+<li>@RequestBody 允许Request的参数在RequestBody 体中</li>
+<li>@PathVariable 用于接收基于路径的参数，<strong>通常作为RESTful接口的实现</strong></li>
+<li>@RestController 组合注解，相当于@Controller和@ResponseBody的组合</li>
+<li>@ExceptionHandler 用于全局控制器的异常处理</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一些经典算法使用Java实现</title>
+    <url>/2021/11/11/%E4%B8%80%E4%BA%9B%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E4%BD%BF%E7%94%A8Java%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<h1 id="Java数据结构与算法之查找"><a href="#Java数据结构与算法之查找" class="headerlink" title="Java数据结构与算法之查找"></a>Java数据结构与算法之查找</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>, right=arr.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right)&#123; #这里&lt;和&lt;=效果是一样的，也就多计算一次循环的差别</span><br><span class="line">            mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]&gt;target) right=mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]&lt;target) left=mid+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]==target) <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>数据结构与算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo+Shell脚本+Crontab实现自动部署个人博客</title>
+    <url>/2021/11/21/%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E6%80%9D%E8%B7%AF/</url>
+    <content><![CDATA[<h2 id="安装配置Hexo"><a href="#安装配置Hexo" class="headerlink" title="安装配置Hexo"></a>安装配置Hexo</h2><ul>
+<li>参照HelloHexo</li>
+<li>配置成功后hexo server开启服务器后就可以访问了，<code>ip:4000</code>就ok</li>
+</ul>
+<h2 id="远程Ubunt生成ssh密钥配置连接github远程仓库"><a href="#远程Ubunt生成ssh密钥配置连接github远程仓库" class="headerlink" title="远程Ubunt生成ssh密钥配置连接github远程仓库"></a>远程Ubunt生成ssh密钥配置连接github远程仓库</h2><ol>
+<li><p>生成密钥</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的GitHub注册邮箱&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>将文件夹~/.ssh文件夹下的公钥–<code>id_rsa.pub</code>的全部内容粘贴配置到<a href="https://github.com/settings/keys[https://github.com/settings/keys]">https://github.com/settings/keys[https://github.com/settings/keys]</a></p>
+</li>
+</ol>
+<h2 id="git-pull实现与github远程仓库的同步"><a href="#git-pull实现与github远程仓库的同步" class="headerlink" title="git pull实现与github远程仓库的同步"></a>git pull实现与github远程仓库的同步</h2><ol>
+<li><p>在myblog/source/_posts文件夹下建立git裸仓</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></li>
+<li><p>指定远程仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:leiw-go/learnAndtry.git <span class="comment">#记住时通过ssh连接GitHub的不要粘错了链接</span></span><br><span class="line">git remote -v <span class="comment">#看下操作成功没用</span></span><br></pre></td></tr></table></figure></li>
+<li><p>同步仓库</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull orgin master</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="部署gitpage"><a href="#部署gitpage" class="headerlink" title="部署gitpage"></a>部署gitpage</h2><ol>
+<li><p>配置根目录下_config.yml文件</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:leiw-go/leiw-go.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
+<li><p>一键部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#hexo执行命令均需在hexo根目录下</span></span><br><span class="line">hexo generate <span class="comment">#生成静态网站目录public(hexo g)</span></span><br><span class="line">hexo depoly <span class="comment">#部署，意思差不多就是git push(hexo d)</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="Shell脚本实现一键操作"><a href="#Shell脚本实现一键操作" class="headerlink" title="Shell脚本实现一键操作"></a>Shell脚本实现一键操作</h2><ul>
+<li><p>autopull.sh</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/ubuntu/myblog/<span class="built_in">source</span>/_posts</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure></li>
+<li><p>autodeploy.sh</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/ubuntu/myblog</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="配置crontab工具实现每天博客网站的自动部署"><a href="#配置crontab工具实现每天博客网站的自动部署" class="headerlink" title="配置crontab工具实现每天博客网站的自动部署"></a>配置crontab工具实现每天博客网站的自动部署</h2><ul>
+<li><p><code>crontab -e</code>进入编辑定时执行配置信息的界面，加入以下两条信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">0 */2 * * * sh /home/ubuntu/myblog/<span class="built_in">source</span>/_posts/autopull.sh <span class="comment">#每隔两个小时自动同步远程仓库</span></span><br><span class="line">30 */2 * * * sh /home/ubuntu/myblog/autodeploy.sh <span class="comment">#每两个小时的半点自动部署发布网站</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="现在只需要往github上面填东西即可"><a href="#现在只需要往github上面填东西即可" class="headerlink" title="现在只需要往github上面填东西即可"></a>现在只需要往github上面填东西即可</h2><ul>
+<li>在你自己的本地电脑上<code>git push -u origin master</code>把你写的文章推到GitHub上文章即可自动发布</li>
+</ul>
+<h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><ul>
+<li><p>进行<code>git push</code>操作时报错：<code>fatal: The current branch master has no upstream branch.</code></p>
+<p><strong>原因：</strong>没有将本地的分支与远程仓库的分支进行关联<br>通过<code>git branch</code>查看本地分支只有<code>master</code></p>
+<p>通过<code>git branch -a</code>查看远程分支，有<code>master</code>和<code>remotes/origin/master</code>两个</p>
+<p>这时由于远程仓库太多，且分支较多。在默认情况下，<code>git push</code>时一般会上传到<code>origin</code>下的<code>master</code>分支上，然而当<code>repository</code>和<code>branch</code>过多，而又没有设置关联时，git就会产生疑问，因为它无法判断你的push目标</p>
+<p><strong>解决方式一</strong></p>
+<p>使用<code>git push --set-upstream origin master</code>命令</p>
+<p><strong>解决方式二</strong></p>
+<p>使用<code>git push -u origin master</code>命令</p>
+</li>
+<li><p>git pull 时报错</p>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">There is no tracking information <span class="keyword">for</span> the current branch.</span><br><span class="line">Please specify <span class="built_in">which</span> branch you want to merge with.</span><br><span class="line">See git-pull(1) <span class="keyword">for</span> details.</span><br><span class="line"></span><br><span class="line">    git pull &lt;remote&gt; &lt;branch&gt;</span><br><span class="line"></span><br><span class="line">If you wish to <span class="built_in">set</span> tracking information <span class="keyword">for</span> this branch you can <span class="keyword">do</span> so with:</span><br><span class="line"></span><br><span class="line">    git branch --set-upstream-to=origin/&lt;branch&gt; master	</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方法见提示</strong><br>   <code>git pull origin master</code>或者<code>git branch --set-upstream-to=origin/master</code></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>数据库系统原理</title>
+    <url>/2020/12/20/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[<h1 id="数据库系统原理"><a href="#数据库系统原理" class="headerlink" title="数据库系统原理"></a>数据库系统原理</h1><h2 id="第一章、绪论"><a href="#第一章、绪论" class="headerlink" title="第一章、绪论"></a>第一章、绪论</h2><ul>
+<li><p>数据库模型：对数据结构和语义的概括</p>
+<ul>
+<li><p>层次模型</p>
+<ul>
+<li>以树结构组织数据</li>
+</ul>
+</li>
+<li><p>关系模型</p>
+<ul>
+<li>以表组织数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据抽象的层次</p>
+<ul>
+<li>概念层：<ul>
+<li>数据模型：E-R模型（实例 联系模型）</li>
+<li>数据模式（脑图）</li>
+</ul>
+</li>
+<li>逻辑层<ul>
+<li>数据模型：关系型模型</li>
+<li>数据模式：模式</li>
+</ul>
+</li>
+<li>视图层<ul>
+<li>数据模型</li>
+<li>数据模式：外模式（应用层依据外模式建立）</li>
+</ul>
+</li>
+<li>物理层<ul>
+<li>数据模型：B+树数据模型</li>
+<li>数据模式：内模式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>三层模式以及两级映射</p>
+<ul>
+<li>物理独立性：如果数据库的内模式改变只要对模式/内模式映射做出响应修改，可以使模式保持不变</li>
+<li>逻辑独立性：如果数据库的模式改变只要对外模式/模式映射做出响应修改，可以使模式保持不变</li>
+</ul>
+</li>
+<li><p>查询处理模块</p>
+<ul>
+<li>数据定义语言</li>
+<li>数据操纵语言</li>
+<li>数据保护语言</li>
+<li>SQL语言包括以上三个部分</li>
+</ul>
+</li>
+<li><p>数据管理技术的发展趋势</p>
+<ul>
+<li>关系型数据库：1.以关系为数据模型    2.采用声明性语言    3.支持完全ACID特性的数据一致性</li>
+<li>数据库管理系统中**事务(transaction)**的四个特性<ul>
+<li><strong>原子性（Atomicity）</strong>：</li>
+<li><strong>一致性（Consistency）</strong></li>
+<li><strong>隔离性（Isolation）</strong></li>
+<li><strong>持久性（Durability）</strong></li>
+</ul>
+</li>
+<li>NoSQL系统<ul>
+<li>利用计算机集群来存储和处理大数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第二章、关系表的结构和约束"><a href="#第二章、关系表的结构和约束" class="headerlink" title="第二章、关系表的结构和约束"></a>第二章、关系表的结构和约束</h2><ul>
+<li><p>数据的完整性约束，常见约束有</p>
+<ul>
+<li> 对属性取值范围的约束</li>
+<li> 对属性值之间相互关系的限定（即键的概念）</li>
+<li>超键：能唯一标识出各个属性的集合 </li>
+<li>候选键：能唯一标识出各个属性的集合，且不包含多余属性</li>
+<li>主键：一个表中可能有多个候选键，通常指定其中一个用作主键</li>
+<li>外键：关系表S1（引用关系）的一个属性子集必须匹配另一个关系表S2（被引用关系）中出现的数值，外键的值与被引用关系的值对应，或为空值</li>
+</ul>
+<h3 id="关系代数运算"><a href="#关系代数运算" class="headerlink" title="关系代数运算"></a>关系代数运算</h3></li>
+<li><p>基本关系运算</p>
+<ul>
+<li>选择，投影，并，差，笛卡尔积，更名</li>
+</ul>
+</li>
+<li><p>集合交，联接运算，赋值运算</p>
+<ul>
+<li>笛卡尔积：全排列</li>
+<li>自然连接：先笛卡尔积，要求所有的同名列一致，最后去重</li>
+<li>属性连接：先笛卡尔积，要求指定的若干同名列一致，最后去重</li>
+<li>条件连接：先笛卡尔积，给出的布尔表达式为真，最后去重</li>
+</ul>
+</li>
+<li><p>扩展关系代数运算</p>
+<ul>
+<li><p>聚集函数（sum,avg,count,max,min）</p>
+</li>
+<li><p>分组聚集</p>
+</li>
+<li><p>外联接（考虑悬浮元组）</p>
+<p><img src="%E9%99%84%E5%8A%A0%E8%BF%90%E7%AE%97.png" alt="附加运算"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第三章、SQL定义与操作-基于PostgreSQL"><a href="#第三章、SQL定义与操作-基于PostgreSQL" class="headerlink" title="第三章、SQL定义与操作(基于PostgreSQL)"></a>第三章、SQL定义与操作(基于PostgreSQL)</h2><ul>
+<li><p>基本select</p>
+<img src="Select.png" alt="Select" style="zoom: 80%;" />
+
+<ul>
+<li><p>where和having区别</p>
+<img src="wherehaving.png" alt="Select" style="zoom:80%;" /></li>
+<li><p>大小写不敏感，字符串内的大小写敏感</p>
+</li>
+</ul>
+</li>
+<li><p>建表</p>
+<ul>
+<li>CREATE TABLE examiner(erid CHAR(20), ername CHAR(20), ersex CHAR(2), erage SMALLINT, ersalary INT, erdepa CHAR(20)); </li>
+</ul>
+</li>
+<li><p>表更名</p>
+<ul>
+<li>ALTER TABLE examiner RENAME TO examine;</li>
+</ul>
+</li>
+<li><p>删表</p>
+<ul>
+<li>Drop TABLE 表名;</li>
+</ul>
+</li>
+<li><p>表结构的后期更改操作</p>
+<img src="ALTER.png" alt="ALTER" style="zoom:80%;" />
+
+<ul>
+<li>例如：<strong>ALTER</strong> <strong>TABLE</strong> examiner <strong>ADD</strong> <strong>COLUMN</strong> erentrance <strong>DATE</strong>;</li>
+</ul>
+</li>
+<li><p><strong>表内容的插入</strong></p>
+<ul>
+<li>INSERT INTO 表名 (属性1，属性2) VALUE(“值1”,”值2”);</li>
+<li>INSERT INTO 表名 (属性1，属性2) SELECT语句；</li>
+<li>INSERT INTO 表名 (属性1，属性2) TABLE 表名；</li>
+</ul>
+</li>
+<li><p><strong>表内容的删除</strong></p>
+<ul>
+<li><strong>DELETE</strong> <strong>FROM</strong> examiner <strong>WHERE</strong>  erage &gt;60;</li>
+</ul>
+</li>
+<li><p><strong>表内容的更新</strong></p>
+<ul>
+<li><strong>UPDATA</strong> examiner <strong>SET</strong> erage=erage+1 <strong>WHERE</strong> erage &gt;30;</li>
+</ul>
+</li>
+<li><p>SQL专有运算符</p>
+<img src="D:\learnAndtry\SQL专有.png" alt="SQL专有" style="zoom:80%;" />
+
+<img src="D:\learnAndtry\专有example.png" alt="例子" style="zoom:80%;" /></li>
+<li><p>需要注意的点</p>
+<ul>
+<li>ORDER BY默认升序(ASC)，空值最后显示</li>
+<li>默认查询结果不去重，除非跟着DISTINCT</li>
+</ul>
+</li>
+<li><p>例子</p>
+<img src="D:\learnAndtry\havingcount.png" alt="例子" style="zoom:80%;" /></li>
+</ul>
+<h2 id="第四章、SQL应用"><a href="#第四章、SQL应用" class="headerlink" title="第四章、SQL应用"></a>第四章、SQL应用</h2><h4 id="数据库应用体系"><a href="#数据库应用体系" class="headerlink" title="数据库应用体系"></a>数据库应用体系</h4><ul>
+<li><p>C/S结构，客户需要安装专门的程序</p>
+<ul>
+<li>QQ</li>
+</ul>
+</li>
+<li><p>B/S结构</p>
+<img src="D:\learnAndtry\bs.png" alt="bs" style="zoom:80%;" /></li>
+<li><p>嵌入式SQL</p>
+</li>
+</ul>
+<h4 id="JDBC编程"><a href="#JDBC编程" class="headerlink" title="JDBC编程"></a>JDBC编程</h4><ul>
+<li><p>```java<br>Class.ForName(“org.xxx.Driver”); // 装载驱动类<br>Connection myconnection = DriverManager.getConnection(“jdbc:数据库名称://连接地址:端口号/数据库名称”,username,passward); //获得数据库连接<br>Statement mystatement = myconnection.createStatement();<br>// 实际的操作，开始处理数据库中的数据<br>//例如：mystatement.excuteUpdate(“需要执行的insert SQL语句”);<br>myconnection.close();<br>mystatement.close();</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- JSP</span><br><span class="line">  - 在HTML中用&lt;% %&gt;嵌入java代码，现在服务端解析处理java代码将结果插入hTML中，客户端完全无感</span><br><span class="line"></span><br><span class="line">## 第五章、数据保护</span><br><span class="line"></span><br><span class="line">- 视图</span><br><span class="line"></span><br><span class="line">  - ```sql</span><br><span class="line">    CREATE VIEW xxx AS SELECT ...</span><br></pre></td></tr></table></figure>
+
+<p>- </p>
+</li>
+<li><p>加密</p>
+</li>
+<li><p>访问控制</p>
+<ul>
+<li>访问控制矩阵</li>
+</ul>
+</li>
+<li><p>事务</p>
+</li>
+<li><p>完整性约束</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>数据库系统原理</category>
+      </categories>
+      <tags>
+        <tag>数据库系统原理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机网络</title>
+    <url>/2020/11/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="计算机网络概述"><a href="#计算机网络概述" class="headerlink" title="计算机网络概述"></a>计算机网络概述</h2><ul>
 <li><p> Internet组成细节（全球最大的互联网络，ISP(Internet Service Provider)）</p>
 </li>
@@ -135,871 +943,6 @@
       </categories>
       <tags>
         <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>HelloHexo</title>
-    <url>/2020/11/20/HelloHexo/</url>
-    <content><![CDATA[<h2 id="就只是简单的MarkDown吗"><a href="#就只是简单的MarkDown吗" class="headerlink" title="就只是简单的MarkDown吗"></a>就只是简单的MarkDown吗</h2><h3 id="创建一个page页"><a href="#创建一个page页" class="headerlink" title="创建一个page页"></a>创建一个page页</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="然后丢进去就差不多了"><a href="#然后丢进去就差不多了" class="headerlink" title="然后丢进去就差不多了"></a>然后丢进去就差不多了</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<h4 id="以下是Font-matter预先定义的参数，在模板中使用这些参数值并加以利用。"><a href="#以下是Font-matter预先定义的参数，在模板中使用这些参数值并加以利用。" class="headerlink" title="以下是Font-matter预先定义的参数，在模板中使用这些参数值并加以利用。"></a>以下是Font-matter预先定义的参数，在模板中使用这些参数值并加以利用。</h4><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>描述</th>
-<th>默认值</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>layout</td>
-<td>布局</td>
-<td>config.default_layout</td>
-</tr>
-<tr>
-<td>title</td>
-<td>标题</td>
-<td>文章的文件名</td>
-</tr>
-<tr>
-<td>date</td>
-<td>建立日期</td>
-<td>文件建立日期</td>
-</tr>
-<tr>
-<td>updated</td>
-<td>更新日期</td>
-<td>文件更新日期</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>开启文章的评论功能</td>
-<td>true</td>
-</tr>
-<tr>
-<td>tags</td>
-<td>标签（不适用于分页）</td>
-<td></td>
-</tr>
-<tr>
-<td>categories</td>
-<td>分类（不适用于分页）</td>
-<td></td>
-</tr>
-<tr>
-<td>permalink</td>
-<td>覆盖文章网址</td>
-<td></td>
-</tr>
-<tr>
-<td>excerpt</td>
-<td>Page excerpt in plain text. Use this plugin to format the text</td>
-<td></td>
-</tr>
-<tr>
-<td>lang</td>
-<td>Set the language to override auto-detection</td>
-<td>Inherited from _config.yml</td>
-</tr>
-</tbody></table>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java小知识点--更新ing</title>
-    <url>/2021/11/20/Java%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
-    <content><![CDATA[<h1 id="Java小知识点"><a href="#Java小知识点" class="headerlink" title="Java小知识点"></a>Java小知识点</h1><ul>
-<li>StringBuilder<ul>
-<li>一个可变的字符序列。 此类提供与<code>StringBuffer</code>的API，但不保证同步。  此类设计用作简易替换为<code>StringBuffer</code>在正在使用由单个线程字符串缓冲区的地方（如通常是这种情况）。  在可能的情况下，建议使用这个类别优先于<code>StringBuffer</code> ，因为它在大多数实现中将更快。</li>
-</ul>
-</li>
-<li>StringBuffer<ul>
-<li>线程安全，可变的字符序列。 字符串缓冲区就像一个<code>String</code>，但可以修改，<code>StringBuffer</code>的<code>append</code>和<code>insert</code>是主要使用的方法</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java数据结构与算法之查找</title>
-    <url>/2021/11/11/Java%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95/</url>
-    <content><![CDATA[<h1 id="Java数据结构与算法之查找"><a href="#Java数据结构与算法之查找" class="headerlink" title="Java数据结构与算法之查找"></a>Java数据结构与算法之查找</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>, right=arr.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right)&#123; #这里&lt;和&lt;=效果是一样的，也就多计算一次循环的差别</span><br><span class="line">            mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]&gt;target) right=mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]&lt;target) left=mid+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]==target) <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>数据结构与算法</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>数据结构与算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java超基础不能忘</title>
-    <url>/2021/11/20/Java%E7%9F%A5%E8%AF%86%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h1 id="Java知识基础"><a href="#Java知识基础" class="headerlink" title="Java知识基础"></a>Java知识基础</h1><h2 id="一、面向对象编程的特点"><a href="#一、面向对象编程的特点" class="headerlink" title="一、面向对象编程的特点"></a>一、面向对象编程的特点</h2><ul>
-<li><h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><ul>
-<li>某事物的属性和行为包装到对象中，这个对象只对外公布需要公开的属性和行为</li>
-<li><strong>public</strong> 表明该数据成员、成员函数是对所有用户开放的，所有用户都可以直接进行调用</li>
-<li><strong>private</strong> 表示私有，私有的意思就是除了<strong>class自己</strong>之外，<strong>任何人都不可以</strong>直接使用。</li>
-<li>**protected ** 对于子女、朋友来说，就是public的，可以自由使用，没有任何限制，而对于其他的外部class，protected就变成private。</li>
-</ul>
-</li>
-<li><h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><ul>
-<li>子对象可以继承父对象的属性和行为</li>
-</ul>
-</li>
-<li><h3 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h3><ul>
-<li>方法的重载<ul>
-<li>方法重载：在类中定义方法名相同，参数不同的不同的多个方法（返回值类型可随意，不能以返回类型作为重载函数的区分标准）。</li>
-<li>方法重写：如果在子类中定义某方法与其父类有相同的名称和参数，我们说该方法被重写 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h3 id="八大原则"><a href="#八大原则" class="headerlink" title="八大原则"></a>八大原则</h3><ol>
-<li><strong>单一职责原则</strong> 每一个类应该专注于做一件事情。</li>
-<li><strong>里氏替换原则</strong> 超类存在的地方，子类是可以替换的。<strong>UserInterface methods=new UserInterfaceImpl();</strong></li>
-<li><strong>依赖倒置原则</strong> 实现尽量依赖抽象，不依赖具体实现</li>
-<li><strong>接口隔离原则</strong> 应当为客户端提供尽可能小的单独的接口，而不是提供大的总的接口。</li>
-<li><strong>迪米特法则</strong> 又叫最少知识原则，一个软件实体应当尽可能少的与其他实体发生相互作用</li>
-<li><strong>开闭原则</strong> 面向扩展开放，面向修改关闭。</li>
-<li><strong>组合/聚合复用原则</strong> 尽量使用合成/聚合达到复用，尽量少用继承。原则： 一个类中有另一个类的对象。</li>
-<li><strong>高内聚、低耦合</strong> 高内聚指的就是单一职责原则，一个类做的职责越单一，内聚度就越高，低耦合，指的就是依赖倒置原则，尽量使用抽象耦合去代替具体耦合</li>
-</ol>
-</li>
-<li><p><strong>具备iterator接口的对象</strong></p>
-<ul>
-<li>数组</li>
-<li>字符串</li>
-<li>函数的 arguments 对象</li>
-<li>Set/Map 数据结构</li>
-<li>TypedArray</li>
-<li>NodeList 对象</li>
-</ul>
-</li>
-</ul>
-<h2 id="二、Java数据结构"><a href="#二、Java数据结构" class="headerlink" title="二、Java数据结构"></a>二、Java数据结构</h2><ol>
-<li><h3 id="List-可重复"><a href="#List-可重复" class="headerlink" title="List(可重复)"></a>List(可重复)</h3><ul>
-<li>ArrayList 基于数组实现，增删慢，查询快，线程不安全</li>
-<li>Vector 基于数组实现，增删慢，查询快，线程安全</li>
-<li>LinkedList 基于双向链表实现，增删快，查询慢，线程不安全</li>
-</ul>
-</li>
-<li><h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><ul>
-<li>ArrayBlockingQueue 基于数组实现的有界阻塞队列</li>
-<li>LinkedBlockingQueue 基于链表实现的有界阻塞队列</li>
-<li>PriorityBlockingQueue 支持优先级排序的无界阻塞队列</li>
-<li>DelayQueue 支持延迟操作的无界阻塞队列</li>
-<li>SynchronousQueue 用于线程同步的阻塞队列</li>
-<li>LinkedTransferQueue 基于链表实现的无界阻塞队列</li>
-<li>LinkedBlockingDeque 基于链表实现的双向阻塞队列</li>
-</ul>
-</li>
-<li><h3 id="Set（不可重复）"><a href="#Set（不可重复）" class="headerlink" title="Set（不可重复）"></a>Set（不可重复）</h3><ol>
-<li>HashSet 哈希表实现，存的是散列值</li>
-<li>TreeSet 二叉树实现，将新添加的对象进行排序</li>
-<li><code>对象的相等性本质上是对象的HashCode值相等，HashCode值是Java根据对象的内存地址通过HashCode()方法计算出的HashCode值</code></li>
-<li>LinkHashSet 哈希表实现数据存储，双向链表记录顺序，底层使用LinkedHashMap记录数据，继承了HashSet</li>
-</ol>
-</li>
-<li><h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><ul>
-<li><p>HashMap</p>
-<ul>
-<li>数组+链表存储数据，线程不安全</li>
-<li>jdk8改为数组+链表或者红黑树</li>
-<li>链表存在主要是为了解决经过hash计算后会有重复值这一问题</li>
-</ul>
-</li>
-<li><p>ConCurrentHashMap</p>
-<ul>
-<li>分段锁的思想实现并发操作，线程安全</li>
-</ul>
-</li>
-<li><p>HashTable</p>
-<ul>
-<li>和HashTable类似，线程安全</li>
-</ul>
-</li>
-<li><p>TreeMap</p>
-<ul>
-<li>二叉树存取数据，key必须实现Camparable接口</li>
-</ul>
-</li>
-<li><p>LinkedHashMap</p>
-<ul>
-<li>链表保存数据的插入顺序</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Map.Entry的作用</span><br><span class="line">	Map.Entry是为了更方便的输出map键值对。一般情况下，要输出Map中的key 和 value  是先得到key的集合keySet()，然后再迭代（循环）由每个key得到每个value。values()方法是获取集合中的所有值，不包含键，没有对应关系。而Entry可以一次性获得这两个值。</span><br></pre></td></tr></table></figure>
-
-<h2 id="三、多线程的并发编程"><a href="#三、多线程的并发编程" class="headerlink" title="三、多线程的并发编程"></a>三、多线程的并发编程</h2><ul>
-<li><h3 id="创建线程的方式"><a href="#创建线程的方式" class="headerlink" title="创建线程的方式"></a>创建线程的方式</h3><ol>
-<li><p>继承Thread类</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Thread t1= <span class="keyword">new</span> ThreadEx();</span><br><span class="line">t1.start();<span class="comment">//继承Thread   11111</span></span><br></pre></td></tr></table></figure></li>
-<li><p>实现Runnable接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">ThreadRun t2=<span class="keyword">new</span> ThreadRun();</span><br><span class="line"><span class="keyword">new</span> Thread(t2,<span class="string">&quot;实现Runnable创建线程1&quot;</span>).start();</span><br></pre></td></tr></table></figure></li>
-<li><p>通过ExecutorService和实现Callable接口实现有返回值的线程</p>
-<ol>
-<li>实现Callable接口创建线程，可以用构造函数给线程取名字</li>
-<li><code>ExecutorService pool= Executors.newFixedThreadPool(2);</code>//创建线程池</li>
-<li><code>Callable c=new MyCallable(&quot;name&quot;);</code>//创建一个有返回值的线程</li>
-<li><code>pool.submit(c);</code>//提交线程</li>
-<li><code>pool.shutdown();</code>//关闭线程</li>
-</ol>
-</li>
-<li><p>基于线程池</p>
-<ol>
-<li><code>ExecutorService pool= Executors.newFixedThreadPool(2);</code>//创建线程池</li>
-<li><code>pool.excute(()-&gt;System.out.println(”线程执行中“));</code>//提交线程并执行</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><h3 id="线程池的工作原理"><a href="#线程池的工作原理" class="headerlink" title="线程池的工作原理"></a>线程池的工作原理</h3><ul>
-<li>线程池的主要作用：<strong>线程复用</strong>，<strong>线程资源管理</strong>，<strong>控制操作系统最大并发数</strong>以保证系统安全且高效<ul>
-<li>线程复用时JVM不断调用Runnable对象的run方法，循环中把Runnable对象放进Queue中，这样既可以有效控制正在执行的线程个数，也能保证系统中等待执行的其他线程有序执行</li>
-</ul>
-</li>
-<li>线程池的核心组件<ul>
-<li><strong>线程池管理器</strong></li>
-<li><strong>工作线程</strong>：线程池中执行具体任务的线程</li>
-<li><strong>任务接口</strong>：定义<strong>工作线程</strong>的调度和执行策略 只有线程实现该接口，才能实现任务调度</li>
-<li><strong>任务队列</strong>：用于存放处理的任务，新任务会不断加入，执行完成的任务会被从队列中除去</li>
-</ul>
-</li>
-<li>线程池通过Executor框架实现，核心类：Executors,ExecutorService,ThreadPoolExecutor,Callable,Future,FutureTask</li>
-</ul>
-</li>
-<li><h3 id="线程的五大状态"><a href="#线程的五大状态" class="headerlink" title="线程的五大状态"></a>线程的五大状态</h3><ul>
-<li>创建状态（新生状态）</li>
-<li>就绪状态</li>
-<li>阻塞状态</li>
-<li>运行状态</li>
-<li>死亡状态</li>
-<li>通过<code>Thread.State state=thread.getState();</code>获取线程状态<ul>
-<li>NEW<br>尚未启动的线程处于此状态。 </li>
-<li>RUNNABLE<br>在Java虚拟机中执行的线程处于此状态。 </li>
-<li>BLOCKED<br>被阻塞等待监视器锁定的线程处于此状态。 </li>
-<li>WAITING<br>正在等待另一个线程执行特定动作的线程处于此状态。 </li>
-<li>TIMED_WAITING<br>正在等待另一个线程执行动作达到指定等待时间的线程处于此状态。 </li>
-<li>TERMINATED</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h3 id="线程的优先级"><a href="#线程的优先级" class="headerlink" title="线程的优先级"></a>线程的优先级</h3><ul>
-<li>线程的Priority优先级低的收到CPU的调度的概率低</li>
-</ul>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line">t2.setPriority();<span class="comment">//设置优先级，默认优先级是5</span></span><br><span class="line">t2.start;<span class="comment">//Thread.MAX_PRIORITY是10</span></span><br></pre></td></tr></table></figure></li>
-<li><h3 id="守护线程"><a href="#守护线程" class="headerlink" title="守护线程"></a>守护线程</h3><ul>
-<li><p>线程分<strong>用户线程</strong>和<strong>守护线程</strong></p>
-</li>
-<li><p>JVM必须确保用户线程执行完毕，而不需要等待守护线程执行完毕</p>
-</li>
-<li><p>```<br>god god = new god();//run方法里面可以写无线循环函数<br>Thread t2= new Thread(god,”守护线程”);<br>t2.setDaemon(true);//设置线程为守护线程<br>t2.start();</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">- ### 线程方法</span><br><span class="line"></span><br><span class="line">  - 线程停止</span><br><span class="line"></span><br><span class="line">    - 建议正常停止--&gt;利用次数，不建议死循环</span><br><span class="line">    - 建议使用标志位--&gt;设置一个标志位</span><br><span class="line">    - 不要使用stop或者destroy等过时或者JDK不建议使用的方法（设置标志位让线程停止）</span><br><span class="line"></span><br><span class="line">  - 线程休眠</span><br><span class="line"></span><br><span class="line">    - 模拟网络延时：放大问题的发生性</span><br><span class="line">    - `Thread.sleep(1000);`</span><br><span class="line"></span><br><span class="line">  - 线程礼让</span><br><span class="line"></span><br><span class="line">    - `Thread.yeild();`</span><br><span class="line"></span><br><span class="line">  - 线程插队(线程vip阻塞)</span><br><span class="line"></span><br><span class="line">    - ```java</span><br><span class="line">      t2.start();</span><br><span class="line">      t2.join();</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><h3 id="线程同步"><a href="#线程同步" class="headerlink" title="线程同步"></a>线程同步</h3><p>- </p>
-</li>
-</ul>
-<h2 id="四、排序查找算法"><a href="#四、排序查找算法" class="headerlink" title="四、排序查找算法"></a>四、排序查找算法</h2><ul>
-<li><p>查找</p>
-<ul>
-<li><p>顺序查找</p>
-<ul>
-<li><table>
-<thead>
-<tr>
-<th align="center">平均查找长度</th>
-<th align="center">时间复杂度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">(n+1)/2</td>
-<td align="center">O(n)</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>二分查找（折半查找）</p>
-<ul>
-<li><table>
-<thead>
-<tr>
-<th align="center">平均查找长度</th>
-<th align="center">时间复杂度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">log2(n+1)</td>
-<td align="center">O(log2n)</td>
-</tr>
-</tbody></table>
-</li>
-</ul>
-</li>
-<li><p>插值查找</p>
-<ul>
-<li><strong>时间复杂度分析：</strong> O(log2(log2n))</li>
-</ul>
-</li>
-<li><p>斐波那契查找</p>
-<p>- </p>
-</li>
-<li><p>树表查找</p>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Nginx部署Hexo+SSL证书安装配置</title>
-    <url>/2021/11/21/Nginx%E9%83%A8%E7%BD%B2Hexo+SSL%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="Nginx部署Hexo-SSL证书安装配置"><a href="#Nginx部署Hexo-SSL证书安装配置" class="headerlink" title="Nginx部署Hexo+SSL证书安装配置"></a>Nginx部署Hexo+SSL证书安装配置</h1>]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>README_Hexo</title>
-    <url>/2021/06/20/README_Hexo/</url>
-    <content><![CDATA[<img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://raw.githubusercontent.com/hexojs/logo/master/hexo-logo-avatar.png"
-                      alt="Hexo logo" width="100" height="100" align="right" 
-                >
-
-<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><blockquote>
-<p>A fast, simple &amp; powerful blog framework, powered by <a class="link"   href="https://nodejs.org/" >Node.js<i class="fas fa-external-link-alt"></i></a>.</p>
-</blockquote>
-<p><a class="link"   href="https://hexo.io/" >Website<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/" >Documentation<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/#Installation" >Installation Guide<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://hexo.io/docs/contributing" >Contribution Guide<i class="fas fa-external-link-alt"></i></a> |<br><a href="CODE_OF_CONDUCT.md">Code of Conduct</a> |<br><a class="link"   href="https://hexo.io/api/" >API<i class="fas fa-external-link-alt"></i></a> |<br><a class="link"   href="https://twitter.com/hexojs" >Twitter<i class="fas fa-external-link-alt"></i></a></p>
-<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
-<li>Blazing fast generating</li>
-<li>Support for GitHub Flavored Markdown and most Octopress plugins</li>
-<li>One-command deploy to GitHub Pages, Heroku, etc.</li>
-<li>Powerful API for limitless extensibility</li>
-<li>Hundreds of <a class="link"   href="https://hexo.io/themes/" >themes<i class="fas fa-external-link-alt"></i></a> &amp; <a class="link"   href="https://hexo.io/plugins/" >plugins<i class="fas fa-external-link-alt"></i></a></li>
-</ul>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p><strong>Install Hexo</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p><strong>Setup your blog</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
-
-<p><strong>Start the server</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p><strong>Create a new post</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Generate static files</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<h2 id="More-Information"><a href="#More-Information" class="headerlink" title="More Information"></a>More Information</h2><ul>
-<li>Read the <a class="link"   href="https://hexo.io/" >documentation<i class="fas fa-external-link-alt"></i></a></li>
-<li>Visit the <a class="link"   href="https://github.com/hexojs/awesome-hexo" >Awesome Hexo<i class="fas fa-external-link-alt"></i></a> list</li>
-<li>Find solutions in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a></li>
-<li>Join discussion on <a class="link"   href="https://groups.google.com/group/hexo" >Google Group<i class="fas fa-external-link-alt"></i></a>, <a class="link"   href="https://discord.gg/teM2Anj" >Discord<i class="fas fa-external-link-alt"></i></a>, <a class="link"   href="https://gitter.im/hexojs/hexo" >Gitter<i class="fas fa-external-link-alt"></i></a> or <a class="link"   href="https://t.me/hexojs" >Telegram<i class="fas fa-external-link-alt"></i></a></li>
-<li>See the <a class="link"   href="https://hexo.io/plugins/" >plugin list<i class="fas fa-external-link-alt"></i></a> and the <a class="link"   href="https://hexo.io/themes/" >theme list<i class="fas fa-external-link-alt"></i></a> on wiki</li>
-<li>Follow <a class="link"   href="https://twitter.com/hexojs" >@hexojs<i class="fas fa-external-link-alt"></i></a> for latest news</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Just for Test</title>
-    <url>/2021/11/25/Test/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/11/12/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo<i class="fas fa-external-link-alt"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation<i class="fas fa-external-link-alt"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting<i class="fas fa-external-link-alt"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub<i class="fas fa-external-link-alt"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>mysql学习笔记</title>
-    <url>/2021/10/12/mysql%E6%98%93%E5%BF%98%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h1 id="Mysql易忘知识点总结"><a href="#Mysql易忘知识点总结" class="headerlink" title="Mysql易忘知识点总结"></a>Mysql易忘知识点总结</h1><h2 id="Select子句顺序"><a href="#Select子句顺序" class="headerlink" title="Select子句顺序"></a>Select子句顺序</h2><table>
-<thead>
-<tr>
-<th>顺序</th>
-<th>子句</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>1</td>
-<td>select</td>
-<td>要返回的列或表达式</td>
-</tr>
-<tr>
-<td>2</td>
-<td>From</td>
-<td>从中检索数据的表</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Where</td>
-<td>行级过滤</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Group by</td>
-<td>分组说明</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Having</td>
-<td>组级过滤</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Order by</td>
-<td>输出排序顺序</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Limit</td>
-<td>要检索的行数（分页）</td>
-</tr>
-</tbody></table>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2>]]></content>
-      <categories>
-        <category>Mysql</category>
-      </categories>
-      <tags>
-        <tag>Mysql</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>spring知识整理</title>
-    <url>/2021/11/20/spring%E7%9F%A5%E8%AF%86%E6%A2%B3%E7%90%86/</url>
-    <content><![CDATA[<h1 id="Spring知识梳理"><a href="#Spring知识梳理" class="headerlink" title="Spring知识梳理"></a>Spring知识梳理</h1><h2 id="一、特性"><a href="#一、特性" class="headerlink" title="一、特性"></a>一、特性</h2><ul>
-<li>轻量</li>
-<li>控制反转<ul>
-<li>不需要自己去new一个对象了</li>
-<li>spring会在容器初始化完成后主动把依赖的对象传递给他</li>
-<li>实现系统对象之间的解耦合</li>
-</ul>
-</li>
-<li>面向切面  <ul>
-<li>spring提供了面  向切面的编程支持</li>
-<li>分离系统逻辑和业务逻辑</li>
-<li>业务层只是实现与业务相关的代码，不需要关心系统功能的实现</li>
-<li>通过面向切面技术实现系统功能的自动织入</li>
-</ul>
-</li>
-<li>面向容器      <ul>
-<li>对象的配置化生成和对象的生命周期管理</li>
-<li>通过xml配置或者注解bean对象，控制其创建和销毁以及是否为单例模式</li>
-</ul>
-</li>
-<li><em><strong>spring是一个轻量性的具有控制反转和面向切面和容器编程特点的开发框架</strong></em></li>
-</ul>
-<h2 id="二、Spring的模块组成"><a href="#二、Spring的模块组成" class="headerlink" title="二、Spring的模块组成"></a>二、Spring的模块组成</h2><ol>
-<li><h3 id="核心容器层-CC"><a href="#核心容器层-CC" class="headerlink" title="核心容器层 CC"></a>核心容器层 CC</h3><ul>
-<li>Sping-Beans<ul>
-<li>此模块基于工厂模式实现对象创建</li>
-<li>通过XML配置实现声明式的对象管理</li>
-</ul>
-</li>
-<li>Sping-Core<ul>
-<li>核心功能实现，包括<strong>控制反转</strong>和<strong>依赖注入</strong></li>
-<li>bean对象的创建<strong>依赖</strong>于容器</li>
-<li>bean对象的所有属性由容器来<strong>注入</strong></li>
-</ul>
-</li>
-<li>Sping-Context<ul>
-<li>基于以上两个模块构建，实现国际化，事务管理、透明创建上下文等功能</li>
-</ul>
-</li>
-<li>SpEL</li>
-</ul>
-</li>
-<li><h3 id="数据访问层-DA"><a href="#数据访问层-DA" class="headerlink" title="数据访问层 DA"></a>数据访问层 DA</h3><ul>
-<li>JDBC<ul>
-<li>此模块提供了JDBC抽象层</li>
-<li>Spring持久化层基于抽象层实现了不同数据库间的灵活切换</li>
-</ul>
-</li>
-<li>ORM（包括JPA,JDO,Hibernate等）</li>
-<li>OXM</li>
-<li>JMS<ul>
-<li>实现对消息队列的支持</li>
-</ul>
-</li>
-<li>事务处理<ul>
-<li>基于接口实现声明式的事务管理</li>
-<li>通过配置和注解就可以实现，具体事务管理工作由Spring自动处理</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h3 id="Web应用层-WA（包含web交互和数据传输等功能）"><a href="#Web应用层-WA（包含web交互和数据传输等功能）" class="headerlink" title="Web应用层 WA（包含web交互和数据传输等功能）"></a>Web应用层 WA（包含web交互和数据传输等功能）</h3><ul>
-<li>Web<ul>
-<li>提供面向Web应用的基本功能</li>
-</ul>
-</li>
-<li>Web-MVC<ul>
-<li>为web应用<strong>提供模型视图控制</strong>和<strong>REST api服务</strong>的实现</li>
-<li>数字模型负责数据的业务逻辑，视图负责数据的展示</li>
-</ul>
-</li>
-<li>Web-Soket<ul>
-<li>提供WebSocket-Base的支持，实现服务端与客户端的双向通信</li>
-</ul>
-</li>
-<li>Web-Portlet<ul>
-<li>提供基于Portlet环境的MVC支持</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><h3 id="其他重要模块"><a href="#其他重要模块" class="headerlink" title="其他重要模块"></a>其他重要模块</h3><ul>
-<li>AOP<ul>
-<li>允许定义方法拦截器和切入点实现系统功能和业务功能解耦合</li>
-</ul>
-</li>
-<li>Aspects   <ul>
-<li>提供Spring和AspectJ的集成，是一个面向切面编程的模块</li>
-</ul>
-</li>
-<li>Instrumentation<ul>
-<li>提供对Instrumentation的支持和类加载器的实现</li>
-</ul>
-</li>
-<li>Messaging<ul>
-<li>为STOMP提供支持，主要用于WebSocket子协议的实现</li>
-</ul>
-</li>
-<li>Test<ul>
-<li>对Junit等测试框架提供支持<h2 id="三、Spring的注解"><a href="#三、Spring的注解" class="headerlink" title="三、Spring的注解"></a>三、Spring的注解</h2></li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><h3 id="Spring注解的使用规则"><a href="#Spring注解的使用规则" class="headerlink" title="Spring注解的使用规则"></a>Spring注解的使用规则</h3></li>
-</ul>
-<ol>
-<li><p>导入命名空间及规范约束</p>
-<ol>
-<li>xmlns指定的命名空间是默认的命名空间</li>
-<li>xmlns:xsi是指该XML文件遵守xml规范</li>
-</ol>
-</li>
-<li><p>配置扫描包/注解支持</p>
-<ol>
-<li>配置文件中配置需要扫描的包，配置过的包中的注解才能生效</li>
-</ol>
-</li>
-<li><p>注解配置总结</p>
-<ol>
-<li><pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
-       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-       xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
-       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-                           https://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
-    &lt;!-- 配置注解支持 --&gt;    
-    &lt;context:annotation-config/&gt; 
-&lt;/beans&gt;
-</code></pre>
-</li>
-</ol>
-</li>
-<li><p>使用注解</p>
-</li>
-</ol>
-<ul>
-<li><h3 id="Spring常用注解"><a href="#Spring常用注解" class="headerlink" title="Spring常用注解"></a>Spring常用注解</h3><ul>
-<li>Bean声明<ul>
-<li>@Component 定义基础层的通用组件</li>
-<li>@Service 定义业务逻辑层的服务组件</li>
-<li>@Repository 在数据访问层定义数据资源服务</li>
-<li>@Controller 在展示层使用，用于定义控制器</li>
-</ul>
-</li>
-<li>Beans注入<ul>
-<li>@Autowired</li>
-<li>@Resource</li>
-</ul>
-</li>
-<li>配置类注解<ul>
-<li>@Configuration</li>
-<li>@Bean</li>
-<li>@ComponentScan</li>
-</ul>
-</li>
-<li>AOP注解</li>
-<li>@Bean属性支持注解</li>
-<li>异步操作注解</li>
-<li>定时任务相关</li>
-<li>开启功能支持</li>
-<li>测试相关注解</li>
-<li>Spring MVC注解<ul>
-<li>@Controller 声明该类为Spring MVC的控制器</li>
-<li>@RequestMapping 声明映射Web请求的地址和参数，包括访问路径和参数</li>
-<li>@ResponseBody 支持将返回值放在ResponseBody体中返回，<strong>通常用于返回json数据到前端</strong></li>
-<li>@RequestBody 允许Request的参数在RequestBody 体中</li>
-<li>@PathVariable 用于接收基于路径的参数，<strong>通常作为RESTful接口的实现</strong></li>
-<li>@RestController 组合注解，相当于@Controller和@ResponseBody的组合</li>
-<li>@ExceptionHandler 用于全局控制器的异常处理</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>Spring</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-        <tag>Spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hexo+Shell脚本+Crontab实现自动部署个人博客</title>
-    <url>/2021/11/21/%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E6%80%9D%E8%B7%AF/</url>
-    <content><![CDATA[<h1 id="Hexo-Shell脚本-Crontab实现自动部署个人博客"><a href="#Hexo-Shell脚本-Crontab实现自动部署个人博客" class="headerlink" title="Hexo+Shell脚本+Crontab实现自动部署个人博客"></a>Hexo+Shell脚本+Crontab实现自动部署个人博客</h1><h2 id="一、安装配置Hexo"><a href="#一、安装配置Hexo" class="headerlink" title="一、安装配置Hexo"></a>一、安装配置Hexo</h2><ul>
-<li>参照HelloHexo</li>
-<li>配置成功后hexo server开启服务器后就可以访问了，<code>ip:4000</code>就ok</li>
-</ul>
-<h2 id="二、远程Ubunt生成ssh密钥配置连接github远程仓库"><a href="#二、远程Ubunt生成ssh密钥配置连接github远程仓库" class="headerlink" title="二、远程Ubunt生成ssh密钥配置连接github远程仓库"></a>二、远程Ubunt生成ssh密钥配置连接github远程仓库</h2><ol>
-<li><p>生成密钥</p>
- <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的GitHub注册邮箱&quot;</span></span><br></pre></td></tr></table></figure></li>
-<li><p>将文件夹~/.ssh文件夹下的公钥–<code>id_rsa.pub</code>的全部内容粘贴配置到<a class="link"   href="https://github.com/settings/keys[https://github.com/settings/keys]" >https://github.com/settings/keys[https://github.com/settings/keys]<i class="fas fa-external-link-alt"></i></a></p>
-</li>
-</ol>
-<h2 id="三、git-pull实现与github远程仓库的同步"><a href="#三、git-pull实现与github远程仓库的同步" class="headerlink" title="三、git pull实现与github远程仓库的同步"></a>三、git pull实现与github远程仓库的同步</h2><ol>
-<li><p>在myblog/source/_posts文件夹下建立git裸仓</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></li>
-<li><p>指定远程仓库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git remote add origin git@github.com:leiw-go/learnAndtry.git <span class="comment">#记住时通过ssh连接GitHub的不要粘错了链接</span></span><br><span class="line">git remote -v <span class="comment">#看下操作成功没用</span></span><br></pre></td></tr></table></figure></li>
-<li><p>同步仓库</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git pull orgin master</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="四、部署gitpage"><a href="#四、部署gitpage" class="headerlink" title="四、部署gitpage"></a>四、部署gitpage</h2><ol>
-<li><p>配置根目录下_config.yml文件</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:leiw-go/leiw-go.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></li>
-<li><p>一键部署</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#hexo执行命令均需在hexo根目录下</span></span><br><span class="line">hexo generate <span class="comment">#生成静态网站目录public(hexo g)</span></span><br><span class="line">hexo depoly <span class="comment">#部署，意思差不多就是git push(hexo d)</span></span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="五、Shell脚本实现一键操作"><a href="#五、Shell脚本实现一键操作" class="headerlink" title="五、Shell脚本实现一键操作"></a>五、Shell脚本实现一键操作</h2><ul>
-<li><p>autopull.sh</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/ubuntu/myblog/<span class="built_in">source</span>/_posts</span><br><span class="line">git pull origin master</span><br></pre></td></tr></table></figure></li>
-<li><p>autodeploy.sh</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/ubuntu/myblog</span><br><span class="line">hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="六、配置crontab工具实现每天博客网站的自动部署"><a href="#六、配置crontab工具实现每天博客网站的自动部署" class="headerlink" title="六、配置crontab工具实现每天博客网站的自动部署"></a>六、配置crontab工具实现每天博客网站的自动部署</h2><ul>
-<li><p><code>crontab -e</code>进入编辑定时执行配置信息的界面，加入以下两条信息</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">0 */2 * * * sh /home/ubuntu/myblog/<span class="built_in">source</span>/_posts/autopull.sh <span class="comment">#每隔两个小时自动同步远程仓库</span></span><br><span class="line">30 */2 * * * sh /home/ubuntu/myblog/autodeploy.sh <span class="comment">#每两个小时的半点自动部署发布网站</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="七、现在只需要往github上面填东西即可"><a href="#七、现在只需要往github上面填东西即可" class="headerlink" title="七、现在只需要往github上面填东西即可"></a>七、现在只需要往github上面填东西即可</h2><ul>
-<li>在你自己的本地电脑上<code>git push -u origin master</code>把你写的文章推到GitHub上文章即可自动发布</li>
-</ul>
-<h2 id="八、问题记录"><a href="#八、问题记录" class="headerlink" title="八、问题记录"></a>八、问题记录</h2><ul>
-<li><p>进行<code>git push</code>操作时报错：<code>fatal: The current branch master has no upstream branch.</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://img-blog.csdnimg.cn/20190623184825880.png"
-                      alt="在这里插入图片描述"
-                ></p>
-<p><strong>原因：</strong>没有将本地的分支与远程仓库的分支进行关联<br>通过<code>git branch</code>查看本地分支只有<code>master</code></p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://img-blog.csdnimg.cn/20190623184837154.png"
-                      alt="在这里插入图片描述"
-                ></p>
-<p>通过<code>git branch -a</code>查看远程分支，有<code>master</code>和<code>remotes/origin/master</code>两个</p>
-<p><img  
-                     lazyload
-                     src="/images/loading.svg"
-                     data-src="https://img-blog.csdnimg.cn/20190623184856359.png"
-                      alt="在这里插入图片描述"
-                ></p>
-<p>这时由于远程仓库太多，且分支较多。在默认情况下，<code>git push</code>时一般会上传到<code>origin</code>下的<code>master</code>分支上，然而当<code>repository</code>和<code>branch</code>过多，而又没有设置关联时，git就会产生疑问，因为它无法判断你的push目标</p>
-<p><strong>解决方式一</strong></p>
-<p>使用<code>git push --set-upstream origin master</code>命令</p>
-<p><strong>解决方式二</strong></p>
-<p>使用<code>git push -u origin master</code>命令</p>
-</li>
-<li><p>git pull 时报错</p>
-<ul>
-<li><pre><code class="bash">There is no tracking information for the current branch.
-Please specify which branch you want to merge with.
-See git-pull(1) for details.
-
-    git pull &lt;remote&gt; &lt;branch&gt;
-
-If you wish to set tracking information for this branch you can do so with:
-
-    git branch --set-upstream-to=origin/&lt;branch&gt; master    
-</code></pre>
-</li>
-<li><p>解决方法见提示</p>
-<ul>
-<li><code>git pull origin master</code>或者<code>git branch --set-upstream-to=origin/master</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>数据库系统原理小记</title>
-    <url>/2020/12/20/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[<h1 id="数据库系统原理"><a href="#数据库系统原理" class="headerlink" title="数据库系统原理"></a>数据库系统原理</h1><h2 id="第一章、绪论"><a href="#第一章、绪论" class="headerlink" title="第一章、绪论"></a>第一章、绪论</h2><ul>
-<li><p>数据库模型：对数据结构和语义的概括</p>
-<ul>
-<li><p>层次模型</p>
-<ul>
-<li>以树结构组织数据</li>
-</ul>
-</li>
-<li><p>关系模型</p>
-<ul>
-<li>以表组织数据</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>数据抽象的层次</p>
-<ul>
-<li>概念层：<ul>
-<li>数据模型：E-R模型（实例 联系模型）</li>
-<li>数据模式（脑图）</li>
-</ul>
-</li>
-<li>逻辑层<ul>
-<li>数据模型：关系型模型</li>
-<li>数据模式：模式</li>
-</ul>
-</li>
-<li>视图层<ul>
-<li>数据模型</li>
-<li>数据模式：外模式（应用层依据外模式建立）</li>
-</ul>
-</li>
-<li>物理层<ul>
-<li>数据模型：B+树数据模型</li>
-<li>数据模式：内模式</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>三层模式以及两级映射</p>
-<ul>
-<li>物理独立性：如果数据库的内模式改变只要对模式/内模式映射做出响应修改，可以使模式保持不变</li>
-<li>逻辑独立性：如果数据库的模式改变只要对外模式/模式映射做出响应修改，可以使模式保持不变</li>
-</ul>
-</li>
-<li><p>查询处理模块</p>
-<ul>
-<li>数据定义语言</li>
-<li>数据操纵语言</li>
-<li>数据保护语言</li>
-<li>SQL语言包括以上三个部分</li>
-</ul>
-</li>
-<li><p>数据管理技术的发展趋势</p>
-<ul>
-<li>关系型数据库：1.以关系为数据模型    2.采用声明性语言    3.支持完全ACID特性的数据一致性</li>
-<li>数据库管理系统中**事务(transaction)**的四个特性<ul>
-<li><strong>原子性（Atomicity）</strong>：</li>
-<li><strong>一致性（Consistency）</strong></li>
-<li><strong>隔离性（Isolation）</strong></li>
-<li><strong>持久性（Durability）</strong></li>
-</ul>
-</li>
-<li>NoSQL系统<ul>
-<li>利用计算机集群来存储和处理大数据</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="第二章、关系表的结构和约束"><a href="#第二章、关系表的结构和约束" class="headerlink" title="第二章、关系表的结构和约束"></a>第二章、关系表的结构和约束</h2><ul>
-<li>数据的完整性约束，常见约束有<ul>
-<li> 对属性取值范围的约束</li>
-<li>对属性值之间相互关系的限定（即键的概念）<ul>
-<li>超键：能唯一标识出各个属性的集合 </li>
-<li>候选键：能唯一标识出各个属性的集合，且不包含多余属性</li>
-<li>主键：一个表中可能有多个候选键，通常指定其中一个用作主键</li>
-<li>外键：关系表S1（引用关系）的一个属性子集必须匹配另一个关系表S2（被引用关系）中出现的数值，外键的值与被引用关系的值对应，或为空值</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>数据库系统原理</category>
-      </categories>
-      <tags>
-        <tag>数据库系统原理</tag>
       </tags>
   </entry>
 </search>
