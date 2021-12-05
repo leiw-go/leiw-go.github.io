@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java动态代理</title>
+    <url>/2021/12/05/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。<br>代理类与委托类之间通常会存在关联关系，一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。</p>
+<ul>
+<li>静态代理<ul>
+<li>对目标接口的多实现加上代理类覆盖实现类的构造器，最后是相应方法的重写达到添加功能的目的</li>
+</ul>
+</li>
+<li>动态代理<ul>
+<li>解决了静态代理一个接口一个代理类的问题(那样的话代理类太多了)</li>
+</ul>
+</li>
+</ul>
+<h2 id="动态代理实现过程"><a href="#动态代理实现过程" class="headerlink" title="动态代理实现过程"></a>动态代理实现过程</h2><ul>
+<li>定义项目接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义项目接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAction</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实现接口，项目逻辑实现</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现接口，项目逻辑实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceImpl</span> <span class="keyword">implements</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAction</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;业务实现...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>写代理类添加相应附加功能，实现InvocationHandler接口，类内实现方法返回代理类，重写invoke方法添加相应功能</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object obj = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一步：需要绑定接口,即绑定委托对象并返回一个代理类</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">bind</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.obj = obj;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//第二步：重写invoke方法，实现需要添加的功能</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;方法调用前的日志...&quot;</span>);</span><br><span class="line">        Object temp = method.invoke(<span class="keyword">this</span>.obj, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;方法调用后的日志...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用动态代理</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 在java中有三种类类加载器。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1）Bootstrap ClassLoader 此加载器采用c++编写，一般开发中很少见。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 2）Extension ClassLoader 用来进行扩展类的加载，一般对应的是jrelibext目录中的类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 3）AppClassLoader 加载classpath指定的类，是最常用的加载器。同时也是java中默认的加载器。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 如果想要完成动态代理，首先需要定义一个InvocationHandler接口的子类，已完成代理的具体操作。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test10</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyInvocationHandler demo = <span class="keyword">new</span> MyInvocationHandler();<span class="comment">//实例化一个InvocationHandler</span></span><br><span class="line">        Service proxy = (Service) demo.bind(<span class="keyword">new</span> ServiceImpl());<span class="comment">//绑定接口返回一个代理类</span></span><br><span class="line">        proxy.doAction();<span class="comment">//调用方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Java特征</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java反射机制深究</title>
     <url>/2021/12/05/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E6%B7%B1%E7%A9%B6/</url>
     <content><![CDATA[<h2 id="反射的简介"><a href="#反射的简介" class="headerlink" title="反射的简介"></a>反射的简介</h2><p>反射主要是指程序可以访问，检测和修改它本身状态或行为的一种能力，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。一个类有多个组成部分，例如：成员变量、方法、构造方法等，反射就是加载类,并解剖出类的各个组成部分。</p>
