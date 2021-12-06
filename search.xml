@@ -474,7 +474,7 @@
 <li>通过面向切面技术实现系统功能的自动织入</li>
 </ul>
 </li>
-<li>面向容器      <ul>
+<li>面向容器<ul>
 <li>对象的配置化生成和对象的生命周期管理</li>
 <li>通过xml配置或者注解bean对象，控制其创建和销毁以及是否为单例模式</li>
 </ul>
@@ -482,8 +482,7 @@
 </ul>
 <p> <em><strong>spring是一个轻量性的具有控制反转和面向切面和容器编程特点的开发框架</strong></em></p>
 <h2 id="Spring的模块组成"><a href="#Spring的模块组成" class="headerlink" title="Spring的模块组成"></a>Spring的模块组成</h2><ul>
-<li><p>核心容器层 CC</p>
-<ul>
+<li>核心容器层 CC<ul>
 <li>Sping-Beans<ul>
 <li>此模块基于工厂模式实现对象创建</li>
 <li>通过XML配置实现声明式的对象管理</li>
@@ -502,8 +501,7 @@
 <li>SpEL</li>
 </ul>
 </li>
-<li><p>数据访问层 DA</p>
-<ul>
+<li>数据访问层 DA<ul>
 <li>JDBC</li>
 <li>此模块提供了JDBC抽象层</li>
 <li>Spring持久化层基于抽象层实现了不同数据库间的灵活切换</li>
@@ -520,8 +518,7 @@
 </li>
 </ul>
 </li>
-<li><p>Web应用层 WA（包含web交互和数据传输等功能）</p>
-<ul>
+<li>Web应用层 WA（包含web交互和数据传输等功能）<ul>
 <li>Web<ul>
 <li>提供面向Web应用的基本功能</li>
 </ul>
@@ -541,13 +538,12 @@
 </li>
 </ul>
 </li>
-<li><p>其他重要模块</p>
-<ul>
+<li>其他重要模块<ul>
 <li>AOP<ul>
 <li>允许定义方法拦截器和切入点实现系统功能和业务功能解耦合</li>
 </ul>
 </li>
-<li>Aspects   <ul>
+<li>Aspects<ul>
 <li>提供Spring和AspectJ的集成，是一个面向切面编程的模块</li>
 </ul>
 </li>
@@ -560,65 +556,59 @@
 </ul>
 </li>
 <li>Test<ul>
-<li>对Junit等测试框架提供支持<h2 id="Spring的注解"><a href="#Spring的注解" class="headerlink" title="Spring的注解"></a>Spring的注解</h2></li>
+<li>对Junit等测试框架提供支持</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>Spring注解的使用规则 </p>
+</ul>
+<h2 id="Spring的注解"><a href="#Spring的注解" class="headerlink" title="Spring的注解"></a>Spring的注解</h2><ul>
+<li><p>Spring注解的使用规则</p>
 <ol>
 <li>导入命名空间及规范约束</li>
 </ol>
 <ul>
-<li>xmlns指定的命名空间是默认的命名空间</li>
-<li>xmlns:xsi是指该XML文件遵守xml规范</li>
-</ul>
+<li><p>xmlns指定的命名空间是默认的命名空间</p>
+</li>
+<li><p>xmlns:xsi是指该XML文件遵守xml规范</p>
 <ol start="2">
 <li>配置扫描包/注解支持</li>
 </ol>
-<ul>
-<li>配置文件中配置需要扫描的包，配置过的包中的注解才能生效</li>
-</ul>
-<ol start="3">
-<li>注解配置总结<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">                          https://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">                          http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">                          https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 配置注解支持 --&gt;</span>    </span><br><span class="line">   <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="Spring常用注解"><a href="#Spring常用注解" class="headerlink" title="Spring常用注解"></a>Spring常用注解</h3></li>
-</ol>
 </li>
-<li><p>Bean声明</p>
-<ul>
+<li><p>配置文件中配置需要扫描的包，配置过的包中的注解才能生效</p>
+<ol start="3">
+<li>注解配置总结</li>
+</ol>
+   <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">                          https://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">                          http://www.springframework.org/schema/context</span></span></span><br><span class="line"><span class="string"><span class="tag">                          https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 配置注解支持 --&gt;</span>    </span><br><span class="line">   <span class="tag">&lt;<span class="name">context:annotation-config</span>/&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="Spring常用注解"><a href="#Spring常用注解" class="headerlink" title="Spring常用注解"></a>Spring常用注解</h3><ul>
+<li>Bean声明<ul>
 <li>@Component 定义基础层的通用组件</li>
 <li>@Service 定义业务逻辑层的服务组件</li>
 <li>@Repository 在数据访问层定义数据资源服务</li>
 <li>@Controller 在展示层使用，用于定义控制器</li>
 </ul>
 </li>
-<li><p>Beans注入</p>
-<ul>
+<li>Beans注入<ul>
 <li>@Autowired</li>
 <li>@Resource</li>
 </ul>
 </li>
-<li><p>配置类注解</p>
-<ul>
+<li>配置类注解<ul>
 <li>@Configuration</li>
 <li>@Bean</li>
 <li>@ComponentScan</li>
 </ul>
 </li>
-<li><p>AOP注解</p>
-</li>
-<li><p>@Bean属性支持注解</p>
-</li>
-<li><p>异步操作注解</p>
-</li>
-<li><p>定时任务相关</p>
-</li>
-<li><p>开启功能支持</p>
-</li>
-<li><p> 测试相关注解</p>
-</li>
-<li><p>Spring MVC注解</p>
-<ul>
+<li>AOP注解</li>
+<li>@Bean属性支持注解</li>
+<li>异步操作注解</li>
+<li>定时任务相关</li>
+<li>开启功能支持</li>
+<li>测试相关注解</li>
+<li>Spring MVC注解<ul>
 <li>@Controller 声明该类为Spring MVC的控制器</li>
 <li>@RequestMapping 声明映射Web请求的地址和参数，包括访问路径和参数</li>
 <li>@ResponseBody 支持将返回值放在ResponseBody体中返回，<strong>通常用于返回json数据到前端</strong></li>
@@ -629,6 +619,36 @@
 </ul>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Spring</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于XML文档的xmlns、xmlns:xsi和xsi:schemaLocation</title>
+    <url>/2021/12/06/xml%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h2 id="XML简介"><a href="#XML简介" class="headerlink" title="XML简介"></a>XML简介</h2><p>XML毫无疑问是一门标记语言这无可厚非，关于XML我个人感觉只有一点是必须清楚的—XML 的设计宗旨是<strong>传输数据</strong>，而非显示数据，而且XML 标签没有被预定义理论上是需要自行定义标签的。</p>
+<h2 id="applicationContext-xml模板文件中的标签含义"><a href="#applicationContext-xml模板文件中的标签含义" class="headerlink" title="applicationContext.xml模板文件中的标签含义"></a>applicationContext.xml模板文件中的标签含义</h2><p>编写Spring或者Maven或者其他需要用到XML文档的程序时，通常都是将这些XML文档头拷贝过来，并没有理解其中元素（比如xmlns，xmlns:xsi，xsi:schemaLocation）的真正含义，不知道哪些元素是多余的，也不知道为什么要加那些元素。有时候Copy错了也很头大，所以在这里花时间记录理解一下。</p>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:security</span>=<span class="string">&quot;http://www.springframework.org/schema/security&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span></span><br><span class="line"><span class="string"><span class="tag">          http://www.springframework.org/schema/beans/spring-beans-3.1.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">          http://www.springframework.org/schema/security</span></span></span><br><span class="line"><span class="string"><span class="tag">          http://www.springframework.org/schema/security/spring-security-3.1.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">security:http</span> <span class="attr">auto-config</span>=<span class="string">&quot;true&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">security:intercept-url</span> <span class="attr">pattern</span>=<span class="string">&quot;/**&quot;</span> <span class="attr">access</span>=<span class="string">&quot;ROLE_USER&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">security:http</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">security:authentication-manager</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">security:authentication-provider</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">security:user-service</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">security:user</span> <span class="attr">name</span>=<span class="string">&quot;user&quot;</span> <span class="attr">password</span>=<span class="string">&quot;user&quot;</span> <span class="attr">authorities</span>=<span class="string">&quot;ROLE_USER&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">security:user</span> <span class="attr">name</span>=<span class="string">&quot;admin&quot;</span> <span class="attr">password</span>=<span class="string">&quot;admin&quot;</span> <span class="attr">authorities</span>=<span class="string">&quot;ROLE_USER, ROLE_ADMIN&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">security:user-service</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">security:authentication-provider</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">security:authentication-manager</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="为什么需要xmlns？"><a href="#为什么需要xmlns？" class="headerlink" title="为什么需要xmlns？"></a>为什么需要xmlns？</h3><p>XML的设计宗旨既然是传输数据,那么保证数据的唯一性是非常必要的.如果传输数据的时候发先有两个是xml中包含相同的标签,那让XML解析器究竟去读哪一个数据呢?所以我个人认为可能就是这个原因导致了xmlns的概念的引入(XML Namespace)</p>
+<h3 id="如何使用xmlns？"><a href="#如何使用xmlns？" class="headerlink" title="如何使用xmlns？"></a>如何使用xmlns？</h3><p>使用语法： xmlns:namespace-prefix=”namespaceURI”。其中namespace-prefix为自定义前缀，只要在这个XML文档中保证前缀不重复即可；namespaceURI是这个前缀对应的XML Namespace的定义。</p>
+<h3 id="xmlns和xmlns-xsi有什么不同？"><a href="#xmlns和xmlns-xsi有什么不同？" class="headerlink" title="xmlns和xmlns:xsi有什么不同？"></a>xmlns和xmlns:xsi有什么不同？</h3><p>xmlns表示默认的Namespace,xmlns:xsi表示使用xsi作为前缀的Namespace，当然前缀xsi需要在文档中声明。</p>
+<h3 id="xsi-schemaLocation有何作用？"><a href="#xsi-schemaLocation有何作用？" class="headerlink" title="xsi:schemaLocation有何作用？"></a>xsi:schemaLocation有何作用？</h3><p> xsi:schemaLocation属性其实是Namespace为<code>http://www.w3.org/2001/XMLSchema-instance</code>里的<code>schemaLocation</code>属性，正是因为我们一开始声明了</p>
+ <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br></pre></td></tr></table></figure>
+
+<p>因此这里才写作xsi:schemaLocation。</p>
+<p><code>xsi:schemaLocation</code>定义了<code>XML Namespace</code>和对应的<code>XSD（Xml Schema Definition）</code>文档的位置的关系。</p>
+<p>它的值由一个或多个URI引用对组成，两个URI之间以空白符分隔（空格和换行均可）。</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">xsi:schemaLocation=&quot;http://www.springframework.org/schema/context </span><br><span class="line">                    http://www.springframework.org/schema/context/spring-context.xsd&quot;</span><br></pre></td></tr></table></figure>
+
+<p>第一个URI是定义的<code>XML Namespace</code>的值，第二个URI给出xsd文档的位置，Schema处理器将从这个位置读取Schema文档，该文档的targetNamespace必须与第一个URI相匹配。</p>
+<p>这里表示<code>Namespace</code>为<code>http://www.springframework.org/schema/context</code>的Schema的位置为<code>http://www.springframework.org/schema/context/spring-context.xsd</code>。</p>
 ]]></content>
       <categories>
         <category>Java</category>
