@@ -1,6 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Java动态代理</title>
+    <url>/2021/12/05/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url>
+    <content><![CDATA[<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。<br>代理类与委托类之间通常会存在关联关系，一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。</p>
+<ul>
+<li>静态代理<ul>
+<li>对目标接口的多实现加上代理类覆盖实现类的构造器，最后是相应方法的重写达到添加功能的目的</li>
+</ul>
+</li>
+<li>动态代理<ul>
+<li>解决了静态代理一个接口一个代理类的问题(那样的话代理类太多了)</li>
+</ul>
+</li>
+</ul>
+<h2 id="动态代理实现过程"><a href="#动态代理实现过程" class="headerlink" title="动态代理实现过程"></a>动态代理实现过程</h2><ul>
+<li>定义项目接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义项目接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAction</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实现接口，项目逻辑实现</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现接口，项目逻辑实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceImpl</span> <span class="keyword">implements</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAction</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;业务实现...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>写代理类添加相应附加功能，实现InvocationHandler接口，类内实现方法返回代理类，重写invoke方法添加相应功能</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">InvocationHandler接口：</span></span><br><span class="line"><span class="comment">public interface InvocationHandler &#123;</span></span><br><span class="line"><span class="comment">    public Object invoke(Object proxy,Method method,Object[] args) throws Throwable;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">参数说明：</span></span><br><span class="line"><span class="comment">        Object proxy：指被代理的对象。</span></span><br><span class="line"><span class="comment">        Method method：要调用的方法</span></span><br><span class="line"><span class="comment">        Object[] args：方法调用时所需要的参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object obj = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一步：需要绑定接口,即绑定委托对象并返回一个代理类</span></span><br><span class="line">    <span class="comment">//第一步：需要绑定接口,即绑定委托对象并返回一个代理类</span></span><br><span class="line">    <span class="comment">//newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</span></span><br><span class="line">    <span class="comment">//返回指定接口的代理类的实例，该接口将方法调用分派给指定的调用处理程序。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">bind</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.obj = obj;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//第二步：重写invoke方法，实现需要添加的功能</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;方法调用前的日志...&quot;</span>);</span><br><span class="line">        Object temp = method.invoke(<span class="keyword">this</span>.obj, args);<span class="comment">//这里的invoke不是InvocationHandler的invoke!!!</span></span><br><span class="line">        System.out.println(<span class="string">&quot;方法调用后的日志...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用动态代理</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 在java中有三种类类加载器。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1）Bootstrap ClassLoader 此加载器采用c++编写，一般开发中很少见。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 2）Extension ClassLoader 用来进行扩展类的加载，一般对应的是jrelibext目录中的类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 3）AppClassLoader 加载classpath指定的类，是最常用的加载器。同时也是java中默认的加载器。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 如果想要完成动态代理，首先需要定义一个InvocationHandler接口的子类，已完成代理的具体操作。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test10</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyInvocationHandler demo = <span class="keyword">new</span> MyInvocationHandler();<span class="comment">//实例化一个InvocationHandler</span></span><br><span class="line">        Service proxy = (Service) demo.bind(<span class="keyword">new</span> ServiceImpl());<span class="comment">//绑定接口返回一个代理类</span></span><br><span class="line">        proxy.doAction();<span class="comment">//调用方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果打印</span></span><br><span class="line"><span class="comment">//方法调用前的日志...</span></span><br><span class="line"><span class="comment">//业务实现...</span></span><br><span class="line"><span class="comment">//方法调用后的日志...</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Java特征</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Java反射机制深究</title>
+    <url>/2021/12/05/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E6%B7%B1%E7%A9%B6/</url>
+    <content><![CDATA[<h2 id="反射的简介"><a href="#反射的简介" class="headerlink" title="反射的简介"></a>反射的简介</h2><p>反射主要是指程序可以访问，检测和修改它本身状态或行为的一种能力，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。一个类有多个组成部分，例如：成员变量、方法、构造方法等，反射就是加载类,并解剖出类的各个组成部分。</p>
+<h2 id="反射的主要功能"><a href="#反射的主要功能" class="headerlink" title="反射的主要功能"></a>反射的主要功能</h2><ol>
+<li>在运行是判断任意一个对象所属的类</li>
+<li>在运行时构造任意一个类的对象</li>
+<li>在运行时判断任意一个类所具有的成员变量和方法</li>
+<li>在运行时调用任意一个对象的方法</li>
+<li>生成动态代理</li>
+</ol>
+<h2 id="关于反射的类"><a href="#关于反射的类" class="headerlink" title="关于反射的类"></a>关于反射的类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.Class;                </span><br><span class="line">java.lang.reflect.Constructor; </span><br><span class="line">java.lang.reflect.Field;        </span><br><span class="line">java.lang.reflect.Method;</span><br><span class="line">java.lang.reflect.Modifier;</span><br></pre></td></tr></table></figure>
+
+<h2 id="反射的作用与常用功能"><a href="#反射的作用与常用功能" class="headerlink" title="反射的作用与常用功能"></a>反射的作用与常用功能</h2><ul>
+<li>通过一个对象获得完整的包名和类名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Test01 testReflect = <span class="keyword">new</span> Test01();</span><br><span class="line">        <span class="comment">//通过一个对象获得完整的包名和类名 ：</span></span><br><span class="line">        System.out.println(testReflect.getClass().getName());</span><br><span class="line">        <span class="comment">// 结果 LearnReflect.Test01</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>实例化Class类对象</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; class1 = <span class="keyword">null</span>;</span><br><span class="line">        Class&lt;?&gt; class2 = <span class="keyword">null</span>;</span><br><span class="line">        Class&lt;?&gt; class3 = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 一般采用第一种形式</span></span><br><span class="line">        <span class="comment">//实例化Class类对象</span></span><br><span class="line">        class1 = Class.forName(<span class="string">&quot;LearnReflect.Test01&quot;</span>);</span><br><span class="line">        class2 = <span class="keyword">new</span> Test01().getClass();</span><br><span class="line">        class3 = Test01.class;</span><br><span class="line">        System.out.println(<span class="string">&quot;类名称   &quot;</span> + class1.getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;类名称   &quot;</span> + class2.getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;类名称   &quot;</span> + class3.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>取得父类以及所有是实现的接口</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test03</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">2862585049955236662L</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;LearnReflect.Test03&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 取得父类</span></span><br><span class="line">        Class&lt;?&gt; parentClass = clazz.getSuperclass();</span><br><span class="line">        System.out.println(<span class="string">&quot;clazz的父类为：&quot;</span> + parentClass.getName());</span><br><span class="line">        <span class="comment">// clazz的父类为： java.lang.Object</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取所有的接口</span></span><br><span class="line">        Class&lt;?&gt;[] intes = clazz.getInterfaces();</span><br><span class="line">        System.out.println(<span class="string">&quot;clazz实现的接口有：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intes.length; i++) &#123;</span><br><span class="line">            System.out.println((i + <span class="number">1</span>) + <span class="string">&quot;：&quot;</span> + intes[i].getName());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// clazz实现的接口有：</span></span><br><span class="line">        <span class="comment">// 1：java.io.Serializable</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>利用getConstructors实例化目标类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Pojo.User;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test04</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; class1 = <span class="keyword">null</span>;</span><br><span class="line">        class1 = Class.forName(<span class="string">&quot;Pojo.User&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第一种方法，实例化默认构造方法，调用set赋值</span></span><br><span class="line">        User user = (User) class1.newInstance();<span class="comment">//此方法已弃用，需要类中有无参构造器</span></span><br><span class="line">        user.setAge(<span class="number">20</span>);<span class="comment">//需要实例中写好了Set方法</span></span><br><span class="line">        user.setName(<span class="string">&quot;Rollen&quot;</span>);</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        <span class="comment">// 结果 User [age=20, name=Rollen]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第二种方法 取得全部的构造函数 使用构造函数赋值</span></span><br><span class="line">        Constructor&lt;?&gt;[] cons = class1.getConstructors();</span><br><span class="line">        <span class="comment">// 查看每个构造方法需要的参数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cons.length; i++) &#123;</span><br><span class="line">            Class&lt;?&gt;[] clazzs = cons[i].getParameterTypes();</span><br><span class="line">            System.out.print(<span class="string">&quot;cons[&quot;</span> + i + <span class="string">&quot;] (&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; clazzs.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j == clazzs.length - <span class="number">1</span>)</span><br><span class="line">                    System.out.print(clazzs[j].getName());</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    System.out.print(clazzs[j].getName() + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">&quot;)&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 结果</span></span><br><span class="line">        <span class="comment">//cons[0] (java.lang.String,int)</span></span><br><span class="line">        <span class="comment">//cons[1] ()</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//cons[0]构造器0</span></span><br><span class="line">        <span class="comment">//必须按照严格构造器要求的参数格式填写参数</span></span><br><span class="line">        user = (User) cons[<span class="number">0</span>].newInstance(<span class="string">&quot;Rollen&quot;</span>,<span class="number">20</span>);</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        <span class="comment">// 结果 User(name=Rollen, age=20)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//cons[1]构造器1</span></span><br><span class="line">        user = (User) cons[<span class="number">1</span>].newInstance();</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        <span class="comment">// 结果 User(name=null, age=0)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>getDeclaredFields()与getFields()方法分别取得所有属性和公开的所有属性</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Modifier;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test05</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">2862585049955236662L</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> i =<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;LearnReflect.Test05&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;===============实现的接口或者父类的属性===============&quot;</span>);</span><br><span class="line">        <span class="comment">// 取得本类的全部属性</span></span><br><span class="line">        Field[] field = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field item : field) &#123;</span><br><span class="line">            <span class="comment">// 权限修饰符</span></span><br><span class="line">            <span class="keyword">int</span> mo = item.getModifiers();</span><br><span class="line">            String priv = Modifier.toString(mo); <span class="comment">//private static final</span></span><br><span class="line">            <span class="comment">// 属性类型</span></span><br><span class="line">            Class&lt;?&gt; type = item.getType();<span class="comment">// long</span></span><br><span class="line">            System.out.println(priv + <span class="string">&quot; &quot;</span> + type.getName() + <span class="string">&quot; &quot;</span> + item.getName() + <span class="string">&quot;;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;==========本类属性==========&quot;</span>);</span><br><span class="line">        <span class="comment">// 取得实现的接口或者父类的属性</span></span><br><span class="line">        Field[] filed1 = clazz.getFields();</span><br><span class="line">        <span class="keyword">for</span> (Field value : filed1) &#123;</span><br><span class="line">            <span class="comment">// 权限修饰符</span></span><br><span class="line">            <span class="keyword">int</span> mo = value.getModifiers();</span><br><span class="line">            String priv = Modifier.toString(mo);<span class="comment">//public</span></span><br><span class="line">            <span class="comment">// 属性类型</span></span><br><span class="line">            Class&lt;?&gt; type = value.getType();<span class="comment">//int</span></span><br><span class="line">            System.out.println(priv + <span class="string">&quot; &quot;</span> + type.getName() + <span class="string">&quot; &quot;</span> + value.getName() + <span class="string">&quot;;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>getMethods()方法取得所有方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Modifier;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test06</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">2862585049955236662L</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;Pojo.User&quot;</span>);</span><br><span class="line">        Method[] method = clazz.getMethods();</span><br><span class="line">        <span class="keyword">for</span> (Method value : method) &#123;</span><br><span class="line">            Class&lt;?&gt; returnType = value.getReturnType();</span><br><span class="line">            Class&lt;?&gt;[] para = value.getParameterTypes();</span><br><span class="line">            <span class="keyword">int</span> temp = value.getModifiers();</span><br><span class="line">            System.out.print(Modifier.toString(temp) + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            System.out.print(returnType.getName() + <span class="string">&quot;  &quot;</span>);</span><br><span class="line">            System.out.print(value.getName() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            System.out.print(<span class="string">&quot;(&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; para.length; ++j) &#123;</span><br><span class="line">                System.out.print(para[j].getName() + <span class="string">&quot; &quot;</span> + <span class="string">&quot;arg&quot;</span> + j);</span><br><span class="line">                <span class="keyword">if</span> (j &lt; para.length - <span class="number">1</span>) &#123;</span><br><span class="line">                    System.out.print(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="comment">//输出所有的方法以及需要的参数类型</span></span><br><span class="line">            <span class="comment">//使用getParameters方法再使用getName方法得到的是arg0,arg0这种形式的形参</span></span><br><span class="line">            <span class="comment">//也就是说使用反射无法拿到形参的名字，即变量标识符</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            Class&lt;?&gt;[] exce = value.getExceptionTypes();</span><br><span class="line">            <span class="keyword">if</span> (exce.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;) throws &quot;</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; exce.length; ++k) &#123;</span><br><span class="line">                    System.out.print(exce[k].getName() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (k &lt; exce.length - <span class="number">1</span>) &#123;</span><br><span class="line">                        System.out.print(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;)&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">            <span class="comment">//如果有抛出异常的就抛出异常</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>invoke方法利用反射调用类内的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test07</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;Pojo.User&quot;</span>);</span><br><span class="line">        <span class="comment">// 调用User中的getName方法</span></span><br><span class="line">        Method methodGet = clazz.getMethod(<span class="string">&quot;getName&quot;</span>);</span><br><span class="line">        System.out.println(methodGet.invoke(clazz.getConstructors()[<span class="number">0</span>].newInstance(<span class="string">&quot;leiw&quot;</span>, <span class="number">20</span>)));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用User中的setName方法</span></span><br><span class="line">        Method methodSet = clazz.getMethod(<span class="string">&quot;setName&quot;</span>, String.class);</span><br><span class="line">        Object old = clazz.getConstructors()[<span class="number">0</span>].newInstance(<span class="string">&quot;yyw&quot;</span>, <span class="number">21</span>);</span><br><span class="line">        System.out.println(methodGet.invoke(old));</span><br><span class="line">        methodSet.invoke(old,<span class="string">&quot;yxw&quot;</span>);</span><br><span class="line">        System.out.println(methodGet.invoke(old));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//结果</span></span><br><span class="line">        <span class="comment">//leiw</span></span><br><span class="line">        <span class="comment">//yyw</span></span><br><span class="line">        <span class="comment">//yxw</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>直接对 private 的属性赋值</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test09</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;Pojo.User&quot;</span>);</span><br><span class="line">        Object obj = clazz.getConstructor().newInstance();<span class="comment">//getConstructor()默认拿的是无参构造器</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 可以直接对 private 的属性赋值</span></span><br><span class="line">        Field field = clazz.getDeclaredField(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">        field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        field.set(obj, <span class="number">25</span>);</span><br><span class="line">        System.out.println(field.get(obj));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>利用反射实现动态代理</li>
+</ul>
+<h2 id="反射的优缺点"><a href="#反射的优缺点" class="headerlink" title="反射的优缺点"></a>反射的优缺点</h2><ul>
+<li><p>优点</p>
+<ol>
+<li>能够运行时动态获取类的实例，大大提高系统的灵活性和扩展性。</li>
+<li>与Java动态编译相结合，可以实现无比强大的功能</li>
+</ol>
+</li>
+<li><p>缺点</p>
+<ol>
+<li>使用反射的性能较低</li>
+<li>使用反射相对来说不安全 </li>
+<li>破坏了类的封装性，可以通过反射获取这个类的私有方法和属性</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+        <category>Java特征</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Java小知识点--更新ing</title>
     <url>/2021/11/20/Java%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9/</url>
     <content><![CDATA[<h1 id="Java小知识点"><a href="#Java小知识点" class="headerlink" title="Java小知识点"></a>Java小知识点</h1><ul>
@@ -16,6 +136,17 @@
 ]]></content>
       <tags>
         <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Nginx部署Hexo+SSL证书安装配置</title>
+    <url>/2021/11/21/Nginx%E9%83%A8%E7%BD%B2Hexo+SSL%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h1 id="Nginx部署Hexo-SSL证书安装配置"><a href="#Nginx部署Hexo-SSL证书安装配置" class="headerlink" title="Nginx部署Hexo+SSL证书安装配置"></a>Nginx部署Hexo+SSL证书安装配置</h1>]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -261,64 +392,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Nginx部署Hexo+SSL证书安装配置</title>
-    <url>/2021/11/21/Nginx%E9%83%A8%E7%BD%B2Hexo+SSL%E8%AF%81%E4%B9%A6%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h1 id="Nginx部署Hexo-SSL证书安装配置"><a href="#Nginx部署Hexo-SSL证书安装配置" class="headerlink" title="Nginx部署Hexo+SSL证书安装配置"></a>Nginx部署Hexo+SSL证书安装配置</h1>]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>README_Hexo</title>
-    <url>/2021/06/20/README_Hexo/</url>
-    <content><![CDATA[<img src="https://raw.githubusercontent.com/hexojs/logo/master/hexo-logo-avatar.png" alt="Hexo logo" width="100" height="100" align="right" />
-
-<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><blockquote>
-<p>A fast, simple &amp; powerful blog framework, powered by <a href="https://nodejs.org/">Node.js</a>.</p>
-</blockquote>
-<p><a href="https://hexo.io/">Website</a> |<br><a href="https://hexo.io/docs/">Documentation</a> |<br><a href="https://hexo.io/docs/#Installation">Installation Guide</a> |<br><a href="https://hexo.io/docs/contributing">Contribution Guide</a> |<br><a href="CODE_OF_CONDUCT.md">Code of Conduct</a> |<br><a href="https://hexo.io/api/">API</a> |<br><a href="https://twitter.com/hexojs">Twitter</a></p>
-<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
-<li>Blazing fast generating</li>
-<li>Support for GitHub Flavored Markdown and most Octopress plugins</li>
-<li>One-command deploy to GitHub Pages, Heroku, etc.</li>
-<li>Powerful API for limitless extensibility</li>
-<li>Hundreds of <a href="https://hexo.io/themes/">themes</a> &amp; <a href="https://hexo.io/plugins/">plugins</a></li>
-</ul>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p><strong>Install Hexo</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p><strong>Setup your blog</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
-
-<p><strong>Start the server</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p><strong>Create a new post</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Generate static files</strong></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<h2 id="More-Information"><a href="#More-Information" class="headerlink" title="More Information"></a>More Information</h2><ul>
-<li>Read the <a href="https://hexo.io/">documentation</a></li>
-<li>Visit the <a href="https://github.com/hexojs/awesome-hexo">Awesome Hexo</a> list</li>
-<li>Find solutions in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a></li>
-<li>Join discussion on <a href="https://groups.google.com/group/hexo">Google Group</a>, <a href="https://discord.gg/teM2Anj">Discord</a>, <a href="https://gitter.im/hexojs/hexo">Gitter</a> or <a href="https://t.me/hexojs">Telegram</a></li>
-<li>See the <a href="https://hexo.io/plugins/">plugin list</a> and the <a href="https://hexo.io/themes/">theme list</a> on wiki</li>
-<li>Follow <a href="https://twitter.com/hexojs">@hexojs</a> for latest news</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/2020/11/12/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
@@ -540,6 +613,53 @@
       </tags>
   </entry>
   <entry>
+    <title>README_Hexo</title>
+    <url>/2021/06/20/README_Hexo/</url>
+    <content><![CDATA[<img src="https://raw.githubusercontent.com/hexojs/logo/master/hexo-logo-avatar.png" alt="Hexo logo" width="100" height="100" align="right" />
+
+<h1 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h1><blockquote>
+<p>A fast, simple &amp; powerful blog framework, powered by <a href="https://nodejs.org/">Node.js</a>.</p>
+</blockquote>
+<p><a href="https://hexo.io/">Website</a> |<br><a href="https://hexo.io/docs/">Documentation</a> |<br><a href="https://hexo.io/docs/#Installation">Installation Guide</a> |<br><a href="https://hexo.io/docs/contributing">Contribution Guide</a> |<br><a href="CODE_OF_CONDUCT.md">Code of Conduct</a> |<br><a href="https://hexo.io/api/">API</a> |<br><a href="https://twitter.com/hexojs">Twitter</a></p>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><ul>
+<li>Blazing fast generating</li>
+<li>Support for GitHub Flavored Markdown and most Octopress plugins</li>
+<li>One-command deploy to GitHub Pages, Heroku, etc.</li>
+<li>Powerful API for limitless extensibility</li>
+<li>Hundreds of <a href="https://hexo.io/themes/">themes</a> &amp; <a href="https://hexo.io/plugins/">plugins</a></li>
+</ul>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><p><strong>Install Hexo</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p><strong>Setup your blog</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init blog</span><br><span class="line">$ <span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+
+<p><strong>Start the server</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p><strong>Create a new post</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;Hello Hexo&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Generate static files</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<h2 id="More-Information"><a href="#More-Information" class="headerlink" title="More Information"></a>More Information</h2><ul>
+<li>Read the <a href="https://hexo.io/">documentation</a></li>
+<li>Visit the <a href="https://github.com/hexojs/awesome-hexo">Awesome Hexo</a> list</li>
+<li>Find solutions in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a></li>
+<li>Join discussion on <a href="https://groups.google.com/group/hexo">Google Group</a>, <a href="https://discord.gg/teM2Anj">Discord</a>, <a href="https://gitter.im/hexojs/hexo">Gitter</a> or <a href="https://t.me/hexojs">Telegram</a></li>
+<li>See the <a href="https://hexo.io/plugins/">plugin list</a> and the <a href="https://hexo.io/themes/">theme list</a> on wiki</li>
+<li>Follow <a href="https://twitter.com/hexojs">@hexojs</a> for latest news</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>一些经典算法使用Java实现</title>
     <url>/2021/11/11/%E4%B8%80%E4%BA%9B%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95%E4%BD%BF%E7%94%A8Java%E5%AE%9E%E7%8E%B0/</url>
     <content><![CDATA[<h1 id="Java数据结构与算法之查找"><a href="#Java数据结构与算法之查找" class="headerlink" title="Java数据结构与算法之查找"></a>Java数据结构与算法之查找</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">binarySearch</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> target)</span></span>&#123;</span><br><span class="line">        <span class="keyword">int</span> mid;</span><br><span class="line">        <span class="keyword">int</span> left=<span class="number">0</span>, right=arr.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(left&lt;=right)&#123; #这里&lt;和&lt;=效果是一样的，也就多计算一次循环的差别</span><br><span class="line">            mid=(left+right)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]&gt;target) right=mid-<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]&lt;target) left=mid+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">if</span>(arr[mid]==target) <span class="keyword">return</span> mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
@@ -616,6 +736,143 @@
       </categories>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机网络</title>
+    <url>/2020/11/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/</url>
+    <content><![CDATA[<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="计算机网络概述"><a href="#计算机网络概述" class="headerlink" title="计算机网络概述"></a>计算机网络概述</h2><ul>
+<li><p> Internet组成细节（全球最大的互联网络，ISP(Internet Service Provider)）</p>
+</li>
+<li><p>数以百万计的计算设备</p>
+</li>
+<li><p>通信链路</p>
+</li>
+<li><p>交换网络实现分组交换</p>
+</li>
+<li><p>网络协议</p>
+<p>互联网协议标准：RFC(Request for Comments)文档</p>
+<ol>
+<li>语法<ul>
+<li>数据与控制信息的格式或者结构</li>
+<li>信号的电平</li>
+</ul>
+</li>
+<li>语义<ul>
+<li>发出何种控制信息</li>
+<li>完成什么动作或者做出什么响应</li>
+<li>差错控制</li>
+</ul>
+</li>
+<li>时序<ul>
+<li>事件顺序</li>
+<li>发送双发速度的匹配</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>计算机网络结构</p>
+<ul>
+<li><p>网络边缘</p>
+<ul>
+<li>主机，各种终端设备</li>
+<li>网络应用</li>
+</ul>
+</li>
+<li><p>接入网络，物理介质：有线或者无线通信链路</p>
+<ol>
+<li>ADSL 非对称的数字用户线路，FMD频分多路复用 <strong>独享</strong><ul>
+<li>50k-1Mhz 下行</li>
+<li>4k-50khz 上行</li>
+<li>0-4khz 电话</li>
+</ul>
+</li>
+<li>电缆网络<ul>
+<li>HFC(hybrid fiber coax) 混合光纤同轴电缆 <strong>共享</strong></li>
+</ul>
+</li>
+<li>机构企业接入网络（以太网）</li>
+<li>无线接入网<ul>
+<li>Lan</li>
+<li>广域无线接入</li>
+</ul>
+</li>
+</ol>
+</li>
+<li><p>网络核心（核心网络）ISP：核心功能为路由和转发</p>
+<ul>
+<li><p>路由设备（或者其他的分组转发设备）</p>
+<ol>
+<li>路由：确定分组从源到目的的传输路径</li>
+<li>转发：将分组从路由的<strong>输入端口</strong>交换至正确的输出端口</li>
+</ol>
+</li>
+<li><p>数据交换</p>
+<ol>
+<li>电路交换（独占资源）：分三个阶段：<strong>（多路复用技术）</strong><ol>
+<li>建立阶段（呼叫/电路建立）</li>
+<li>通信</li>
+<li>释放连接</li>
+</ol>
+</li>
+<li>报文交换<ul>
+<li>把完整报文进行存储转发</li>
+</ul>
+</li>
+<li>分组交换（<strong>报文的拆分与重组</strong>）（统计多路复用技术：按需分配带宽）<ul>
+<li>定义：把报文拆分成一系列的相对较小的数据包进行存储转发</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p>计算机网络性能</p>
+<ul>
+<li>延迟（正在传输中的分组），时延（排队的分组），丢包（缓存用完被丢弃）<ul>
+<li>四种分组延迟<ul>
+<li>结点处理延迟：差错控制，确定输出链路</li>
+<li>排队延迟：等待输出链路可用，取决于路由器的拥挤程度（流量强度：La/R）</li>
+<li>传输延迟（L/R）即数据包/带宽</li>
+<li>传播延迟（d/s）物理长度/信号传播速度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>时延带宽积（以比特为单位的链路长度）<ul>
+<li>定义：传播延迟*带宽</li>
+</ul>
+</li>
+<li>丢包率（丢包数/已发分组总数）</li>
+<li>吞吐量（取决于瓶颈链路）</li>
+</ul>
+</li>
+<li><p>OSI参考模型</p>
+<ul>
+<li>Please Do Not Throw(传输层) Sausage Pizza(表示层) Away</li>
+<li>端到端层 应用层 表示层 会话层 传输层</li>
+<li>路由层 <ul>
+<li>网络层：逻辑寻址（ip），路由，分组转发</li>
+<li>数据链路层：组帧，物理寻址（MAC），流量控制，差错控制，接入控制</li>
+<li>物理层: 接口特性，比特编码，时钟同步</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据封装</p>
+<ul>
+<li>构建协议数据单元，增加控制信息（地址、差错检测编码、协议控制/优先级，安全控制等）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>计算机网络</category>
+      </categories>
+      <tags>
+        <tag>计算机网络</tag>
       </tags>
   </entry>
   <entry>
@@ -826,263 +1083,6 @@
       </categories>
       <tags>
         <tag>数据库系统原理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算机网络</title>
-    <url>/2020/11/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86/</url>
-    <content><![CDATA[<h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="计算机网络概述"><a href="#计算机网络概述" class="headerlink" title="计算机网络概述"></a>计算机网络概述</h2><ul>
-<li><p> Internet组成细节（全球最大的互联网络，ISP(Internet Service Provider)）</p>
-</li>
-<li><p>数以百万计的计算设备</p>
-</li>
-<li><p>通信链路</p>
-</li>
-<li><p>交换网络实现分组交换</p>
-</li>
-<li><p>网络协议</p>
-<p>互联网协议标准：RFC(Request for Comments)文档</p>
-<ol>
-<li>语法<ul>
-<li>数据与控制信息的格式或者结构</li>
-<li>信号的电平</li>
-</ul>
-</li>
-<li>语义<ul>
-<li>发出何种控制信息</li>
-<li>完成什么动作或者做出什么响应</li>
-<li>差错控制</li>
-</ul>
-</li>
-<li>时序<ul>
-<li>事件顺序</li>
-<li>发送双发速度的匹配</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>计算机网络结构</p>
-<ul>
-<li><p>网络边缘</p>
-<ul>
-<li>主机，各种终端设备</li>
-<li>网络应用</li>
-</ul>
-</li>
-<li><p>接入网络，物理介质：有线或者无线通信链路</p>
-<ol>
-<li>ADSL 非对称的数字用户线路，FMD频分多路复用 <strong>独享</strong><ul>
-<li>50k-1Mhz 下行</li>
-<li>4k-50khz 上行</li>
-<li>0-4khz 电话</li>
-</ul>
-</li>
-<li>电缆网络<ul>
-<li>HFC(hybrid fiber coax) 混合光纤同轴电缆 <strong>共享</strong></li>
-</ul>
-</li>
-<li>机构企业接入网络（以太网）</li>
-<li>无线接入网<ul>
-<li>Lan</li>
-<li>广域无线接入</li>
-</ul>
-</li>
-</ol>
-</li>
-<li><p>网络核心（核心网络）ISP：核心功能为路由和转发</p>
-<ul>
-<li><p>路由设备（或者其他的分组转发设备）</p>
-<ol>
-<li>路由：确定分组从源到目的的传输路径</li>
-<li>转发：将分组从路由的<strong>输入端口</strong>交换至正确的输出端口</li>
-</ol>
-</li>
-<li><p>数据交换</p>
-<ol>
-<li>电路交换（独占资源）：分三个阶段：<strong>（多路复用技术）</strong><ol>
-<li>建立阶段（呼叫/电路建立）</li>
-<li>通信</li>
-<li>释放连接</li>
-</ol>
-</li>
-<li>报文交换<ul>
-<li>把完整报文进行存储转发</li>
-</ul>
-</li>
-<li>分组交换（<strong>报文的拆分与重组</strong>）（统计多路复用技术：按需分配带宽）<ul>
-<li>定义：把报文拆分成一系列的相对较小的数据包进行存储转发</li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p>计算机网络性能</p>
-<ul>
-<li>延迟（正在传输中的分组），时延（排队的分组），丢包（缓存用完被丢弃）<ul>
-<li>四种分组延迟<ul>
-<li>结点处理延迟：差错控制，确定输出链路</li>
-<li>排队延迟：等待输出链路可用，取决于路由器的拥挤程度（流量强度：La/R）</li>
-<li>传输延迟（L/R）即数据包/带宽</li>
-<li>传播延迟（d/s）物理长度/信号传播速度</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>时延带宽积（以比特为单位的链路长度）<ul>
-<li>定义：传播延迟*带宽</li>
-</ul>
-</li>
-<li>丢包率（丢包数/已发分组总数）</li>
-<li>吞吐量（取决于瓶颈链路）</li>
-</ul>
-</li>
-<li><p>OSI参考模型</p>
-<ul>
-<li>Please Do Not Throw(传输层) Sausage Pizza(表示层) Away</li>
-<li>端到端层 应用层 表示层 会话层 传输层</li>
-<li>路由层 <ul>
-<li>网络层：逻辑寻址（ip），路由，分组转发</li>
-<li>数据链路层：组帧，物理寻址（MAC），流量控制，差错控制，接入控制</li>
-<li>物理层: 接口特性，比特编码，时钟同步</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>数据封装</p>
-<ul>
-<li>构建协议数据单元，增加控制信息（地址、差错检测编码、协议控制/优先级，安全控制等）</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>计算机网络</category>
-      </categories>
-      <tags>
-        <tag>计算机网络</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java反射机制深究</title>
-    <url>/2021/12/05/Java%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%E6%B7%B1%E7%A9%B6/</url>
-    <content><![CDATA[<h2 id="反射的简介"><a href="#反射的简介" class="headerlink" title="反射的简介"></a>反射的简介</h2><p>反射主要是指程序可以访问，检测和修改它本身状态或行为的一种能力，并能根据自身行为的状态和结果，调整或修改应用所描述行为的状态和相关的语义。一个类有多个组成部分，例如：成员变量、方法、构造方法等，反射就是加载类,并解剖出类的各个组成部分。</p>
-<h2 id="反射的主要功能"><a href="#反射的主要功能" class="headerlink" title="反射的主要功能"></a>反射的主要功能</h2><ol>
-<li>在运行是判断任意一个对象所属的类</li>
-<li>在运行时构造任意一个类的对象</li>
-<li>在运行时判断任意一个类所具有的成员变量和方法</li>
-<li>在运行时调用任意一个对象的方法</li>
-<li>生成动态代理</li>
-</ol>
-<h2 id="关于反射的类"><a href="#关于反射的类" class="headerlink" title="关于反射的类"></a>关于反射的类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line">java.lang.Class;                </span><br><span class="line">java.lang.reflect.Constructor; </span><br><span class="line">java.lang.reflect.Field;        </span><br><span class="line">java.lang.reflect.Method;</span><br><span class="line">java.lang.reflect.Modifier;</span><br></pre></td></tr></table></figure>
-
-<h2 id="反射的作用与常用功能"><a href="#反射的作用与常用功能" class="headerlink" title="反射的作用与常用功能"></a>反射的作用与常用功能</h2><ul>
-<li>通过一个对象获得完整的包名和类名</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test01</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Test01 testReflect = <span class="keyword">new</span> Test01();</span><br><span class="line">        <span class="comment">//通过一个对象获得完整的包名和类名 ：</span></span><br><span class="line">        System.out.println(testReflect.getClass().getName());</span><br><span class="line">        <span class="comment">// 结果 LearnReflect.Test01</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>实例化Class类对象</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test02</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; class1 = <span class="keyword">null</span>;</span><br><span class="line">        Class&lt;?&gt; class2 = <span class="keyword">null</span>;</span><br><span class="line">        Class&lt;?&gt; class3 = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 一般采用第一种形式</span></span><br><span class="line">        <span class="comment">//实例化Class类对象</span></span><br><span class="line">        class1 = Class.forName(<span class="string">&quot;LearnReflect.Test01&quot;</span>);</span><br><span class="line">        class2 = <span class="keyword">new</span> Test01().getClass();</span><br><span class="line">        class3 = Test01.class;</span><br><span class="line">        System.out.println(<span class="string">&quot;类名称   &quot;</span> + class1.getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;类名称   &quot;</span> + class2.getName());</span><br><span class="line">        System.out.println(<span class="string">&quot;类名称   &quot;</span> + class3.getName());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>取得父类以及所有是实现的接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test03</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">2862585049955236662L</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;LearnReflect.Test03&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 取得父类</span></span><br><span class="line">        Class&lt;?&gt; parentClass = clazz.getSuperclass();</span><br><span class="line">        System.out.println(<span class="string">&quot;clazz的父类为：&quot;</span> + parentClass.getName());</span><br><span class="line">        <span class="comment">// clazz的父类为： java.lang.Object</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取所有的接口</span></span><br><span class="line">        Class&lt;?&gt;[] intes = clazz.getInterfaces();</span><br><span class="line">        System.out.println(<span class="string">&quot;clazz实现的接口有：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; intes.length; i++) &#123;</span><br><span class="line">            System.out.println((i + <span class="number">1</span>) + <span class="string">&quot;：&quot;</span> + intes[i].getName());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// clazz实现的接口有：</span></span><br><span class="line">        <span class="comment">// 1：java.io.Serializable</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>利用getConstructors实例化目标类</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> Pojo.User;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Constructor;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test04</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; class1 = <span class="keyword">null</span>;</span><br><span class="line">        class1 = Class.forName(<span class="string">&quot;Pojo.User&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第一种方法，实例化默认构造方法，调用set赋值</span></span><br><span class="line">        User user = (User) class1.newInstance();<span class="comment">//此方法已弃用，需要类中有无参构造器</span></span><br><span class="line">        user.setAge(<span class="number">20</span>);<span class="comment">//需要实例中写好了Set方法</span></span><br><span class="line">        user.setName(<span class="string">&quot;Rollen&quot;</span>);</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        <span class="comment">// 结果 User [age=20, name=Rollen]</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第二种方法 取得全部的构造函数 使用构造函数赋值</span></span><br><span class="line">        Constructor&lt;?&gt;[] cons = class1.getConstructors();</span><br><span class="line">        <span class="comment">// 查看每个构造方法需要的参数</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cons.length; i++) &#123;</span><br><span class="line">            Class&lt;?&gt;[] clazzs = cons[i].getParameterTypes();</span><br><span class="line">            System.out.print(<span class="string">&quot;cons[&quot;</span> + i + <span class="string">&quot;] (&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; clazzs.length; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (j == clazzs.length - <span class="number">1</span>)</span><br><span class="line">                    System.out.print(clazzs[j].getName());</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    System.out.print(clazzs[j].getName() + <span class="string">&quot;,&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println(<span class="string">&quot;)&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 结果</span></span><br><span class="line">        <span class="comment">//cons[0] (java.lang.String,int)</span></span><br><span class="line">        <span class="comment">//cons[1] ()</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//cons[0]构造器0</span></span><br><span class="line">        <span class="comment">//必须按照严格构造器要求的参数格式填写参数</span></span><br><span class="line">        user = (User) cons[<span class="number">0</span>].newInstance(<span class="string">&quot;Rollen&quot;</span>,<span class="number">20</span>);</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        <span class="comment">// 结果 User(name=Rollen, age=20)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//cons[1]构造器1</span></span><br><span class="line">        user = (User) cons[<span class="number">1</span>].newInstance();</span><br><span class="line">        System.out.println(user);</span><br><span class="line">        <span class="comment">// 结果 User(name=null, age=0)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>getDeclaredFields()与getFields()方法分别取得所有属性和公开的所有属性</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Modifier;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test05</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">2862585049955236662L</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> i =<span class="number">0</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;LearnReflect.Test05&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;===============实现的接口或者父类的属性===============&quot;</span>);</span><br><span class="line">        <span class="comment">// 取得本类的全部属性</span></span><br><span class="line">        Field[] field = clazz.getDeclaredFields();</span><br><span class="line">        <span class="keyword">for</span> (Field item : field) &#123;</span><br><span class="line">            <span class="comment">// 权限修饰符</span></span><br><span class="line">            <span class="keyword">int</span> mo = item.getModifiers();</span><br><span class="line">            String priv = Modifier.toString(mo); <span class="comment">//private static final</span></span><br><span class="line">            <span class="comment">// 属性类型</span></span><br><span class="line">            Class&lt;?&gt; type = item.getType();<span class="comment">// long</span></span><br><span class="line">            System.out.println(priv + <span class="string">&quot; &quot;</span> + type.getName() + <span class="string">&quot; &quot;</span> + item.getName() + <span class="string">&quot;;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;==========本类属性==========&quot;</span>);</span><br><span class="line">        <span class="comment">// 取得实现的接口或者父类的属性</span></span><br><span class="line">        Field[] filed1 = clazz.getFields();</span><br><span class="line">        <span class="keyword">for</span> (Field value : filed1) &#123;</span><br><span class="line">            <span class="comment">// 权限修饰符</span></span><br><span class="line">            <span class="keyword">int</span> mo = value.getModifiers();</span><br><span class="line">            String priv = Modifier.toString(mo);<span class="comment">//public</span></span><br><span class="line">            <span class="comment">// 属性类型</span></span><br><span class="line">            Class&lt;?&gt; type = value.getType();<span class="comment">//int</span></span><br><span class="line">            System.out.println(priv + <span class="string">&quot; &quot;</span> + type.getName() + <span class="string">&quot; &quot;</span> + value.getName() + <span class="string">&quot;;&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>getMethods()方法取得所有方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Modifier;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test06</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = -<span class="number">2862585049955236662L</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;Pojo.User&quot;</span>);</span><br><span class="line">        Method[] method = clazz.getMethods();</span><br><span class="line">        <span class="keyword">for</span> (Method value : method) &#123;</span><br><span class="line">            Class&lt;?&gt; returnType = value.getReturnType();</span><br><span class="line">            Class&lt;?&gt;[] para = value.getParameterTypes();</span><br><span class="line">            <span class="keyword">int</span> temp = value.getModifiers();</span><br><span class="line">            System.out.print(Modifier.toString(temp) + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            System.out.print(returnType.getName() + <span class="string">&quot;  &quot;</span>);</span><br><span class="line">            System.out.print(value.getName() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">            System.out.print(<span class="string">&quot;(&quot;</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; para.length; ++j) &#123;</span><br><span class="line">                System.out.print(para[j].getName() + <span class="string">&quot; &quot;</span> + <span class="string">&quot;arg&quot;</span> + j);</span><br><span class="line">                <span class="keyword">if</span> (j &lt; para.length - <span class="number">1</span>) &#123;</span><br><span class="line">                    System.out.print(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="comment">//输出所有的方法以及需要的参数类型</span></span><br><span class="line">            <span class="comment">//使用getParameters方法再使用getName方法得到的是arg0,arg0这种形式的形参</span></span><br><span class="line">            <span class="comment">//也就是说使用反射无法拿到形参的名字，即变量标识符</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            Class&lt;?&gt;[] exce = value.getExceptionTypes();</span><br><span class="line">            <span class="keyword">if</span> (exce.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;) throws &quot;</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; exce.length; ++k) &#123;</span><br><span class="line">                    System.out.print(exce[k].getName() + <span class="string">&quot; &quot;</span>);</span><br><span class="line">                    <span class="keyword">if</span> (k &lt; exce.length - <span class="number">1</span>) &#123;</span><br><span class="line">                        System.out.print(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                System.out.print(<span class="string">&quot;)&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">            <span class="comment">//如果有抛出异常的就抛出异常</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>invoke方法利用反射调用类内的方法</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test07</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;Pojo.User&quot;</span>);</span><br><span class="line">        <span class="comment">// 调用User中的getName方法</span></span><br><span class="line">        Method methodGet = clazz.getMethod(<span class="string">&quot;getName&quot;</span>);</span><br><span class="line">        System.out.println(methodGet.invoke(clazz.getConstructors()[<span class="number">0</span>].newInstance(<span class="string">&quot;leiw&quot;</span>, <span class="number">20</span>)));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 调用User中的setName方法</span></span><br><span class="line">        Method methodSet = clazz.getMethod(<span class="string">&quot;setName&quot;</span>, String.class);</span><br><span class="line">        Object old = clazz.getConstructors()[<span class="number">0</span>].newInstance(<span class="string">&quot;yyw&quot;</span>, <span class="number">21</span>);</span><br><span class="line">        System.out.println(methodGet.invoke(old));</span><br><span class="line">        methodSet.invoke(old,<span class="string">&quot;yxw&quot;</span>);</span><br><span class="line">        System.out.println(methodGet.invoke(old));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//结果</span></span><br><span class="line">        <span class="comment">//leiw</span></span><br><span class="line">        <span class="comment">//yyw</span></span><br><span class="line">        <span class="comment">//yxw</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>直接对 private 的属性赋值</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test09</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        Class&lt;?&gt; clazz = Class.forName(<span class="string">&quot;Pojo.User&quot;</span>);</span><br><span class="line">        Object obj = clazz.getConstructor().newInstance();<span class="comment">//getConstructor()默认拿的是无参构造器</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 可以直接对 private 的属性赋值</span></span><br><span class="line">        Field field = clazz.getDeclaredField(<span class="string">&quot;age&quot;</span>);</span><br><span class="line">        field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        field.set(obj, <span class="number">25</span>);</span><br><span class="line">        System.out.println(field.get(obj));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>利用反射实现动态代理</li>
-</ul>
-<h2 id="反射的优缺点"><a href="#反射的优缺点" class="headerlink" title="反射的优缺点"></a>反射的优缺点</h2><ul>
-<li><p>优点</p>
-<ol>
-<li>能够运行时动态获取类的实例，大大提高系统的灵活性和扩展性。</li>
-<li>与Java动态编译相结合，可以实现无比强大的功能</li>
-</ol>
-</li>
-<li><p>缺点</p>
-<ol>
-<li>使用反射的性能较低</li>
-<li>使用反射相对来说不安全 </li>
-<li>破坏了类的封装性，可以通过反射获取这个类的私有方法和属性</li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-        <category>Java特征</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Java动态代理</title>
-    <url>/2021/12/05/Java%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86/</url>
-    <content><![CDATA[<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>代理模式是常用的java设计模式，他的特征是代理类与委托类有同样的接口，代理类主要负责为委托类预处理消息、过滤消息、把消息转发给委托类，以及事后处理消息等。<br>代理类与委托类之间通常会存在关联关系，一个代理类的对象与一个委托类的对象关联，代理类的对象本身并不真正实现服务，而是通过调用委托类的对象的相关方法，来提供特定的服务。</p>
-<ul>
-<li>静态代理<ul>
-<li>对目标接口的多实现加上代理类覆盖实现类的构造器，最后是相应方法的重写达到添加功能的目的</li>
-</ul>
-</li>
-<li>动态代理<ul>
-<li>解决了静态代理一个接口一个代理类的问题(那样的话代理类太多了)</li>
-</ul>
-</li>
-</ul>
-<h2 id="动态代理实现过程"><a href="#动态代理实现过程" class="headerlink" title="动态代理实现过程"></a>动态代理实现过程</h2><ul>
-<li>定义项目接口</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义项目接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAction</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>实现接口，项目逻辑实现</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现接口，项目逻辑实现</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceImpl</span> <span class="keyword">implements</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doAction</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;业务实现...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>写代理类添加相应附加功能，实现InvocationHandler接口，类内实现方法返回代理类，重写invoke方法添加相应功能</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">InvocationHandler接口：</span></span><br><span class="line"><span class="comment">public interface InvocationHandler &#123;</span></span><br><span class="line"><span class="comment">    public Object invoke(Object proxy,Method method,Object[] args) throws Throwable;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">参数说明：</span></span><br><span class="line"><span class="comment">        Object proxy：指被代理的对象。</span></span><br><span class="line"><span class="comment">        Method method：要调用的方法</span></span><br><span class="line"><span class="comment">        Object[] args：方法调用时所需要的参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyInvocationHandler</span> <span class="keyword">implements</span> <span class="title">InvocationHandler</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Object obj = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//第一步：需要绑定接口,即绑定委托对象并返回一个代理类</span></span><br><span class="line">    <span class="comment">//第一步：需要绑定接口,即绑定委托对象并返回一个代理类</span></span><br><span class="line">    <span class="comment">//newProxyInstance(ClassLoader loader, Class&lt;?&gt;[] interfaces, InvocationHandler h)</span></span><br><span class="line">    <span class="comment">//返回指定接口的代理类的实例，该接口将方法调用分派给指定的调用处理程序。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">bind</span><span class="params">(Object obj)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.obj = obj;</span><br><span class="line">        <span class="keyword">return</span> Proxy.newProxyInstance(obj.getClass().getClassLoader(), obj.getClass().getInterfaces(), <span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//第二步：重写invoke方法，实现需要添加的功能</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;方法调用前的日志...&quot;</span>);</span><br><span class="line">        Object temp = method.invoke(<span class="keyword">this</span>.obj, args);<span class="comment">//这里的invoke不是InvocationHandler的invoke!!!</span></span><br><span class="line">        System.out.println(<span class="string">&quot;方法调用后的日志...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>使用动态代理</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">package</span> LearnReflect;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 在java中有三种类类加载器。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 1）Bootstrap ClassLoader 此加载器采用c++编写，一般开发中很少见。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 2）Extension ClassLoader 用来进行扩展类的加载，一般对应的是jrelibext目录中的类</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 3）AppClassLoader 加载classpath指定的类，是最常用的加载器。同时也是java中默认的加载器。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 如果想要完成动态代理，首先需要定义一个InvocationHandler接口的子类，已完成代理的具体操作。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test10</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        MyInvocationHandler demo = <span class="keyword">new</span> MyInvocationHandler();<span class="comment">//实例化一个InvocationHandler</span></span><br><span class="line">        Service proxy = (Service) demo.bind(<span class="keyword">new</span> ServiceImpl());<span class="comment">//绑定接口返回一个代理类</span></span><br><span class="line">        proxy.doAction();<span class="comment">//调用方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//结果打印</span></span><br><span class="line"><span class="comment">//方法调用前的日志...</span></span><br><span class="line"><span class="comment">//业务实现...</span></span><br><span class="line"><span class="comment">//方法调用后的日志...</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Java</category>
-        <category>Java特征</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
       </tags>
   </entry>
 </search>
